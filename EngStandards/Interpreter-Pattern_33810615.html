@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Interpreter Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Interpreter Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span> on May 05, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p class="auto-cursor-target">LOW</p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Given a language, define a representation for its grammar along with an interpreter that uses the representation to interpret sentences in the language.</li><li>Map a domain to a language, the language to a grammar, and the grammar to a hierarchical object-oriented design.</li></ul>
+</div></div><p><br/></p><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">2</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">3</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>LOW</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">A class of problems occurs repeatedly in a well-defined and well-understood domain. If the domain were characterized with a &quot;language&quot;, then problems could be easily solved with an interpretation &quot;engine&quot;.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p>The Interpreter pattern discusses: defining a domain language (i.e. problem characterization) as a simple language grammar, representing domain rules as language sentences, and interpreting these sentences to solve the problem. The pattern uses a class to represent each grammar rule. And since grammars are usually hierarchical in structure, an inheritance hierarchy of rule classes maps nicely.</p><p>An abstract base class specifies the method <code>interpret()</code>. Each concrete subclass implements <code>interpret()</code> by accepting (as an argument) the current state of the language stream, and adding its contribution to the problem solving process.</p><p class="ptext">The Interpreter pattern offers a scripting language that allows end-users to customize their solution.</p><p class="ptext">Some applications are so complex that they require advanced configuration. You could offer a basic scripting language which allows the end-user to manipulate your application through simple instructions. The Interpreter pattern solves this particular problem – that of creating a simple scripting language.</p><p class="ptext">Certain types of problems lend themselves to be characterized by a language. This language describes the problem domain which should be well-understood and well-defined. To implement this you need to map the language to a grammar. Grammars are usually hierarchical tree-like structures that step through multiple levels and then end up with terminal nodes (also called literals).</p><p class="ptext">Problems like this, expressed as a grammar, can be implemented using the Interpreter design pattern.</p><p class="ptext">Today, if you really need this type of control in JavaScript it is probably easier to use a code generator like ANTLR which will allow you to build your own command interpreters based on a grammar that you provide.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">Interpreter suggests modeling the domain with a recursive grammar. Each rule in the grammar is either a 'composite' (a rule that references other rules) or a terminal (a leaf node in a tree structure). Interpreter relies on the recursive traversal of the Composite pattern to interpret the 'sentences' it is asked to process.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33810615/33811019.png?height=400" data-image-src="attachments/33810615/33811019.png" data-unresolved-comment-count="0" data-linked-resource-id="33811019" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 1.45.16 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33810615" data-linked-resource-container-version="1" data-media-id="cc2c414d-10fa-4907-a79c-110239a46a95" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Interpreter pattern defines a grammatical representation for a language and an interpreter to interpret the grammar. Musicians are examples of Interpreters. The pitch of a sound and its duration can be represented in musical notation on a staff. This notation provides the language of music. Musicians playing the music from the score are able to reproduce the original pitch and duration of each sound represented.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33810615/33811038.png?height=400" data-image-src="attachments/33810615/33811038.png" data-unresolved-comment-count="0" data-linked-resource-id="33811038" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 1.46.46 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33810615" data-linked-resource-container-version="1" data-media-id="5b7e3941-ac8f-4678-a5bb-92c2ad247129" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The objective of this example is to build an interpreter which translates roman numerals to decimal numbers: for example, XXXVI = 36.</p><p class="ptext">The <span class="cd">Context</span> object maintains the input (the roman numeral) and the resulting output as it is being parsed and interpreted. The <span class="cd">Expression</span> object represents the nodes in the grammar tree; it supports the <span class="cd">interpret</span> method.</p><p class="ptext">When running the program, a simple grammar tree is being built which then processes a roman numeral and translates it into a numeric.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var Context = function (input) {
+    this.input = input;
+    this.output = 0;
+}
+ 
+Context.prototype = {
+    startsWith : function (str) {
+        return this.input.substr(0, str.length) === str;
+    }
+}
+ 
+var Expression = function (name, one, four, five, nine, multiplier) {
+    this.name = name;
+    this.one = one;
+    this.four = four;
+    this.five = five;
+    this.nine = nine;
+    this.multiplier = multiplier;
+}
+ 
+Expression.prototype = {
+    interpret: function (context) {
+        if (context.input.length == 0) {
+            return;
+        }
+        else if (context.startsWith(this.nine)) {
+            context.output += (9 * this.multiplier);
+            context.input = context.input.substr(2);
+        }
+        else if (context.startsWith(this.four)) {
+            context.output += (4 * this.multiplier);
+            context.input = context.input.substr(2);
+        }
+        else if (context.startsWith(this.five)) {
+            context.output += (5 * this.multiplier);
+            context.input = context.input.substr(1);
+        }
+        while (context.startsWith(this.one)) {
+            context.output += (1 * this.multiplier);
+            context.input = context.input.substr(1);
+        }
+    }
+}
+ 
+function run() {
+    var roman = &quot;MCMXXVIII&quot;
+    var context = new Context(roman);
+    var tree = [];
+ 
+    tree.push(new Expression(&quot;thousand&quot;, &quot;M&quot;, &quot; &quot; , &quot; &quot;, &quot; &quot; , 1000));
+    tree.push(new Expression(&quot;hundred&quot;,  &quot;C&quot;, &quot;CD&quot;, &quot;D&quot;, &quot;CM&quot;, 100));
+    tree.push(new Expression(&quot;ten&quot;,      &quot;X&quot;, &quot;XL&quot;, &quot;L&quot;, &quot;XC&quot;, 10));
+    tree.push(new Expression(&quot;one&quot;,      &quot;I&quot;, &quot;IV&quot;, &quot;V&quot;, &quot;IX&quot;, 1));
+ 
+    for (var i = 0, len = tree.length; i &lt; len; i++) {
+        tree[i].interpret(context);
+    }
+ 
+    alert(roman + &quot; = &quot; + context.output);
+}
+
+
+</pre>
+</div></div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Decide if a &quot;little language&quot; offers a justifiable return on investment.</li><li>Define a grammar for the language.</li><li>Map each production in the grammar to a class.</li><li>Organize the suite of classes into the structure of the Composite pattern.</li><li>Define an <code>interpret(Context)</code> method in the Composite hierarchy.</li><li>The <code>Context</code> object encapsulates the current state of the input and output as the former is parsed and the latter is accumulated. It is manipulated by each grammar class as the &quot;interpreting&quot; process transforms the input into the output.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Considered in its most general form (i.e. an operation distributed over a class hierarchy based on the Composite pattern), nearly every use of the Composite pattern will also contain the Interpreter pattern. But the Interpreter pattern should be reserved for those cases in which you want to think of this class hierarchy as defining a language.</li><li>Interpreter can use State to define parsing contexts.</li><li>The abstract syntax tree of Interpreter is a Composite (therefore Iterator and Visitor are also applicable).</li><li>Terminal symbols within Interpreter's abstract syntax tree can be shared with Flyweight.</li><li>The pattern doesn't address parsing. When the grammar is very complex, other techniques (such as a parser) are more appropriate.</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33810615/33811019.png">Screen Shot 2017-05-05 at 1.45.16 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33810615/33811038.png">Screen Shot 2017-05-05 at 1.46.46 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

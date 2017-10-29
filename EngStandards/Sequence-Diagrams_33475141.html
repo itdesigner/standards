@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Sequence Diagrams</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Architectural-Documentation_33471477.html">Architectural Documentation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="127434830.html">UML (Unified Modeling Language)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Sequence Diagrams
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Ryan Fisch</span>, last modified by <span class='editor'> Jerry Shaughnessy</span> on May 09, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Sequence diagrams describe interactions among classes in terms of an exchange of messages over time. They're also called event diagrams. A sequence diagram is a good way to visualize and validate various runtime scenarios. These can help to predict how a system will behave and to discover responsibilities a class may need to have in the process of modeling a new system.</p><h2 id="SequenceDiagrams-"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Sequence diagram" src="https://wcs.smartdraw.com/sequence-diagram/img/sequence-diagram.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/sequence-diagram.jpg?bn=1510011069"></span></h2><h2 id="SequenceDiagrams-HowtoUseSequenceDiagrams">How to Use Sequence Diagrams</h2><ul class="vertList" style="margin-left: 25.0px;"><li><p>Model and document how your system will behave in various scenarios</p></li><li><p>Validate the logic of complex operations and functions</p></li></ul><h2 id="SequenceDiagrams-BasicSequenceDiagramSymbolsandNotations">Basic Sequence Diagram Symbols and Notations</h2><p><strong>Class Roles or Participants</strong><br/>Class roles describe the way an object will behave in context. Use the UML object symbol to illustrate class roles, but don't list object attributes.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Object symbol - Sequence diagram" src="https://wcs.smartdraw.com/sequence-diagram/img/component.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/component.jpg?bn=1510011069"></span></p><p><strong>Activation or Execution Occurrence</strong><br/>Activation boxes represent the time an object needs to complete a task. When an object is busy executing a process or waiting for a reply message, use a thin gray rectangle placed vertically on its lifeline.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Activation - Sequence diagram" src="https://wcs.smartdraw.com/sequence-diagram/img/activation-or-execution.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/activation-or-execution.jpg?bn=1510011069"></span></p><p><strong>Messages</strong><br/>Messages are arrows that represent communication between objects. Use half-arrowed lines to represent asynchronous messages. Asynchronous messages are sent from an object that will not wait for a response from the receiver before continuing its tasks. For message types, see below.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Messages - Sequence diagram" src="https://wcs.smartdraw.com/sequence-diagram/img/messages.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/messages.jpg?bn=1510011069"></span></p><p><strong>Lifelines</strong><br/>Lifelines are vertical dashed lines that indicate the object's presence over time.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Lifeline - Sequence diagram" src="https://wcs.smartdraw.com/sequence-diagram/img/lifeline.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/lifeline.jpg?bn=1510011069"></span></p><p><strong>Destroying Objects</strong><br/>Objects can be terminated early using an arrow labeled &quot;&lt;&lt; destroy &gt;&gt;&quot; that points to an X. This object is removed from memory. When that object's lifeline ends, you can place an X at the end of its lifeline to denote a destruction occurrence.</p><p><strong>Loops</strong><br/>A repetition or loop within a sequence diagram is depicted as a rectangle. Place the condition for exiting the loop at the bottom left corner in square brackets [ ].</p><h2 id="SequenceDiagrams-TypesofMessagesinSequenceDiagrams">Types of Messages in Sequence Diagrams</h2><p><strong>Synchronous Message</strong><br/>A synchronous message requires a response before the interaction can continue. It's usually drawn using a line with a solid arrowhead pointing from one object to another.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Synchronous message - Sequence diagram" src="https://wcs.smartdraw.com/sequence-diagram/img/synchronous-message.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/synchronous-message.jpg?bn=1510011069"></span></p><p><strong>Asynchronous Message</strong><br/>Asynchronous messages don't need a reply for interaction to continue. Like synchronous messages, they are drawn with an arrow connecting two lifelines; however, the arrowhead is usually open and there's no return message depicted.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Simple message" src="https://wcs.smartdraw.com/sequence-diagram/img/simple-message.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/simple-message.jpg?bn=1510011069"></span><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Asyncrhonous message" src="https://wcs.smartdraw.com/sequence-diagram/img/asynchronous-message.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/asynchronous-message.jpg?bn=1510011069"></span></p><p><strong>Reply or Return Message</strong><br/>A reply message is drawn with a dotted line and an open arrowhead pointing back to the original lifeline.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Reply messages" src="https://wcs.smartdraw.com/sequence-diagram/img/reply-or-return-message.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/reply-or-return-message.jpg?bn=1510011069"></span></p><p><strong>Self Message</strong><br/>A message an object sends to itself, usually shown as a U shaped arrow pointing back to itself.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Self message" src="https://wcs.smartdraw.com/sequence-diagram/img/self-message.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/self-message.jpg?bn=1510011069"></span></p><p><strong>Create Message</strong><br/>This is a message that creates a new object. Similar to a return message, it's depicted with a dashed line and an open arrowhead that points to the rectangle representing the object created.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Create message" src="https://wcs.smartdraw.com/sequence-diagram/img/create-message.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/create-message.jpg?bn=1510011069"></span></p><p><strong>Delete Message</strong><br/>This is a message that destroys an object. It can be shown by an arrow with an x at the end.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Delete message" src="https://wcs.smartdraw.com/sequence-diagram/img/delete-message.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/delete-message.jpg?bn=1510011069"></span></p><p><strong>Found Message</strong><br/>A message sent from an unknown recipient, shown by an arrow from an endpoint to a lifeline.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Found message" src="https://wcs.smartdraw.com/sequence-diagram/img/found-message.gif?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/found-message.gif?bn=1510011069"></span></p><p><strong>Lost Message</strong><br/>A message sent to an unknown recipient. It's shown by an arrow going from a lifeline to an endpoint, a filled circle or an x.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" alt="Lost message" src="https://wcs.smartdraw.com/sequence-diagram/img/lost-message.gif?bn=1510011069" data-image-src="https://wcs.smartdraw.com/sequence-diagram/img/lost-message.gif?bn=1510011069"></span></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

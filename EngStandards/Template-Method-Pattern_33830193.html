@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Template Method Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Template Method Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span> on May 07, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Define the skeleton of an algorithm in an operation, deferring some steps to client subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure.</li><li>Base class declares algorithm 'placeholders', and derived classes implement the placeholders</li></ul>
+</div></div><p><br/></p><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">3</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>MEDIUM LOW</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">Two different components have significant similarities, but demonstrate no reuse of common interface or implementation. If a change common to both components becomes necessary, duplicate effort must be expended.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The Template Method pattern provides an outline of a series of steps for an algorithm. Objects that implement these steps retain the original structure of the algorithm but have the option to redefine or adjust certain steps. This pattern is designed to offer extensibility to the client developer.</p><p class="ptext">Template Methods are frequently used in general purpose frameworks or libraries that will be used by other developers. An example is an object that fires a sequence of events in response to an action, for example a process request. The object generates a 'preprocess' event, a 'process' event and a 'postprocess' event. The developer has the option to adjust the response to immediately before the processing, during the processing and immediately after the processing.</p><p class="ptext">An easy way to think of Template Method is that of an algorithm with holes (see diagram below). It is up to the developer to fill these holes with appropriate functionality for each step.</p><p class="ptext"><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33830193/33830218.png?height=400" data-image-src="attachments/33830193/33830218.png" data-unresolved-comment-count="0" data-linked-resource-id="33830218" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-07 at 8.48.33 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33830193" data-linked-resource-container-version="1" data-media-id="24096621-5c46-4d80-9261-bc529192a8aa" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33830193/33830252.png?height=400" data-image-src="attachments/33830193/33830252.png" data-unresolved-comment-count="0" data-linked-resource-id="33830252" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-07 at 8.50.26 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33830193" data-linked-resource-container-version="1" data-media-id="e08d4439-b906-497e-879e-0a302430afa7" data-media-type="file"></span></p><p><span style="color: rgb(68,68,68);">The implementation of </span><code>template_method()</code><span style="color: rgb(68,68,68);"> is: call </span><code>step_one()</code><span style="color: rgb(68,68,68);">, call </span><code>step_two()</code><span style="color: rgb(68,68,68);">, and call </span><code>step_three()</code><span style="color: rgb(68,68,68);">. </span><code>step_two()</code><span style="color: rgb(68,68,68);"> is a &quot;hook&quot; method – a placeholder. It is declared in the base class, and then defined in derived classes. Frameworks (large scale reuse infrastructures) use Template Method a lot. All reusable code is defined in the framework's base classes, and then clients of the framework are free to define customizations by creating derived classes as needed.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33830193/33830262.png?height=400" data-image-src="attachments/33830193/33830262.png" data-unresolved-comment-count="0" data-linked-resource-id="33830262" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-07 at 8.50.36 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33830193" data-linked-resource-container-version="1" data-media-id="0a41eded-2897-46df-ab65-f78d3ee74ef2" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Template Method defines a skeleton of an algorithm in an operation, and defers some steps to subclasses. Home builders use the Template Method when developing a new subdivision. A typical subdivision consists of a limited number of floor plans with different variations available for each. Within a floor plan, the foundation, framing, plumbing, and wiring will be identical for each house. Variation is introduced in the later stages of construction to produce a wider variety of models.</span></p><p><span style="color: rgb(68,68,68);">Another example: daily routine of a worker.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33830193/33830288.png?height=400" data-image-src="attachments/33830193/33830288.png" data-unresolved-comment-count="0" data-linked-resource-id="33830288" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-07 at 8.52.27 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33830193" data-linked-resource-container-version="1" data-media-id="92483fdf-e8e6-4f86-80b8-66b57513e84d" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">This is an example where we use JavaScript's <em>prototypal inheritance</em>. The <span class="cd">inherit</span> function helps us establish the inheritance relationship by assigning a base object to the prototype of a newly created <em>descendant</em> object.</p><p class="ptext">The <span class="cd">datastore</span> function represents the AbstractClass and <span class="cd">mySql</span> represents the ConcreteClass.<span class="cd">mySql</span> overrides the 3 template methods: <span class="cd">connect</span>, <span class="cd">select</span>, and <span class="cd">disconnect</span> with datastore-specific implementations.</p><p class="ptext">The template methods allow the client to change datastore (SQL Server, Oracle, etc.) by adjusting (filling in the blanks) only the template methods. The rest, such as, the order of the steps, stays the same for any datastore.</p><p class="ptext">The <span class="cd">log</span> function is a helper which collects and displays results.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var datastore = {
+    process: function() {
+        this.connect();
+        this.select();
+        this.disconnect();
+        return true;
+    }
+};
+ 
+function inherit(proto) {
+    var F = function() { };
+    F.prototype = proto;
+    return new F();
+}
+ 
+// log helper
+ 
+var log = (function() {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function(msg) { log += msg + &quot;\n&quot;; },
+        show: function() { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+    var mySql = inherit(datastore);
+ 
+    // implement template steps
+ 
+    mySql.connect = function() {
+        log.add(&quot;MySQL: connect step&quot;);
+    };
+ 
+    mySql.select = function() {
+        log.add(&quot;MySQL: select step&quot;);
+    };
+ 
+    mySql.disconnect = function() {
+        log.add(&quot;MySQL: disconnect step&quot;);
+    };
+ 
+    mySql.process();
+ 
+    log.show();
+}</pre>
+</div></div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Examine the algorithm, and decide which steps are standard and which steps are peculiar to each of the current classes.</li><li>Define a new abstract base class to host the &quot;don't call us, we'll call you&quot; framework.</li><li>Move the shell of the algorithm (now called the &quot;template method&quot;) and the definition of all standard steps to the new base class.</li><li>Define a placeholder or &quot;hook&quot; method in the base class for each step that requires many different implementations. This method can host a default implementation – or – it can be defined as abstract (Java) or pure virtual (C++).</li><li>Invoke the hook method(s) from the template method.</li><li>Each of the existing classes declares an &quot;is-a&quot; relationship to the new abstract base class.</li><li>Remove from the existing classes all the implementation details that have been moved to the base class.</li><li>The only details that will remain in the existing classes will be the implementation details peculiar to each derived class.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Strategy is like Template Method except in its granularity.</li><li>Template Method uses inheritance to vary part of an algorithm. Strategy uses delegation to vary the entire algorithm.</li><li>Strategy modifies the logic of individual objects. Template Method modifies the logic of an entire class.</li><li>Factory Method is a specialization of Template Method.</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33830193/33830218.png">Screen Shot 2017-05-07 at 8.48.33 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33830193/33830252.png">Screen Shot 2017-05-07 at 8.50.26 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33830193/33830262.png">Screen Shot 2017-05-07 at 8.50.36 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33830193/33830288.png">Screen Shot 2017-05-07 at 8.52.27 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

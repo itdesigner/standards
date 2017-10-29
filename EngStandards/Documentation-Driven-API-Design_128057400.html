@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Documentation Driven API Design</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Architectural-Documentation_33471477.html">Architectural Documentation</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Documentation Driven API Design
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Oct 27, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Many companies and developers think documentation is something to be done as an afterthought, a nightmare for any developer who has been assigned the difficult task of having to go through each of the application’s features and write about them and how they are used.</p><p>But think, what if you could speed up your API development by focusing on the documentation first? <span style="color: rgb(128,0,0);"><em><strong>Documentation changes are cheap, code changes are expensive</strong></em></span>.</p><p><br/></p><div class="confluence-information-macro-body" style=""><blockquote><p><span style="color: rgb(0,0,128);"><em>The philosophy behind Documentation-Driven API Design or Development is simple: from the perspective of a user, if a feature is not documented, then it does not exist, and if a feature is documented incorrectly, then it is broken.</em></span></p></blockquote></div><h2 id="DocumentationDrivenAPIDesign-APIDESIGN–DOCUMENTATIONFIRST"><strong>API DESIGN – DOCUMENTATION FIRST </strong></h2><p>Designing an API is a special case because you’re often designing for unknowns. You might not know:</p><ul><li>What types of clients will consume the API, or their individual preferences.</li><li>The flow that any given consumer will take through your API endpoints.</li><li>Which information will be most valuable to the consumer.</li></ul><p>With all of these unknowns, the best thing you can do for yourself and your consumers is to write your documentation first, as visibly as possible. The goal is to gather insight and recommendations from your consumers early and throughout the design process, turning your unknowns into knowns.</p><p>By designing your API through documentation, you can easily get feedback and iterate your design before any development happens. Changes are easier and faster to make in documentation than they are in code. Documentation can become an invaluable resource as you want to increase your company’s Velocity.</p><p>The documentation gives the client team and test team something to work from before the server team has even implemented the documented endpoints. This prevents rework and parallelizes the efforts of the server and client teams. Coders and testers could start working at the same time to implement and test such an API.</p><p>When writing or updating documentation is a required first step of your development process, you ensure your documentation is always consistent with your code.</p><h2 id="DocumentationDrivenAPIDesign-GUIDELINESFORWORKINGDOCUMENTATION-DRIVENAPIDESIGN"><strong>GUIDELINES FOR WORKING DOCUMENTATION-DRIVEN API DESIGN</strong></h2><h3 id="DocumentationDrivenAPIDesign-DocumentyourAPIorFeatureFirst"><strong>Document your API or Feature First</strong></h3><p>You can do this as you design an API, or later if you’d like to rework an existing API. Wherever the documentation becomes complicated or difficult to write, revisit the design. This process works because it is easier to spot complexity in the documentation than in the code. Figure out how you are going to describe the feature to users; if it is not documented, it does not exist.</p><h3 id="DocumentationDrivenAPIDesign-DoDocumentationReviews"><strong>Do Documentation Reviews</strong></h3><p>Whenever possible, documentation should be reviewed by users before any development begins. This also gives you the chance to get your ideas peer-reviewed, since it helps users to understand what you are trying to do.</p><h3 id="DocumentationDrivenAPIDesign-WorkinParallel"><strong>Work in Parallel</strong></h3><p>Once documentation has been written, development should commence, preferably test-driven development. Both developers and testers can start working on the implementation, one focusing on writing code and the other on writing automatic tests.</p><h3 id="DocumentationDrivenAPIDesign-Testing"><strong>Testing</strong></h3><p>Unit tests should be written to test the features as described in the documentation. If the functionality is ever out of alignment with the documentation, tests should fail.</p><h3 id="DocumentationDrivenAPIDesign-Changes"><strong>Changes</strong></h3><p>When a feature is being modified, it should be modified documentation-first; when documentation is modified, so should the tests change. Along with the tests being changed, the coding will also have to be modified accordingly.</p><h3 id="DocumentationDrivenAPIDesign-Versioning"><strong>Versioning</strong></h3><p>Documentation and software should both be versioned, and the versions should match so someone working with old versions of software will be able to find the proper documentation.</p><h2 id="DocumentationDrivenAPIDesign-APIDOCUMENTATIONDESIGNFUNDAMENTALS"><strong>API DOCUMENTATION DESIGN FUNDAMENTALS</strong></h2><p>Concise and clear documentation, which allows your API consumers to adopt it into their application quickly, is no longer optional for organizations that want to drive adoption of their APIs. According to SmartBear’s 2016 State of API Report, 75% of organizations that develop APIs now have a formal documentation process. 46% say it is a high priority for their organization. A survey by ProgrammableWeb found that API consumers considered complete and accurate documentation as the biggest factor affecting their API decision-making, even outweighing price and API performance.</p><p>Good documentation accelerates development and consumption, and reduces the money and time that would otherwise be spent answering support calls. It is important to remember that documentation matters for internal API users as well. Do not assume that your internal stakeholders will have intimate knowledge of how to work with the API.</p><p>What should go into your API documentation? These are three features that should be ever-present in documentation:</p><ol><li>There should be consistency, meaning that an end user should be able to know what your documentation has in the offing. The terminology used should also be in line with your language.</li><li>The documentation should be a complete scope of the features of your entire project. Private methods used should also be put down for your developers to utilize. The public features should be made explicitly available for your end users.</li><li>It should also be up to date. This means that the documentation should maintain recent versions of the code used for the project.</li></ol><p>There are, of course, no standards or hard-and-fast rules on what API documentation should have. As a general rule, whatever resonates with the developer community and makes it easy for them to understand an API is a good starting point.</p><p>Some general sections that are backed up by examples from established providers in the API economy:</p><ul><li>A list of the resources with an explanation of the purpose of each in the context of the product or service being offered via the API.</li><li>Examples of API calls in a variety of languages and tools (curl, Postman collections, etc.). The examples are probably the most important section of the API document, as these are going to be used by your clients.</li><li>Guides that detail the workflows implicit in using the API, i.e. the sequence of API calls that do something meaningful in the context of the product or service the API offers.</li><li>An overview of the design principles adopted by the API provider and what that means for aspects adherence to REST (especially hypermedia), HTTP codes, etc.</li><li>Information on authentication, including schemes that may be implemented, such as OAuth or OpenID Connect.</li><li>General information on error handling with information on the HTTP return codes that will be returned.</li></ul><p><br/></p><p><br/></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="250" src="attachments/128057400/128548928.png?height=250" data-image-src="attachments/128057400/128548928.png" data-unresolved-comment-count="0" data-linked-resource-id="128548928" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-10-25 at 11.33.19 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="128057400" data-linked-resource-container-version="3" data-media-id="ebbe229e-92ad-4980-8e6e-08124606ae5a" data-media-type="file"></span></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/128057400/128548928.png">Screen Shot 2017-10-25 at 11.33.19 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

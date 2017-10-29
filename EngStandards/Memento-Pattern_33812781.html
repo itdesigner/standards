@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Memento Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Memento Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on May 05, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Without violating encapsulation, capture and externalize an object's internal state so that the object can be returned to this state later.</li><li>A magic cookie that encapsulates a &quot;check point&quot; capability.</li><li>Promote undo or rollback to full object status.</li></ul>
+</div></div><p><br/></p><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">2</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">3</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>LOW</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">Need to restore an object back to its previous state (e.g. &quot;undo&quot; or &quot;rollback&quot; operations)</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The Memento pattern provides temporary storage as well as restoration of an object. The mechanism in which you store the object’s state depends on the required duration of persistence, which may vary.</p><p class="ptext">You could view a database as an implementation of the Memento design pattern in which objects are persisted and restored. However, the most common reason for using this pattern is to capture a snapshot of an object’s state so that any subsequent changes can be undone easily if necessary.</p><p class="ptext">Essentially, a Memento is a small repository that stores an object’s state. Scenarios in which you may want to restore an object into a state that existed previously include: saving and restoring the state of a player in a computer game or the implementation of an undo operation in a database.</p><p class="ptext">In JavaScript Mementos are easily implemented by serializing and de-serializing objects with JSON.</p><p>The client requests a Memento from the source object when it needs to checkpoint the source object's state. The source object initializes the Memento with a characterization of its state. The client is the &quot;care-taker&quot; of the Memento, but only the source object can store and retrieve information from the Memento (the Memento is &quot;opaque&quot; to the client and all other objects). If the client subsequently needs to &quot;rollback&quot; the source object's state, it hands the Memento back to the source object for reinstatement.</p><p>An unlimited &quot;undo&quot; and &quot;redo&quot; capability can be readily implemented with a stack of Command objects and a stack of Memento objects.</p><p>The Memento design pattern defines three distinct roles:</p><ol><li><em class="bullet">Originator</em> - the object that knows how to save itself.</li><li><em class="bullet">Caretaker</em> - the object that knows why and when the Originator needs to save and restore itself.</li><li><em class="bullet">Memento</em> - the lock box that is written and read by the Originator, and shepherded by the Caretaker.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33812781/33812796.png?height=400" data-image-src="attachments/33812781/33812796.png" data-unresolved-comment-count="0" data-linked-resource-id="33812796" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 6.04.41 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33812781" data-linked-resource-container-version="2" data-media-id="5c2e63ec-6efc-4205-b072-cbe3134430e1" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Memento captures and externalizes an object's internal state so that the object can later be restored to that state. This pattern is common among do-it-yourself mechanics repairing drum brakes on their cars. The drums are removed from both sides, exposing both the right and left brakes. Only one side is disassembled and the other serves as a Memento of how the brake parts fit together. Only after the job has been completed on one side is the other side disassembled. When the second side is disassembled, the first side acts as the Memento.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33812781/33812816.png?height=400" data-image-src="attachments/33812781/33812816.png" data-unresolved-comment-count="0" data-linked-resource-id="33812816" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 6.05.34 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33812781" data-linked-resource-container-version="2" data-media-id="d1cc5747-a79a-4788-81ac-9c60cd9769cb" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The sample code creates two persons named Mike and John are created using the <span class="cd">Person</span> constructor function. Next, their mementos are created which are maintained by the <span class="cd">CareTaker</span> object.</p><p class="ptext">We assign Mike and John bogus names before restoring them from their mementos. Following the restoration we confirm that the person objects are back to their original state with valid names.</p><p class="ptext">The Memento pattern itself with CareTaker etc. is rarely used in JavaScript. However, JSON is a highly effective data format that is extremely useful in many different data exchange scenarios.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var Person = function(name, street, city, state) {
+    this.name = name;
+    this.street = street;
+    this.city = city;
+    this.state = state;
+}
+ 
+Person.prototype = {
+ 
+    hydrate: function() {
+        var memento = JSON.stringify(this);
+        return memento;
+    },
+ 
+    dehydrate: function(memento) {
+        var m = JSON.parse(memento);
+        this.name = m.name;
+        this.street = m.street;
+        this.city = m.city;
+        this.state = m.state;
+    }
+}
+ 
+var CareTaker = function() {
+    this.mementos = {};
+ 
+    this.add = function(key, memento) {
+        this.mementos[key] = memento;
+    },
+ 
+    this.get = function(key) {
+        return this.mementos[key];
+    }
+}
+ 
+// log helper
+var log = (function () {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function (msg) { log += msg + &quot;\n&quot;; },
+        show: function () { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+ 
+function run() {
+    var mike = new Person(&quot;Mike Foley&quot;, &quot;1112 Main&quot;, &quot;Dallas&quot;, &quot;TX&quot;);
+    var john = new Person(&quot;John Wang&quot;, &quot;48th Street&quot;, &quot;San Jose&quot;, &quot;CA&quot;);
+    var caretaker = new CareTaker();
+ 
+    // save state
+ 
+    caretaker.add(1, mike.hydrate());
+    caretaker.add(2, john.hydrate());
+ 
+    // mess up their names
+ 
+    mike.name = &quot;King Kong&quot;;
+    john.name = &quot;Superman&quot;;
+ 
+    // restore original state
+ 
+    mike.dehydrate(caretaker.get(1));
+    john.dehydrate(caretaker.get(2));
+ 
+    log.add(mike.name);
+    log.add(john.name);
+ 
+    log.show();
+}</pre>
+</div></div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Identify the roles of “caretaker” and “originator”.</li><li>Create a Memento class and declare the originator a friend.</li><li>Caretaker knows when to &quot;check point&quot; the originator.</li><li>Originator creates a Memento and copies its state to that Memento.</li><li>Caretaker holds on to (but cannot peek into) the Memento.</li><li>Caretaker knows when to &quot;roll back&quot; the originator.</li><li>Originator reinstates itself using the saved state in the Memento.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Command and Memento act as magic tokens to be passed around and invoked at a later time. In Command, the token represents a request; in Memento, it represents the internal state of an object at a particular time. Polymorphism is important to Command, but not to Memento because its interface is so narrow that a memento can only be passed as a value.</li><li>Command can use Memento to maintain the state required for an undo operation.</li><li>Memento is often used in conjunction with Iterator. An Iterator can use a Memento to capture the state of an iteration. The Iterator stores the Memento internally.</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33812781/33812796.png">Screen Shot 2017-05-05 at 6.04.41 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33812781/33812816.png">Screen Shot 2017-05-05 at 6.05.34 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

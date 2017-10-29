@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Decorator Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Decorator Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on May 05, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.</li><li>Client-specified embellishment of a core object by recursively wrapping it.</li><li>Wrapping a gift, putting it in a box, and wrapping the box.</li></ul>
+</div></div><p>Frequency of use in JavaScript:</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-green confluenceTd" data-highlight-colour="green">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>MEDIUM HIGH</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">You want to add behavior or state to individual objects at run-time. Inheritance is not feasible because it is static and applies to an entire class.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p><p class="ptext">The Decorator pattern extends (decorates) an object’s behavior dynamically. The ability to add new behavior at runtime is accomplished by a Decorator object which ‘wraps itself’ around the original object. Multiple decorators can add or override functionality to the original object.</p><p><br/></p><p class="ptext">An example of a decorator is security management where business objects are given additional access to privileged information depending on the privileges of the authenticated user. For example, an HR manager gets to work with an employee object that has appended (i.e. is decorated with) the employee's salary record so that salary information can be viewed.</p><p><br/></p><p class="ptext">Decorators provide flexibility to statically typed languages by allowing runtime changes as opposed to inheritance which takes place at compile time. JavaScript, however, is a dynamic language and the ability to extend an object at runtime is baked into the language itself.</p><p><br/></p><p class="ptext"><strong><em>For this reason, the Decorator pattern is less relevant to JavaScript developers. In JavaScript the Extend and Mixin patterns subsume the Decorator pattern. </em></strong></p><p><span style="color: rgb(68,68,68);">Having said that, suppose you are working on a user interface toolkit and you wish to support adding borders and scroll bars to windows. You could define an inheritance hierarchy like ...</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33802762/33802801.png" data-image-src="attachments/33802762/33802801.png" data-unresolved-comment-count="0" data-linked-resource-id="33802801" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 11.14.44 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33802762" data-linked-resource-container-version="3" data-media-id="05f4431c-6ff5-4585-8f4d-a92f6ade1596" data-media-type="file"></span></p><p><span style="color: rgb(68,68,68);">But the Decorator pattern suggests giving the client the ability to specify whatever combination of &quot;features&quot; is desired.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">Widget* aWidget = new BorderDecorator(
+  new HorizontalScrollBarDecorator(
+    new VerticalScrollBarDecorator(
+      new Window( 80, 24 ))));
+aWidget-&gt;draw();</pre>
+</div></div><p><br/></p><p><span style="color: rgb(68,68,68);">This flexibility can be achieved with the following design</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33802762/33802821.png" data-image-src="attachments/33802762/33802821.png" data-unresolved-comment-count="0" data-linked-resource-id="33802821" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 11.16.10 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33802762" data-linked-resource-container-version="3" data-media-id="ecbbfffb-8eda-4506-86fe-20ec92f9b351" data-media-type="file"></span></p><p><span style="color: rgb(68,68,68);">Another example of cascading (or chaining) features together to produce a custom object might look like ...</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">Stream* aStream = new CompressingStream(
+  new ASCII7Stream(
+    new FileStream(&quot;fileName.dat&quot;)));
+aStream-&gt;putString( &quot;Hello world&quot; );</pre>
+</div></div><p><br/></p><p>The solution to this class of problems involves encapsulating the original object inside an abstract wrapper interface. Both the decorator objects and the core object inherit from this abstract interface. The interface uses recursive composition to allow an unlimited number of decorator &quot;layers&quot; to be added to each core object.</p><p>Note that this pattern allows responsibilities to be added to an object, not methods to an object's interface. The interface presented to the client must remain constant as successive layers are specified.</p><p>Also note that the core object's identity has now been &quot;hidden&quot; inside of a decorator object. Trying to access the core object directly is now a problem.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The client is always interested in </span><code>CoreFunctionality.doThis()</code><span style="color: rgb(68,68,68);">. The client may, or may not, be interested in </span><code>OptionalOne.doThis()</code><span style="color: rgb(68,68,68);"> and </span><code>OptionalTwo.doThis()</code><span style="color: rgb(68,68,68);">. Each of these classes always delegate to the Decorator base class, and that class always delegates to the contained &quot;wrappee&quot; object.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33802762/33802847.png" data-image-src="attachments/33802762/33802847.png" data-unresolved-comment-count="0" data-linked-resource-id="33802847" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 11.17.52 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33802762" data-linked-resource-container-version="3" data-media-id="3674c5cd-f5ed-4a54-9e2d-5c14b4d3f807" data-media-type="file"></span></p><p><br/></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p>The Decorator attaches additional responsibilities to an object dynamically. The ornaments that are added to pine or fir trees are examples of Decorators. Lights, garland, candy canes, glass ornaments, etc., can be added to a tree to give it a festive look. The ornaments do not change the tree itself which is recognizable as a Christmas tree regardless of particular ornaments used. As an example of additional functionality, the addition of lights allows one to &quot;light up&quot; a Christmas tree.</p><p>Another example: assault gun is a deadly weapon on it's own. But you can apply certain &quot;decorations&quot; to make it more accurate, silent and devastating.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33802762/33802866.png" data-image-src="attachments/33802762/33802866.png" data-unresolved-comment-count="0" data-linked-resource-id="33802866" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 11.18.57 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33802762" data-linked-resource-container-version="3" data-media-id="abd33a90-f5c7-4c97-9be9-a044bb6e43b3" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">In the example code a <span class="cd">User</span> object is decorated (enhanced) by a <span class="cd">DecoratedUser</span> object. It extends the User with several address-based properties. The original interface must stay the same, which explains why <span class="cd"><a href="http://user.name" class="external-link" rel="nofollow">user.name</a></span> is assigned to <span class="cd"><a href="http://this.name" class="external-link" rel="nofollow">this.name</a></span>. Also, the <span class="cd">say</span> method of DecoratedUser hides the <span class="cd">say</span> method of User.</p><p class="ptext">JavaScript itself is far more effective in dynamically extending objects with additional data and behavior. You can learn more about extending objects at runtime and other techniques in our <a href="http://www.dofactory.com/products/javascript-jquery-design-pattern-framework" class="external-link" rel="nofollow">JavaScript + jQuery Design Pattern Framework</a>.</p><p class="ptext">The <span class="cd">log</span> function is a helper which collects and displays results.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var User = function(name) {
+    this.name = name;
+ 
+    this.say = function() {
+        log.add(&quot;User: &quot; + this.name);
+    };
+}
+ 
+var DecoratedUser = function(user, street, city) {
+    this.user = user;
+    this.name = user.name;  // ensures interface stays the same
+    this.street = street;
+    this.city = city;
+ 
+    this.say = function() {
+        log.add(&quot;Decorated User: &quot; + this.name + &quot;, &quot; +
+                   this.street + &quot;, &quot; + this.city);
+    };
+}
+ 
+// logging helper
+ 
+var log = (function() {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function(msg) { log += msg + &quot;\n&quot;; },
+        show: function() { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+ 
+    var user = new User(&quot;Kelly&quot;);
+    user.say();
+ 
+    var decorated = new DecoratedUser(user, &quot;Broadway&quot;, &quot;New York&quot;);
+    decorated.say();
+ 
+    log.show();
+}
+
+</pre>
+</div></div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Ensure the context is: a single core (or non-optional) component, several optional embellishments or wrappers, and an interface that is common to all.</li><li>Create a &quot;Lowest Common Denominator&quot; interface that makes all classes interchangeable.</li><li>Create a second level base class (Decorator) to support the optional wrapper classes.</li><li>The Core class and Decorator class inherit from the LCD interface.</li><li>The Decorator class declares a composition relationship to the LCD interface, and this data member is initialized in its constructor.</li><li>The Decorator class delegates to the LCD object.</li><li>Define a Decorator derived class for each optional embellishment.</li><li>Decorator derived classes implement their wrapper functionality - and - delegate to the Decorator base class.</li><li>The client configures the type and ordering of Core and Decorator objects.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p>Advantages:</p><ul><li>The decorator pattern can be used to make it possible to extend (decorate) the functionality of a certain object at runtime<strong>.</strong></li><li>The decorator pattern is an alternative to subclassing. Subclassing adds behavior at compile time, and the change affects all instances of the original class; decorating can provide new behavior at runtime for individual objects.</li><li>Decorator offers a pay-as-you-go approach to adding responsibilities. Instead of trying to support all foreseeable features in a complex, customizable class, you can define a simple class and add functionality incrementally with Decorator objects.</li></ul><p>Disadvantages:</p><ul><li>Decorators can complicate the process of instantiating the component because you not only have to instantiate the component, but wrap it in a number of decorators.</li><li>It can be complicated to have decorators keep track of other decorators, because to look back into multiple layers of the decorator chain starts to push the decorator pattern beyond its true intent.</li></ul>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Adapter provides a different interface to its subject. Proxy provides the same interface. Decorator provides an enhanced interface.</li><li>Adapter changes an object's interface, Decorator enhances an object's responsibilities. Decorator is thus more transparent to the client. As a consequence, Decorator supports recursive composition, which isn't possible with pure Adapters.</li><li>Composite and Decorator have similar structure diagrams, reflecting the fact that both rely on recursive composition to organize an open-ended number of objects.</li><li>A Decorator can be viewed as a degenerate Composite with only one component. However, a Decorator adds additional responsibilities - it isn't intended for object aggregation.</li><li>Decorator is designed to let you add responsibilities to objects without subclassing. Composite's focus is not on embellishment but on representation. These intents are distinct but complementary. Consequently, Composite and Decorator are often used in concert.</li><li>Composite could use Chain of Responsibility to let components access global properties through their parent. It could also use Decorator to override these properties on parts of the composition.</li><li>Decorator and Proxy have different purposes but similar structures. Both describe how to provide a level of indirection to another object, and the implementations keep a reference to the object to which they forward requests.</li><li>Decorator lets you change the skin of an object. Strategy lets you change the guts.</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33802762/33802801.png">Screen Shot 2017-05-04 at 11.14.44 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33802762/33802821.png">Screen Shot 2017-05-04 at 11.16.10 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33802762/33802847.png">Screen Shot 2017-05-04 at 11.17.52 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33802762/33802866.png">Screen Shot 2017-05-04 at 11.18.57 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Performance Patterns in Microservices-Based Designs</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Services-Guidance%2C-Design%2C-and-Review-Criteria_127664218.html">Services Guidance, Design, and Review Criteria</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Performance Patterns in Microservices-Based Designs
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Oct 26, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Systems based on microservices architectures are becoming more and more popular in IT environments. The rise of microservices increases the challenges associated with systems with multiple integrations. Almost all applications that perform anything useful for a given business need to be integrated with one or more applications. With microservices-based architecture, where a number of services are broken down based on the services or functionality offered, the number of integration points or touch points also increases massively. This can impact the system as a whole, since now overall system performance is also dependent upon external factors (the performance of an external system and its behavior).</p><h2 id="PerformancePatternsinMicroservices-BasedDesigns-PerformancePatternsandtheirBenefits">Performance Patterns and their Benefits</h2><p>The concept of <a href="Design-Patterns_33471172.html" data-linked-resource-id="33471172" data-linked-resource-version="5" data-linked-resource-type="page">Design Patterns</a> are well documented and understood in the software development world. These design patterns generally describe a reusable solution to a commonly occurring problem. Using design patterns can ensure good architectural design, but these alone are not enough to address performance challenges.</p><p>This is where performance patterns come into play. When implemented correctly, these can really help build a scalable solution.</p><h2 id="PerformancePatternsinMicroservices-BasedDesigns-PerformanceChallenges">Performance Challenges</h2><p>Distributed computing has its own challenges, and all of these challenges are not only well documented, but are experienced by professionals working on distributed systems almost daily. While connecting to other microservices (within the same bounded context or of some remote, external system), many things can go wrong. Services and systems (both internal and external) you connect to may be slow or down. If your application is not designed to handle this scenario gracefully, it can have an adverse impact on the performance and stability of the overall application.</p><h2 id="PerformancePatternsinMicroservices-BasedDesigns-PerformancePatterns">Performance Patterns</h2><p>Here we will talk about some approaches and design decisions that can help us achieve better performance, resilience, and overall stability with respect to integration challenges in a microservices-based environment.</p><h3 style="margin-left: 30.0px;" id="PerformancePatternsinMicroservices-BasedDesigns-THROTTLING">THROTTLING</h3><p style="margin-left: 30.0px;">Throttling is one technique that can be used to prevent any misbehaving or rogue application from overloading or bringing down our application by sending more requests than what our application can handle.</p><p style="margin-left: 30.0px;">One simple way to implement throttling is by providing a fixed number of connections to individual applications. For example, there are two vendors who call our microservice to deduct money from one account. If one vendor has a big application (like Amazon), then it is likely to consume our service more often than a vendor which has a small user base. We can provide these two vendors two separate and dedicated “entry points,” with dedicated throttled connection limits. This way, a large number of requests coming from Amazon will not hamper requests coming from a second vendor. Moreover, we can throttle individual partners so that none can send requests at a rate faster than what we can process.</p><p style="margin-left: 30.0px;">Generally, synchronous requests from external services/systems are throttled at the load balancer/HTTP server or another such entry point.</p><h3 style="margin-left: 30.0px;" id="PerformancePatternsinMicroservices-BasedDesigns-TIMEOUTS">TIMEOUTS</h3><p style="margin-left: 30.0px;">If a microservice is responding slowly, it can cause our application to take longer to complete a request. Application threads now remain busy for a longer duration. This can have a cascading impact on our application, resulting in the application/server becoming totally choked/unresponsive.</p><p style="margin-left: 30.0px;">Most libraries, APIs, frameworks, and servers provide configurable settings for different kinds of timeouts. You may need to set timeouts for read requests, write requests, wait timeouts, connection pool wait timeouts, keep alive timeouts, and so on. Values of these timeouts should be determined only by proper performance testing, SLA validation, etc. </p><h3 style="margin-left: 30.0px;" id="PerformancePatternsinMicroservices-BasedDesigns-DEDICATEDTHREADPOOLS/BULKHEADS">DEDICATED THREAD POOLS/BULKHEADS</h3><p style="margin-left: 30.0px;">Consider a scenario where, in your application f low, you need to connect to five different microservices using REST over HTTP. You are also using a library to use a common thread pool for maintaining these connections. If, for some reason, one of the five services starts responding slowly, then all your pool members will be exhausted waiting for the response from this service. To minimize the impact, it is always a good practice to have a dedicated pool for each individual service. This can minimize the impact caused by a misbehaving service, allowing your application to continue with other parts of the execution path.</p><p style="margin-left: 30.0px;">This is commonly known as the bulkheads pattern. The following figure depicts a sample scenario of implementing a bulkhead. On the left side of the figure, microservice A—which is calling both microservice X and microservice Y—is using a single common pool to connect to these microservices. If either service X or service Y misbehaves, it could impact the overall behavior of the f low, since the connection pool is common. If a bulkhead is implemented instead (as shown in the right side of the figure), even if microservice X is misbehaving, only the pool for X will be impacted. The application can continue to offer functionality that depends on microservice Y.</p><p style="margin-left: 30.0px;"><br/></p><p style="margin-left: 30.0px;"><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="150" src="attachments/129073169/129859585.png?height=150" data-image-src="attachments/129073169/129859585.png" data-unresolved-comment-count="0" data-linked-resource-id="129859585" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-10-26 at 12.07.06 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="129073169" data-linked-resource-container-version="2" data-media-id="25aeb0e1-c3fd-4c58-9154-0b47def01ea7" data-media-type="file"></span></p><p style="margin-left: 30.0px;"><br/></p><div class="confluence-information-macro confluence-information-macro-information"><p class="title">Critical Details</p><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><p style="text-align: left;">Any application that needs to connect to a component will request a connection to that component.</p><p style="text-align: left;">Connection to each of the components is controlled by the individual bulkhead.</p><p style="text-align: left;">When a request for a new connection is made, the bulkhead will check if the connection to the requested component is available to serve the request.</p><p style="text-align: left;">If the connection is available, it will allocate this connection to serve the request.</p><p style="text-align: left;">In case no free connection is available, the bulkhead will wait for a pre-defined time interval.</p><p style="text-align: left;">If any connection becomes available during this wait period, it will be allocated to serve the waiting request.</p></div></div><h3 style="margin-left: 30.0px;" id="PerformancePatternsinMicroservices-BasedDesigns-CIRCUITBREAKERS">CIRCUIT BREAKERS</h3><p style="margin-left: 30.0px;">A Circuit Breaker is a design pattern, which is used to minimize the impact of any of the downstream being not accessible or down (due to planned or unplanned outages). Circuit breakers are used to check the availability of external systems/services, and in case these are down, applications can be prevented from sending requests to these external systems. This acts as a safety measure, on top of timeouts/bulkheads, where one may not want to even wait for the period specified by timeout. If a downstream system is down, it is of no use to wait for the TIMEOUT period for each request, and then getting a response of timeout exception.</p><p style="margin-left: 30.0px;">Circuit breakers can have built in logic to perform necessary health checks of external systems.</p><h3 style="margin-left: 30.0px;" id="PerformancePatternsinMicroservices-BasedDesigns-ASYNCHRONOUSINTEGRATION">ASYNCHRONOUS INTEGRATION</h3><p style="margin-left: 30.0px;">Most performance issues related to integrations can be avoided by decoupling the communications between microservices. The asynchronous integration approach provides one such mechanism to achieve this decoupling. Take a look at the design of your microservices-based system, and give it a serious thought if you see point-to-point integration between two microservices.</p><p style="margin-left: 30.0px;">Any standard message broker system can be used to provide publish-subscribe capabilities. Another way to achieve asynchronous integration is to use event-driven architecure.</p><p style="margin-left: 30.0px;">The following figure shows a scenario, where decoupling between producers and receivers/subscribers is achieved with the use of a message broker.  Of course, this message broker includes multiple technologies such as SNS (Pub/Sub Topics, Queuing, etc...).</p><p style="margin-left: 30.0px;"><br/></p><p style="margin-left: 30.0px;"><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="250" src="attachments/129073169/129761287.png?height=250" data-image-src="attachments/129073169/129761287.png" data-unresolved-comment-count="0" data-linked-resource-id="129761287" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-10-26 at 12.17.00 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="129073169" data-linked-resource-container-version="2" data-media-id="fdfa826e-bd24-4b92-8c83-2704881de1da" data-media-type="file"></span></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/129073169/129859585.png">Screen Shot 2017-10-26 at 12.07.06 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/129073169/128942110.png">Screen Shot 2017-10-26 at 12.08.10 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/129073169/129761287.png">Screen Shot 2017-10-26 at 12.17.00 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

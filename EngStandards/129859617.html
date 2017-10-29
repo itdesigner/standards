@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Service Design / Review Checklist</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Services-Guidance%2C-Design%2C-and-Review-Criteria_127664218.html">Services Guidance, Design, and Review Criteria</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Service Design / Review Checklist
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Oct 27, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>A Web API (Application Programming Interface) is a web application that’s not visual. There are no colors, layouts, or user interactions in the typical sense. Instead, there is the bare-bones request and response of structured data that facilitates everything from mobile apps to email notifications to stock trading.</p><p>Building a Web API is mostly a typical web software project: it’s got a variety of stakeholders both technical and non-technical, it’s got scope creep and feature dreams. What it lacks is an easy way to show intentions and progress to people that cannot read code. API design provides an opportunity to put something on a whiteboard and talk about what you are planning to build.</p><p><br/></p><blockquote><p><span style="color: rgb(51,51,51);">API DESIGN IS THE COUNTERPART OF VISUAL DESIGN IN THIS MACHINE-READABLE WORLD</span></p></blockquote><p><br/></p><p>API design is the counterpart of visual design in this machine-readable world, a phase of work that starts between architectural planning and implementation where the details are defined. In this case, it’s a series of details in data handling in one of the most pitfall-laden categories of functionality in software: integrations.</p><p>System-to-system communications (or integrations) are not always pretty, but they are at the heart of many of the most important systems we see on the web today. Government, Education, Business, Humanitarian Aid, and Social Media are all increasingly driven by API platforms, and enriched at the point where two or more systems combine their content and services into a new and greater whole.</p><p>Putting the two sides of an integration together takes careful communications, planning for troubleshooting, and often the need to satisfy the process and technical needs of two different  teams for any single connection. For a public platform, that might translate to satisfying hundreds or thousands of development teams. How can you support the disparate technical requirements of all these API customers without having to interface with each individually?</p><p>Whether supporting one customer or many, your API Design should create intuitive, flexible access to functionality and data without being limited by any specific layout, use case, or medium. Other products bring their specific goals and lean on your API to realize them. Achieving this requires a design that is as close to a complete specification as possible, a document which ultimately is shared with your developer community.</p><p>Let’s imagine you’ve drafted your design specification. Before you can call it complete, what are the things you should make sure are done?</p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout three-equal" data-layout="three-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Architecture &amp; Design Considerations</b></div><div class="panelContent" style="background-color: white;">
+<ul class="inline-task-list" data-inline-tasks-content-id="129859617"><li data-inline-task-id="34">All entry points and trust boundaries are identified</li><li data-inline-task-id="35">Input validation for all external callers</li><li data-inline-task-id="36">Design assumes malicious callers</li><li data-inline-task-id="37">Design address potential cross-site scripting issues</li><li data-inline-task-id="38">Design does not rely on client-side validation</li><li data-inline-task-id="39">Clear division of external and internal interfaces</li><li data-inline-task-id="40">API is following REST (or GraphQL rules)</li><li data-inline-task-id="41">All remote resources are called asynchronously whenever possible</li><li data-inline-task-id="42">System is designed to gracefully degrade.</li><li data-inline-task-id="43">Version strategy defined and implemented</li><li data-inline-task-id="44">Service is stateless</li><li data-inline-task-id="45"><span> </span></li></ul>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Documentation</b></div><div class="panelContent" style="background-color: white;">
+<ul class="inline-task-list" data-inline-tasks-content-id="129859617"><li data-inline-task-id="1">Cost analysis completed and included with design</li><li data-inline-task-id="46">Implementation matches the design documentation</li><li data-inline-task-id="47">Contracts for API are defined and published</li><li data-inline-task-id="48">A core READ.MD file exists in the code and is sufficient to get a new developer up and running with a basic understanding of the system/service functionality and interactions</li><li data-inline-task-id="6"><span>There are examples of all resources</span></li><li data-inline-task-id="49"><span>Initial design documents exist with sequence diagrams</span></li></ul>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Monitoring &amp; Logging</b></div><div class="panelContent" style="background-color: white;">
+<ul class="inline-task-list" data-inline-tasks-content-id="129859617"><li data-inline-task-id="7">All exceptions are logged</li><li data-inline-task-id="50">At a minimum, all boundary methods have measures applied to them</li><li data-inline-task-id="51">Error codes are used throughout </li><li data-inline-task-id="52">Logging can be configured and level changed without requiring a redeployment</li><li data-inline-task-id="12"><span>No sensitive data is logged</span></li><li data-inline-task-id="53"><span>Correlation ID's are used whenever possible</span></li></ul>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout three-equal" data-layout="three-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Communication &amp; External Resources</b></div><div class="panelContent" style="background-color: white;">
+<ul class="inline-task-list" data-inline-tasks-content-id="129859617"><li data-inline-task-id="13">SSL everywhere - all the time</li><li data-inline-task-id="22">Return fields can be limited / sorted / filtering</li><li data-inline-task-id="54">Any necessary throttling has been identified and implemented</li><li data-inline-task-id="55">JSON only responses</li><li data-inline-task-id="56">Latency and response SLA's identified and documented</li><li data-inline-task-id="57">Bulkhead strategy employed against external resources</li><li data-inline-task-id="58">Circuit-break strategy employed against external resources</li><li data-inline-task-id="59">GET, HEAD, PUT, DELETE, OPTIONS and TRACE are all idempotent</li></ul>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Naming &amp; Style</b></div><div class="panelContent" style="background-color: white;">
+<ul class="inline-task-list" data-inline-tasks-content-id="129859617"><li data-inline-task-id="30">Consistent and Intuitive Naming used</li><li data-inline-task-id="31"><span>Are there any undocumented assumptions</span></li><li data-inline-task-id="60"><span>Are the proper HTTP response codes being returned</span></li></ul>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Performance &amp; Testing</b></div><div class="panelContent" style="background-color: white;">
+<ul class="inline-task-list" data-inline-tasks-content-id="129859617"><li data-inline-task-id="32">Consistent and Intuitive Naming used</li><li data-inline-task-id="33"><span>No unnecessary dependencies</span></li><li data-inline-task-id="61"><span>Unit tests exist and code coverage is &gt;90%</span></li><li data-inline-task-id="62"><span>Can this code gracefully handle external errors (e.g. - network, db, etc.).</span></li><li data-inline-task-id="63"><span>Are all resources released when they are no longer needed</span></li><li data-inline-task-id="64"><span>Has the code /service performance been validated over the desired target range</span></li><li data-inline-task-id="65"><span>Has any auto-scaling functionality been tested and documented</span></li></ul>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="ServiceDesign/ReviewChecklist-AdditionalLinks">Additional Links</h2><p>See the coding best practices and style guides found here:</p><ul><li><a href="https://placester.atlassian.net/wiki/spaces/EngStandards/pages/33830953/Node.JS+Best+Practices" rel="nofollow">Javascript</a></li><li><a href="Java_33476592.html" data-linked-resource-id="33476592" data-linked-resource-version="1" data-linked-resource-type="page">Java</a></li><li>Typescript</li></ul></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

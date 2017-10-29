@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Null Object Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Null Object Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span> on May 08, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<p>The intent of a Null Object is to encapsulate the absence of an object by providing a substitutable alternative that offers suitable default do nothing behavior. In short, a design where &quot;nothing will come of nothing&quot;</p><p>Use the Null Object pattern when</p><ul><li>an object requires a collaborator. The Null Object pattern does not introduce this collaboration--it makes use of a collaboration that already exists</li><li>some collaborator instances should do nothing</li><li>you want to abstract the handling of null away from the client</li></ul>
+</div></div><p><br/></p><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">2</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">3</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>LOW</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">Given that an object reference may be optionally null, and that the result of a null check is to do nothing or use some default value, how can the absence of an object — the presence of a null reference — be treated transparently?</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p>Sometimes a class that requires a collaborator does not need the collaborator to do anything. However, the class wishes to treat a collaborator that does nothing the same way it treats one that actually provides behavior.</p><p>Consider for example a simple screen saver which displays balls that move about the screen and have special color effects. This is easily achieved by creating a Ball class to represent the balls and using a Strategy pattern to control the ball's motion and another Strategy pattern to control the ball's color.</p><p>It would then be trivial to write strategies for many different types of motion and color effects and create balls with any combination of those. However, to start with you want to create the simplest strategies possible to make sure everything is working. And these strategies could also be useful later since you want as strategies as possible strategies.</p><p>Now, the simplest strategy would be no strategy. That is do nothing, don't move and don't change color. However, the Strategy pattern requires the ball to have objects which implement the strategy interfaces. This is where the Null Object pattern becomes useful.</p><p>Simply implement a NullMovementStrategy which doesn't move the ball and a NullColorStrategy which doesn't change the ball's color. Both of these can probably be implemented with essentially no code. All the methods in these classes do &quot;nothing&quot;. They are perfect examples of the Null Object Pattern.</p><p>The key to the Null Object pattern is an abstract class that defines the interface for all objects of this type. The Null Object is implemented as a subclass of this abstract class. Because it conforms to the abstract class' interface, it can be used any place this type of object is needed. As compared to using a special &quot;null&quot; value which doesn't actually implement the abstract interface and which must constantly be checked for with special code in any object which uses the abstract interface.</p><p>It is sometimes thought that Null Objects are over simple and &quot;stupid&quot; but in truth a Null Object always knows exactly what needs to be done without interacting with any other objects. So in truth it is very &quot;smart.&quot;</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33833817/33833846.png?height=400" data-image-src="attachments/33833817/33833846.png" data-unresolved-comment-count="0" data-linked-resource-id="33833846" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-08 at 1.33.00 AM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33833817" data-linked-resource-container-version="1" data-media-id="3e915362-f29f-49f2-8b2a-204b943df917" data-media-type="file"></span></p><ul><li><span><code>Client</code></span> -<ul style="margin-left: 25.0px;"><li>requires a collaborator.</li></ul></li><li><span><code>AbstractObject</code></span> -<ul style="margin-left: 25.0px;"><li>declares the interface for Client's collaborator</li><li>implements default behavior for the interface common to all classes, as appropriate</li></ul></li><li><code><span>RealObject</span></code> -<ul style="margin-left: 25.0px;"><li>defines a concrete subclass of AbstractObject whose instances provide useful behavior that Client expects</li></ul></li><li><code><span>NullObject</span></code> -<ul style="margin-left: 25.0px;"><li>provides an interface identical to AbstractObject's so that a null object can be substituted for a real object</li><li>implements its interface to do nothing. What exactly it means to do nothing depends on what sort of behavior Client is expecting</li><li>when there is more than one way to do nothing, more than one NullObject class may be required</li></ul></li></ul>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">class Dog{
+  sound(){
+    return &#39;bark&#39;;
+  }
+}
+
+class NullAnimal{
+  sound(){
+    return null;
+  }
+}
+
+function getAnimal(type) {
+  return type === &#39;dog&#39; ? new Dog() : new NullAnimal();
+}
+
+[&#39;dog&#39;, null].map((animal) =&gt; getAnimal(animal).sound());
+// Returns [&quot;bark&quot;, null]</pre>
+</div></div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>The Null Object class is often implemented as a Singleton. Since a null object usually does not have any state, its state can't change, so multiple instances are identical. Rather than use multiple identical instances, the system can just use a single instance repeatedly.</li><li>If some clients expect the null object to do nothing one way and some another, multiple NullObject classes will be required. If the do nothing behavior must be customized at run time, the <code>NullObject</code> class will require pluggable variables so that the client can specify how the null object should do nothing (see the discussion of pluggable adaptors in the Adapter pattern). This may generally be a symptom of the <code>AbstractObject</code> not having a well defined (semantic) interface.</li><li>A Null Object does not transform to become a Real Object. If the object may decide to stop providing do nothing behavior and start providing real behavior, it is not a null object. It may be a real object with a do nothing mode, such as a controller which can switch in and out of read-only mode. If it is a single object which must mutate from a do nothing object to a real one, it should be implemented with the State pattern or perhaps the Proxy pattern. In this case a Null State may be used or the proxy may hold a Null Object.</li><li>The use of a null object can be similar to that of a Proxy, but the two patterns have different purposes. A proxy provides a level of indirection when accessing a real subject, thus controlling access to the subject. A null collaborator does not hide a real object and control access to it, it replaces the real object. A proxy may eventually mutate to start acting like a real subject. A null object will not mutate to start providing real behavior, it will always provide do nothing behavior.</li><li>A Null Object can be a special case of the Strategy pattern. Strategy specifies several ConcreteStrategy classes as different approaches for accomplishing a task. If one of those approaches is to consistently do nothing, that <code>ConcreteStrategy</code> is a <code>NullObject</code>. For example, a Controller is a View's Strategy for handling input, and NoController is the Strategy that ignores all input.</li><li>A Null Object can be a special case of the State pattern. Normally, each ConcreteState has some do nothing methods because they're not appropriate for that state. In fact, a given method is often implemented to do something useful in most states but to do nothing in at least one state. If a particular ConcreteState implements most of its methods to do nothing or at least give null results, it becomes a do nothing state and as such is a null state.</li><li>A Null Object can be used to allow a Visitor to safely visit a hierarchy and handle the null situation.</li><li>Null Object is a concrete collaborator class that acts as the collaborator for a client which needs one. The null behavior is not designed to be mixed into an object that needs some do nothing behavior. It is designed for a class which delegates to a collaborator all of the behavior that may or may not be do nothing behavior.</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33833817/33833846.png">Screen Shot 2017-05-08 at 1.33.00 AM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

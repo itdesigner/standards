@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Asset Tagging Requirements</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="AWS_33474897.html">AWS</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Asset Tagging Requirements
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Ryan Fisch</span>, last modified on Apr 14, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="AssetTaggingRequirements-ResourceTaggingPolicy"><span style="color: rgb(0,0,0);">Resource Tagging Policy</span></h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/></colgroup><tbody><tr><td class="confluenceTd"><p><span>This document sets for the expectation for tag management within the Placester AWS environment. All taggable assets should have the minimum of these tags in place. Tags are a key-value pair that allows an individual to identify an attribute of AWS with a specific value. The value of tags are to provide better reporting for utilization and cost management.</span></p><p><span>*Note: tags are case sensitive on Key and Values. Also they are limited to 128 and 256 respectively. </span></p><h3 id="AssetTaggingRequirements-AssetswithTagSupport:"><span style="color: rgb(67,67,67);">Assets with Tag Support:</span></h3><ul><li style="list-style-type: disc;"><p><span>AMI</span></p></li><li style="list-style-type: disc;"><p><span>Customer Gateway</span></p></li><li style="list-style-type: disc;"><p><span>DHCP Option</span></p></li><li style="list-style-type: disc;"><p><span>EBS Volume</span></p></li><li style="list-style-type: disc;"><p><span>EC2 Instance</span></p></li><li style="list-style-type: disc;"><p><span>Network ACL</span></p></li><li style="list-style-type: disc;"><p><span>Network Interface</span></p></li><li style="list-style-type: disc;"><p><span>Reserved Instance</span></p></li><li style="list-style-type: disc;"><p><span>Route Table</span></p></li><li style="list-style-type: disc;"><p><span>Spot Instance Request</span></p></li><li style="list-style-type: disc;"><p><span>Security Group</span></p></li><li style="list-style-type: disc;"><p><span>Subnet</span></p></li><li style="list-style-type: disc;"><p><span>Virtual Private Gateway</span></p></li><li style="list-style-type: disc;"><p><span>Virtual Private Cloud</span></p></li><li style="list-style-type: disc;"><p><span>VPN Connection</span></p></li></ul><h3 id="AssetTaggingRequirements-GeneralRestrictions"><span style="color: rgb(67,67,67);">General Restrictions</span></h3><ul><li style="list-style-type: disc;"><p><span>Maximum number of tags per resource – 10  </span></p></li><li style="list-style-type: disc;"><p><span>Maximum key length – 127 Unicode characters  </span></p></li><li style="list-style-type: disc;"><p><span>Maximum value length – 255 Unicode characters  </span></p></li><li style="list-style-type: disc;"><p><span>Tag keys and values are case sensitive  </span></p></li><li style="list-style-type: disc;"><p><span>Tag keys must be unique per resource  </span></p></li><li style="list-style-type: disc;"><p><span>Do not use the “aws:” prefix in your tag name or values because it is reserved for AWS use</span></p></li></ul><br/><p><span>The following are a series of tags, their definition, and expected / example values that should be mapped for each asset in AWS.</span></p><h3 id="AssetTaggingRequirements-RequiredTags"><span style="color: rgb(67,67,67);">Required Tags</span></h3><h4 id="AssetTaggingRequirements-TagName:TeamOwner"><span style="color: rgb(102,102,102);">Tag Name: TeamOwner</span></h4><p><span>Description: Defines the primary team that “owns” this asset</span></p><p><span>Values:</span></p><ul><li style="list-style-type: disc;"><p><span>Infrastructure (EngOps)</span></p></li><li style="list-style-type: disc;"><p><span>Web (SAS)</span></p></li><li style="list-style-type: disc;"><p><span>Data (Archimedes)</span></p></li><li style="list-style-type: disc;"><p><span>Search (Archimedes)</span></p></li><li style="list-style-type: disc;"><p><span>Services (Monoceros)</span></p></li><li style="list-style-type: disc;"><p><span>Engineering (email only)</span></p></li></ul><br/><p><span>These tags are used by PagerDuty trigger scripts to route Monit alerts to the correct Team/Escalation path (in parenthesis above) as defined by the following case statement in </span><span><a href="http://internal.aws.plcstrint.com" class="external-link" rel="nofollow">internal.aws.plcstrint.com</a></span><span>:/</span><span>placester/pagerduty/get_service_key.sh</span></p><p><span style="color: rgb(199,37,78);">case $TeamOwner in</span></p><p><span style="color: rgb(199,37,78);">        Infrastructure )PAGERDUTY_SERVICE_KEY=$INFRASTRUCTURE_KEY;;</span></p><p><span style="color: rgb(199,37,78);">        Web )           PAGERDUTY_SERVICE_KEY=$WEB_KEY;;</span></p><p><span style="color: rgb(199,37,78);">        Data )          PAGERDUTY_SERVICE_KEY=$DATA_KEY;;</span></p><p><span style="color: rgb(199,37,78);">        Search )  PAGERDUTY_SERVICE_KEY=$DATASERVICES_KEY;;</span></p><p><span style="color: rgb(199,37,78);">        Services )      PAGERDUTY_SERVICE_KEY=$SERVICES_KEY;;</span></p><p><span style="color: rgb(199,37,78);">        Engineering)    PAGERDUTY_SERVICE_KEY=&quot;&quot;;;</span></p><p><span style="color: rgb(199,37,78);">        * )             PAGERDUTY_SERVICE_KEY=$HOTPOTATO_KEY</span></p><p><span style="color: rgb(199,37,78);">esac</span></p><br/><h4 style="margin-left: 0.75pt;" id="AssetTaggingRequirements-TagName:Owner"><span style="color: rgb(102,102,102);">Tag Name: Owner</span></h4><br/><p style="margin-left: 0.75pt;"><span>Description: This is to be used in the pl-internal account (</span><span>colloquially referred to as &quot;the sandbox&quot;). </span><span>Defines the primary individual that “owns” this asset. </span></p><p style="margin-left: 0.75pt;"><span>Any asset in the pl-internal account that does not have an owner can and will be shut down and terminated without notice to control costs.  Assets that are consuming financial resources that have an Owner tag can still be shut down outside of business hours without notice but will not be destroyed.   Owner tag should be used in association with TeamOwner = Engineering and the value should be your personal AWS userid.</span></p></td></tr></tbody></table></div><h3 id="AssetTaggingRequirements-OptionalTags"><span style="color: rgb(0,0,0);">   </span><span style="color: rgb(67,67,67);">Optional Tags</span></h3><h4 style="margin-left: 9.0pt;" id="AssetTaggingRequirements-TagName:Domain"><span style="color: rgb(102,102,102);">Tag Name: Domain</span></h4><p><span><span><br/></span></span></p><p style="margin-left: 9.0pt;"><span style="color: rgb(0,0,0);">The domain tag should represent the service or application generalized context or domain area. Examples: etl, sites, billing, subscription, accounts</span></p><h4 style="margin-left: 9.0pt;" id="AssetTaggingRequirements-TagName:Service"><span style="color: rgb(102,102,102);">Tag Name: Service</span></h4><p><span><span style="color: rgb(0,0,0);">The service tag should represent a more specific sub system, microservice, application specific detail.  Example could be a micro-service name, lambda function name, application module, et cetera.</span></span></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

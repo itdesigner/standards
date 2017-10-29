@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Orchestration and Choreography</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Conceptual-Patterns_131203160.html">Conceptual Patterns</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Orchestration and Choreography
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span> on Oct 28, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p style="">One thing with micro-services that people get caught up on is how to do orchestration. The answer is don't. Instead of doing orchestration, do choreography.</p><h2 style="" id="OrchestrationandChoreography-orchestrationasananti-pattern">orchestration as an anti-pattern</h2><p style="">What is service orchestration? It's the process of managing different services and the dependencies between them such that we promote the principles of loose coupling.</p><p style="">The tragedy of this is that orchestration efforts almost inevitably result in the introduction of frameworks specifically designed to facilitate orchestration. Often this results in large indirection tables with services declaring that they want to use XYZ service and other services declaring they might provide XYZ service. At a macro level orchestration systems look familiar to Object Oriented programmers. They look like the sorts of things you get with Java or C# interfaces and dependency injection.</p><p style="">The thing is, often the dependencies of a service don't have multiple implementations, only one. So as soon as we introduce orchestration for that we're introducing needless complexity. Why parameterize something that doesn't need to be parameterized?</p><p style="">Orchestration is very often achieved through indirection with a service registry. Orchestration is therefore useful when runtime configuration of a service might change on the fly.</p><h2 style="" id="OrchestrationandChoreography-whyruntimeadaptiondoesn&#39;tmatter">why runtime adaption doesn't matter</h2><p style="">But we have continuous delivery (we do, right?). Why does run time adaptation matter? if we want to change what a service calls we don't need dependency injection or any parameterization on the service call, we'll just make a change to the depending service and do a release, right?</p><p style="">And changing the code to effect a change, rather than changing the configuration of the code to effect the change, is better because you reduce the number of places that you have to record change. If we use the code we record the change in version control and we can use trunk based development and all that.</p><h2 style="" id="OrchestrationandChoreography-hencechoreography">hence choreography</h2><p style="">Orchestration requires a conductor. The conductor directs the orchestra during the performance.</p><p style="">Choreography is the process of agreeing, between the dancers, how a dance will be performed<span> </span><em>before</em><span> </span>it is performed. We don't stop during the performance of the dance to discuss alternative moves and we don't take instruction from a conductor during the dance. We listen to the music and we follow the choreography that we agreed. Importantly, if there even is an autocratic<span> </span><em>choreographer</em>that person might even be dead during the actual performance. Likely as not the performance will differ in very subtle ways from what has been agreed. The choreography has to have built in tolerance for those differences.</p><p style="">We have this same idea of choreography in service orientation. Choreography means to encode in our services what the other dancers in the performance are or are doing, directly, before we perform the dance of live runtime.</p><p style="">When we change the dance, when we change the services that we co-operate with, we can't do that as we dance. We have to stop the dance, change the choreography, maybe practice a bit, and then start dancing again. We start a new form of the dance instead of trying to improvise the dance as we go along. Improvising<span> </span><em>might</em><span> </span>work if there are only a few participants... but if there's a whole marching band you better be sure they all know what they're doing before they start.</p><h2 style="" id="OrchestrationandChoreography-morechoreographymisconceptions">more choreography misconceptions</h2><blockquote style=""><p><em>If you don't have parameterization of service endpoints then you are reducing your service's ability to scale.</em></p></blockquote><p style="">This is a fallacy based on the idea that you need to dynamically alter the endpoint that a service talks to in order to scale it. But that's not true. Altering the endpoint that a service talks to is one way to scale but if you use protocols that can be proxied then another way of scaling is to just place a proxy between the client and the endpoint and make the proxy load balance to different actual backends.</p><p style="">In other words we need less loose coupling in the code if we use protocols that provide facilities for loose coupling.</p><p style="">What's one of those protocols? well HTTP. You can't get much more common than that. Another example is SMTP.</p><blockquote style=""><p><em>We don't orchestrate just between services but within them</em></p></blockquote><p style="">This shows a fallacy about how to scale things. Scaling things is absolutely about rebuilding services. Either it's that or you over engineered the service that did not need to scale.</p><p style="">Orchestration advocates often like to pretend that adjusting a parameter will let you scale a particular service. But if it's so easy to do that why not automate and pipeline that change so a service can automatically adapt to the load? And then you no longer have orchestration, but choreography.</p><blockquote style=""><p><em>Without a centralized configuration management schema we're lost</em></p></blockquote><p style="">This is another tenet of orchestration. Another way of looking at it is that it is an effort to centralize all configuration and environment management. Microservice approaches reject this, building massively centralized anything tends to result in overly expensive solutions. Why not aggregate the information that does need to be centralized, deliberately, instead of centralizing by default? In other words, isn't centralizing everything just another example of premature optimization?</p><h2 style="" id="OrchestrationandChoreography-there&#39;salwaysanotherwaytosayit">there's always another way to say it</h2><p style="">In this case we might say:</p><blockquote style=""><p><em>yeah, yeah, dependency injection is super cool, but let's not use it for everything.</em></p></blockquote>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

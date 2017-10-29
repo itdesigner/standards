@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Thoughts on Technology</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Thoughts on Technology
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Oct 29, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Here is a place for any Placester employee to add their thoughts about technology and how it should be used.  This area of our site is not necessarily authoritative; but, is really designed to give everyone the opportunity to put their thoughts out there for everyone to interact with.</p><p>    
+    
+
+
+<div class="search-macro search-macro-medium">
+    <div class="aui-dd-parent"></div>
+    <form class="aui aui-dd-parent" name="livesearchForm" method="POST" action="/wiki/dosearchsite.action">
+        <fieldset class="search-macro-fields">
+            <div class="search-macro-query">
+                <input class="text" type="text" name="queryString" autocomplete="off" placeholder="Article keywords to search">
+                            </div>
+                        <button type="submit" class="search-macro-button aui-button">
+                <span class="aui-icon aui-icon-small aui-iconfont-search">Search</span>
+            </button>
+                        <input type="hidden" name="where" value="conf_all">
+            <input type="hidden" name="additional" value="space name">
+            <input type="hidden" name="labels" value="">
+            <input type="hidden" name="contentType" value="">
+        </fieldset>
+    </form>
+</div>
+</p><h3 id="ThoughtsonTechnology-Contents">Contents</h3><p>    
+    
+
+
+    
+        
+<div class="blog-post-listing">
+            <div class="logo-heading-block">
+            <span class="logoBlock">
+                <a  class="userLogoLink" data-username="jshaughnessy" href="    /wiki/display/~jshaughnessy
+">
+               <img class="userLogo logo" src="aa-avatar/f2b81ee56d4789ec425869cb019d1b87" alt="User icon: jshaughnessy" title="jshaughnessy">
+           </a>            </span>
+            <span class="blogHeading">
+                <a class="blogHeading" href="/wiki/display/EngStandards/2017/10/29/The+Do%27s+and+Don%27ts+of+AWS+Lambdas">The Do&#39;s and Don&#39;ts of AWS Lambdas</a>
+                <div class="page-metadata not-personal">    <a href="    /wiki/display/~jshaughnessy
+"
+                       class="url fn confluence-userlink" data-username="jshaughnessy"
+                            >Jerry Shaughnessy</a> posted on Oct 29, 2017</div>
+            </span>
+        </div>
+    
+    <div class="wiki-content">
+        This post touches on some things I’ve learned using AWS Lambda to build the proof-of-concept notification service, which is built almost exclusively with Lambdas.
+Don’t substitute FaaS (Function as a service) with writing good libraries
+People often ask me how to test Lambda functions locally, my answer to that is don’t! Write and test libraries, integration with Lambda should come after you have an initial suite of libraries containing your application logic.  Don't get me wrong,…
+    </div>
+    
+            
+        <div class="endsection">
+        
+            <a href="/wiki/pages/editblogpost.action?pageId=131301999">Edit</a>
+                    
+                    </div>
+    </div>
+    
+        
+<div class="blog-post-listing">
+            <div class="logo-heading-block">
+            <span class="logoBlock">
+                <a  class="userLogoLink" data-username="jshaughnessy" href="    /wiki/display/~jshaughnessy
+">
+               <img class="userLogo logo" src="aa-avatar/f2b81ee56d4789ec425869cb019d1b87" alt="User icon: jshaughnessy" title="jshaughnessy">
+           </a>            </span>
+            <span class="blogHeading">
+                <a class="blogHeading" href="/wiki/display/EngStandards/2017/10/28/Creating+a+true+Singleton+in+Node+with+ES6+Symbols">Creating a true Singleton in Node with ES6 Symbols</a>
+                <div class="page-metadata not-personal">    <a href="    /wiki/display/~jshaughnessy
+"
+                       class="url fn confluence-userlink" data-username="jshaughnessy"
+                            >Jerry Shaughnessy</a> posted on Oct 28, 2017</div>
+            </span>
+        </div>
+    
+    <div class="wiki-content">
+        In Node.js, it’s common to use “module.exports” to export an object instance, allowing other files to get the same object instance when requiring the file in question. A lot of people call this the singleton pattern https://en.wikipedia.org/wiki/Singleton_pattern of Node.js, but this isn’t really a singleton.
+source.gif
+No, this is just a cached object instance – and one that is not guaranteed to be re-used across all files that require it.…
+    </div>
+    
+            
+        <div class="endsection">
+        
+            <a href="/wiki/pages/editblogpost.action?pageId=131203340">Edit</a>
+                    
+                    </div>
+    </div>
+    
+        
+<div class="blog-post-listing">
+            <div class="logo-heading-block">
+            <span class="logoBlock">
+                <a  class="userLogoLink" data-username="jshaughnessy" href="    /wiki/display/~jshaughnessy
+">
+               <img class="userLogo logo" src="aa-avatar/f2b81ee56d4789ec425869cb019d1b87" alt="User icon: jshaughnessy" title="jshaughnessy">
+           </a>            </span>
+            <span class="blogHeading">
+                <a class="blogHeading" href="/wiki/display/EngStandards/2017/10/28/Don%27t+be+afraid+to+unravel+your+hard+work">Don&#39;t be afraid to unravel your hard work</a>
+                <div class="page-metadata not-personal">    <a href="    /wiki/display/~jshaughnessy
+"
+                       class="url fn confluence-userlink" data-username="jshaughnessy"
+                            >Jerry Shaughnessy</a> posted on Oct 28, 2017</div>
+            </span>
+        </div>
+    
+    <div class="wiki-content">
+        Earlier tonight, I was working on building a specialized tool for one of my many hobbies.  I had already invested hours over several days in building it out and their was only a little to go.  It was going to be fun and I was excited to see it all together.  You may not know, nor even be interested in what I was making (certainly my wife wasn't); however, needless to say it was a series of complicated steps to get it to its nearly final usable state.
+http://3.bp.blogspot.…
+    </div>
+    
+            
+        <div class="endsection">
+        
+            <a href="/wiki/pages/editblogpost.action?pageId=131203321">Edit</a>
+                    
+                    </div>
+    </div>
+    
+        
+<div class="blog-post-listing">
+            <div class="logo-heading-block">
+            <span class="logoBlock">
+                <a  class="userLogoLink" data-username="jshaughnessy" href="    /wiki/display/~jshaughnessy
+">
+               <img class="userLogo logo" src="aa-avatar/f2b81ee56d4789ec425869cb019d1b87" alt="User icon: jshaughnessy" title="jshaughnessy">
+           </a>            </span>
+            <span class="blogHeading">
+                <a class="blogHeading" href="/wiki/display/EngStandards/2017/10/28/Ending+the+Nested+Tree+of+Doom+with+Chained+Promises">Ending the Nested Tree of Doom with Chained Promises</a>
+                <div class="page-metadata not-personal">    <a href="    /wiki/display/~jshaughnessy
+"
+                       class="url fn confluence-userlink" data-username="jshaughnessy"
+                            >Jerry Shaughnessy</a> posted on Oct 28, 2017</div>
+            </span>
+        </div>
+    
+    <div class="wiki-content">
+        Recently I was asked to look at some code and provide some recommendations, specifically about some asynchronous code that they wanted to clean up.
+In this question, they wanted to know of good options for restructuring deeply nested promises without introducing any new libraries. Would it be possible to clean up the code and only use ES6 features?
+download.jpeg
+It’s a common pattern and problem – the Nested Tree of Doom – not only with promises, but with JavaScript callbacks in general.…
+    </div>
+    
+            
+        <div class="endsection">
+        
+            <a href="/wiki/pages/editblogpost.action?pageId=131301631">Edit</a>
+                    
+                    </div>
+    </div>
+    
+        
+<div class="blog-post-listing">
+            <div class="logo-heading-block">
+            <span class="logoBlock">
+                <a  class="userLogoLink" data-username="rfisch" href="    /wiki/display/~rfisch
+">
+               <img class="userLogo logo" src="aa-avatar/b11dc54bb6f01f8f8d189810013ad71f" alt="User icon: rfisch" title="rfisch">
+           </a>            </span>
+            <span class="blogHeading">
+                <a class="blogHeading" href="/wiki/pages/viewpage.action?pageId=33476940">AWS X-Ray – See Inside of Your Distributed Application</a>
+                <div class="page-metadata not-personal">    <a href="    /wiki/display/~rfisch
+"
+                       class="url fn confluence-userlink" data-username="rfisch"
+                            >Ryan Fisch</a> posted on Apr 15, 2017</div>
+            </span>
+        </div>
+    
+    <div class="wiki-content">
+        by Jeff Barr | on 01 DEC 2016 | in AWS Re:Invent https://aws.amazon.com/blogs/aws/category/re-invent/, AWS X-Ray https://aws.amazon.com/blogs/aws/category/aws-x-ray/ | Permalink https://aws.amazon.com/blogs/aws/aws-x-ray-see-inside-of-your-distributed-application/ |  Comments https://commenting.awsblogs.com/embed.html?disqus_shortname=aws-official-blog&amp;disqus_identifier=15037&amp;disqus_title=AWS+X-Ray+%26%238211%3B+See+Inside+of+Your+Distributed+Application&amp;disqus_url=https://aws.amazon.…
+    </div>
+    
+            
+        <div class="endsection">
+        
+            <a href="/wiki/pages/editblogpost.action?pageId=33476940">Edit</a>
+                    
+                    </div>
+    </div>
+    
+        
+<div class="blog-post-listing">
+            <div class="logo-heading-block">
+            <span class="logoBlock">
+                <a  class="userLogoLink" data-username="rfisch" href="    /wiki/display/~rfisch
+">
+               <img class="userLogo logo" src="aa-avatar/b11dc54bb6f01f8f8d189810013ad71f" alt="User icon: rfisch" title="rfisch">
+           </a>            </span>
+            <span class="blogHeading">
+                <a class="blogHeading" href="/wiki/display/EngStandards/2017/04/14/Replacing+a+Bastion+Host+with+Amazon+EC2+Systems+Manager">Replacing a Bastion Host with Amazon EC2 Systems Manager</a>
+                <div class="page-metadata not-personal">    <a href="    /wiki/display/~rfisch
+"
+                       class="url fn confluence-userlink" data-username="rfisch"
+                            >Ryan Fisch</a> posted on Apr 14, 2017</div>
+            </span>
+        </div>
+    
+    <div class="wiki-content">
+        by Rob Barnes | on 30 MAR 2017 | Permalink https://aws.amazon.com/blogs/mt/replacing-a-bastion-host-with-amazon-ec2-systems-manager/
+Bastion hosts (also called “jump servers”) are often used as a best practice for accessing privately accessible hosts within a system environment. For example, your system might include an application host that is not intended to be publicly accessible. To access it for product updates or managing system patches,…
+    </div>
+    
+            
+        <div class="endsection">
+        
+            <a href="/wiki/pages/editblogpost.action?pageId=33473920">Edit</a>
+                    
+                    </div>
+    </div>
+    
+        
+<div class="blog-post-listing">
+            <div class="logo-heading-block">
+            <span class="logoBlock">
+                <a  class="userLogoLink" data-username="rfisch" href="    /wiki/display/~rfisch
+">
+               <img class="userLogo logo" src="aa-avatar/b11dc54bb6f01f8f8d189810013ad71f" alt="User icon: rfisch" title="rfisch">
+           </a>            </span>
+            <span class="blogHeading">
+                <a class="blogHeading" href="/wiki/display/EngStandards/2017/04/14/Launch%3A+Amazon+Athena+adds+support+for+Querying+Encrypted+Data">Launch: Amazon Athena adds support for Querying Encrypted Data</a>
+                <div class="page-metadata not-personal">    <a href="    /wiki/display/~rfisch
+"
+                       class="url fn confluence-userlink" data-username="rfisch"
+                            >Ryan Fisch</a> posted on Apr 14, 2017</div>
+            </span>
+        </div>
+    
+    <div class="wiki-content">
+        by Tara Walker | on 14 APR 2017 | in Amazon Athena https://aws.amazon.com/blogs/aws/category/amazon-athena/, Key Management Service https://aws.amazon.com/blogs/aws/category/key-management-service/, Launch https://aws.amazon.com/blogs/aws/category/launch/ | Permalink https://aws.amazon.com/blogs/aws/launch-amazon-athena-adds-support-for-querying-encrypted-data/ |  Comments https://commenting.awsblogs.com/embed.html?…
+    </div>
+    
+            
+        <div class="endsection">
+        
+            <a href="/wiki/pages/editblogpost.action?pageId=33473619">Edit</a>
+                    
+                    </div>
+    </div>
+    </p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

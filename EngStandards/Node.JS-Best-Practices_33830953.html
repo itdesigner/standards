@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Node.JS Best Practices</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Code-Standards_33471212.html">Code Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Node.js_33473087.html">Node.js</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Node.JS Best Practices
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on May 08, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><span style="color: rgb(89,91,102);">Some of these Node.js best practices fall under the category of </span><a href="Node.JS-Style-Guide_33831387.html" data-linked-resource-id="33831387" data-linked-resource-version="11" data-linked-resource-type="page"><em>Coding style</em></a><span style="color: rgb(89,91,102);">, some deal with </span><em>Developer workflow</em><span style="color: rgb(89,91,102);">.</span></p><p><span style="color: rgb(89,91,102);"><br/></span></p><p><span style="color: rgb(89,91,102);"><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1509255691118 {padding: 0px;}
+div.rbtoc1509255691118 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1509255691118 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1509255691118'>
+<ul class='toc-indentation'>
+<li><a href='#Node.JSBestPractices-CodingStyle'>Coding Style</a>
+<ul class='toc-indentation'>
+<li><a href='#Node.JSBestPractices-CallbackConvention'>Callback Convention</a></li>
+<li><a href='#Node.JSBestPractices-Alwayscheckforerrorsincallbacks'>Always check for errors in callbacks</a></li>
+<li><a href='#Node.JSBestPractices-Returnoncallbacks'>Return on callbacks</a></li>
+<li><a href='#Node.JSBestPractices-Usertry-catchinsynccodeonly'>User try-catch in sync code only</a></li>
+<li><a href='#Node.JSBestPractices-Trytoavoidthisandnew'>Try to avoid this and new</a></li>
+<li><a href='#Node.JSBestPractices-Createsmallmodules'>Create small modules</a></li>
+<li><a href='#Node.JSBestPractices-Usegoodasyncpatterns'>Use good async patterns</a></li>
+</ul>
+</li>
+<li><a href='#Node.JSBestPractices-ErrorHandling'>Error Handling</a>
+<ul class='toc-indentation'>
+<li><a href='#Node.JSBestPractices-Operationalerrors'>Operational errors</a></li>
+<li><a href='#Node.JSBestPractices-HandlingOperationalErrors'>Handling Operational Errors</a></li>
+<li><a href='#Node.JSBestPractices-ProgrammerErrors'>Programmer Errors</a></li>
+<li><a href='#Node.JSBestPractices-HandlingProgrammerErrors'>Handling Programmer Errors</a></li>
+</ul>
+</li>
+<li><a href='#Node.JSBestPractices-Workflows'>Workflows</a>
+<ul class='toc-indentation'>
+<li><a href='#Node.JSBestPractices-Startanewprojectwithnpminit'>Start a new project with npm init</a></li>
+<li><a href='#Node.JSBestPractices-Specifyastartandtestscript'>Specify a start and test script</a></li>
+<li><a href='#Node.JSBestPractices-Environmentvariables'>Environment variables</a></li>
+<li><a href='#Node.JSBestPractices-Donotreinventthewheel'>Do not reinvent the wheel</a></li>
+<li><a href='#Node.JSBestPractices-Alwaysuseastyleguide'>Always use a style guide</a></li>
+</ul>
+</li>
+</ul>
+</div><br/></span></p><h2 id="Node.JSBestPractices-CodingStyle">Coding Style</h2><h3 id="Node.JSBestPractices-CallbackConvention">Callback Convention</h3><p>Modules should expose an error-first callback interface.</p><p>It should be like this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">module.exports = function (dragonName, callback) {  
+  // do some stuff here
+  var dragon = createDragon(dragonName);
+
+  // note, that the first parameter is the error
+  // which is null here
+  // but if an error occurs, then a new Error
+  // should be passed here
+  return callback(null, dragon);
+}</pre>
+</div></div><p><br/></p><h3 id="Node.JSBestPractices-Alwayscheckforerrorsincallbacks">Always check for errors in callbacks</h3><p><span style="color: rgb(89,91,102);">To better understand why this is a must, first start with an example that is </span><strong>broken</strong><span style="color: rgb(89,91,102);"> in every possible way, then fix it.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// this example is **BROKEN**, we will fix it soon :)
+var fs = require(&#39;fs&#39;);
+
+function readJSON(filePath, callback) {  
+  fs.readFile(filePath, function(err, data) {  
+    callback(JSON.parse(data));
+  });
+}
+
+readJSON(&#39;./package.json&#39;, function (err, pkg) { ... }</pre>
+</div></div><p>The very first problem with this <code>readJSON</code> function, is that it never checks, if an <code>Error</code> happened during the execution. You should always check for them.</p><p>The improved version:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// this example is **STILL BROKEN**, we are fixing it!
+function readJSON(filePath, callback) {  
+  fs.readFile(filePath, function(err, data) {
+    // here we check, if an error happened
+    if (err) {
+      // yep, pass the error to the callback
+      // remember: error-first callbacks
+      callback(err);
+    }
+
+    // no error, pass a null and the JSON
+    callback(null, JSON.parse(data));
+  });
+}</pre>
+</div></div><h3 id="Node.JSBestPractices-Returnoncallbacks">Return on callbacks</h3><p><span style="color: rgb(89,91,102);">One of the problems that still exists in the above example, is that if an </span><code>Error</code><span style="color: rgb(89,91,102);"> occurs, then the execution will not stop in the </span><code>if</code><span style="color: rgb(89,91,102);"> statement, but will continue. This can lead to lots of unexpected things. As of a rule of thumb, always return on callbacks.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// this example is **STILL BROKEN**, we are fixing it!
+function readJSON(filePath, callback) {  
+  fs.readFile(filePath, function(err, data) {
+    if (err) {
+      return callback(err);
+    }
+
+    return callback(null, JSON.parse(data));
+  });
+}</pre>
+</div></div><p><br/></p><h3 id="Node.JSBestPractices-Usertry-catchinsynccodeonly">User try-catch in sync code only</h3><p>Almost there! One more thing we have to take care of is the <code>JSON.parse</code>. <code>JSON.parse</code> can throw an exception, if it cannot parse the input string to a valid <code>JSON</code>format.</p><p>As <code>JSON.parse</code> will happen synchronously, we can surround it with a <code>try-catch</code> block. <strong>Please note, that you can only do this with synchronous codeblocks, but it won't work for callbacks!</strong></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// this example **WORKS**! :)
+function readJSON(filePath, callback) {  
+  fs.readFile(filePath, function(err, data) {
+    var parsedJson;
+
+    // Handle error
+    if (err) {
+       return callback(err);
+    }
+
+    // Parse JSON
+    try {
+      parsedJson = JSON.parse(data);
+    } catch (exception) {
+      return callback(exception);
+    }
+
+    // Everything is ok
+    return callback(null, parsedJson);
+  });
+}</pre>
+</div></div><p><br/></p><h3 id="Node.JSBestPractices-Trytoavoidthisandnew">Try to avoid this and new</h3><p><span style="color: rgb(89,91,102);">Binding to a specific context in Node is not a win, because Node involves passing around lots of callbacks, and heavy use of higher-level functions to manage control flow. Using a functional style will save you a lot of trouble. </span><br/><span style="color: rgb(89,91,102);">Of course, there are some cases, when prototypes can be more efficient, but if possible, try to avoid them.</span></p><p><br/></p><h3 id="Node.JSBestPractices-Createsmallmodules">Create small modules</h3><p>Do it the unix-way:</p><blockquote style="margin-left: 0.0px;"><p>Developers should build a program out of simple parts connected by well defined interfaces, so problems are local, and parts of the program can be replaced in future versions to support new features.</p></blockquote><p>Do not build <em>Deathstars</em> - keep it simple, a module should do one thing, but that thing well.</p><p><br/></p><h3 id="Node.JSBestPractices-Usegoodasyncpatterns"><strong>Use good async patterns</strong></h3><p><strong><br/></strong></p><h2 id="Node.JSBestPractices-ErrorHandling"><strong>Error Handling</strong></h2><p><span style="color: rgb(89,91,102);">Errors can be divided into two main parts: </span>operational errors<span style="color: rgb(89,91,102);"> and </span>programmer errors<span style="color: rgb(89,91,102);">.</span></p><h3 id="Node.JSBestPractices-Operationalerrors"><strong>Operational errors</strong></h3><p>Operational errors can happen in well-written applications as well, because they are not bugs, but problems with the system / a remote service, like:</p><ul><li>request timeout</li><li>system is out of memory</li><li>failed to connect to a remote service</li></ul><p><br/></p><h3 id="Node.JSBestPractices-HandlingOperationalErrors">Handling Operational Errors</h3><p>Depending on the type of the operational error, you can do the followings:</p><ul><li>Try to solve the error - if a file is missing, you may need to create one first</li><li>Retry the operation, when dealing with network communication</li><li>Tell the client, that something is not ok - can be used, when handling user inputs</li><li>Crash the process, when the error condition is unlikely to change on its own, like the application cannot read its configuration file</li></ul><p>Also, it is true for all the above: <strong>log everything</strong>.</p><p><strong><br/></strong></p><h3 id="Node.JSBestPractices-ProgrammerErrors"><strong>Programmer Errors</strong></h3><p>Programmer errors are bugs. This is the thing you can avoid, like:</p><ul><li>called an async function without a callback</li><li>cannot read property of <code>undefined</code></li></ul><p><br/></p><h3 id="Node.JSBestPractices-HandlingProgrammerErrors"><code>Handling Programmer Errors</code></h3><p><span style="color: rgb(89,91,102);">Crash immediately - as these errors are bugs, you won't know in which state your application is. A process control system should restart the application when it happens, like: </span><a href="http://supervisord.org/" class="external-link" rel="nofollow">supervisord</a><span style="color: rgb(89,91,102);"> or </span><a href="http://mmonit.com/monit/" class="external-link" rel="nofollow">monit</a><span style="color: rgb(89,91,102);">.</span></p><p><strong><br/></strong></p><h2 id="Node.JSBestPractices-Workflows"><strong>Workflows</strong></h2><h3 id="Node.JSBestPractices-Startanewprojectwithnpminit"><strong>Start a new project with npm init</strong></h3><p>The <code>init</code> command helps you create the application's <code>package.json</code> file. It sets some defaults, which can be later modified.</p><p>Start writing your fancy new application should begin with:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">mkdir my-awesome-new-project  
+cd my-awesome-new-project  
+npm init  </pre>
+</div></div><p><br/></p><h3 id="Node.JSBestPractices-Specifyastartandtestscript">Specify a start and test script</h3><p>In your <code>package.json</code> file you can set scripts under the <code>scripts</code> section. By default, <code>npm init</code> generates two, <code>start</code> and <code>test</code>. These can be run with <code>npm start</code> and <code>npm test</code>.</p><p>Also, as a bonus point: you can define custom scripts here and can be invoked with <code>npm run-script &lt;SCRIPT_NAME&gt;</code>.</p><p>Note, that NPM will set up <code>$PATH</code> to look in <code>node_modules/.bin</code> for executables. This helps avoid global installs of NPM modules.</p><p><br/></p><h3 id="Node.JSBestPractices-Environmentvariables">Environment variables</h3><p>Production/staging deployments should be done with environment variables. The most common way to do this is to set the <code>NODE_ENV</code> variable to either <code>production</code> or <code>staging</code>.</p><p>Depending on your environment variable, you can load your configuration, with modules like <a href="https://github.com/flatiron/nconf" class="external-link" rel="nofollow">nconf</a>.</p><p>Of course, you can use other environment variables in your Node.js applications with <code>process.env</code>, which is an object that contains the user environment.</p><p><br/></p><h3 id="Node.JSBestPractices-Donotreinventthewheel">Do not reinvent the wheel</h3><p><span style="color: rgb(89,91,102);">Always look for existing solutions first. NPM has a crazy amount of packages, there is a pretty good chance you will find the functionality that you are looking for.</span></p><p><br/></p><h3 id="Node.JSBestPractices-Alwaysuseastyleguide">Always use a style guide</h3><p><span style="color: rgb(89,91,102);">It is much easier to understand a large codebase, when all the code is written in a consistent style. It should include indent rules, variable naming conventions, best practices and lots of other things.</span><strong><br/></strong></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Asset Naming Conventions</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="AWS_33474897.html">AWS</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Asset Naming Conventions
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Ryan Fisch</span>, last modified on May 12, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="AssetNamingConventions-"><span><span><br/></span></span></h2><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="highlight-blue confluenceTh" data-highlight-colour="blue"><p><span style="color: rgb(0,0,0);">Service</span></p></th><th class="highlight-blue confluenceTh" data-highlight-colour="blue"><p><span style="color: rgb(0,0,0);">Pattern</span></p></th><th class="highlight-blue confluenceTh" data-highlight-colour="blue"><p><span style="color: rgb(0,0,0);">Example</span></p></th></tr><tr><th colspan="3" class="confluenceTh"><p><span style="color: rgb(0,0,0);">Compute</span></p></th></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">EC2</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^([a-z0-9\-]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">abc-defgh</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">ELB</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^elb-(us-east-1|us-west-2)-([a-z]{3})-([a-z0-9\-]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">elb-us-east-1-abc-defgh</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">ECS</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^ecs-(cl|task|svc)-([a-z0-9\-]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">ecs-cl-abc-defgh</span></p><p><span style="color: rgb(0,0,0);">ecs-task-abc-defgh</span></p><p><span style="color: rgb(0,0,0);">ecs-svc-abc-defgh</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">Lambda</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^fn-([a-z]{3})-([a-z0-9]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">fn-abc-defgh-functionName</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">Autoscale Policy</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^scale-([a-z]{3})-([a-z0-9\-]+)-(instances|tasks)-(up|down)-by-([a-z0-9]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">scale-abc-defgh-instances-up-by-cpu</span></p><p><span style="color: rgb(0,0,0);">scale-abc-defgh-tasks-down-by-ram</span></p></td></tr><tr><th colspan="3" class="confluenceTh"><p><span style="color: rgb(0,0,0);">Storage</span></p></th></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">EBS Volume</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^ebs-(us-east-1|us-west-2)(a|b|c)-([a-z]{3})-([a-z0-9\-]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">ebs-us-east-1a-abc-defgh</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">S3 Lifecycle Rule</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^s3r-([a-z0-9\-]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">s3r-doing-some-type-of-cleanup</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">ElastiCache</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">cache-(r|m)-([a-z]{3})-([a-z0-9\-]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">cache-r-abc-defgh</span></p></td></tr><tr><th colspan="3" class="confluenceTh"><p><span style="color: rgb(0,0,0);">Networking</span></p></th></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">VPC</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^vpc-([a-z0-9\-]+)$</span></p><p><span style="color: rgb(0,0,0);">label the VPC by it's purpose</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">vpc-defgh</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">Subnet</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^sn-(prv|pub)-(us-east-1|us-west-2)(a|b|c)-([a-z0-9\-]+))$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">sn-prv-us-east-1a-abc-defgh</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">Routes</span></p></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">ACL</span></p></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">Security Groups</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^sg-([a-z]{3})-([a-z0-9\-]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">sg-abc-defgh</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">Internet Gateway</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^igw-([a-z0-9\-]+)</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">ig-abc-xyz</span></p></td></tr><tr><th colspan="3" class="confluenceTh"><p><span style="color: rgb(0,0,0);">Applications</span></p></th></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">SNS</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^sns-([a-z]{3})-([a-z0-9\-]+)-event$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">sns-abc-defgh-verb-event</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">SQS</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^sqs-([a-z]{3})-([a-z0-9\-]+)s$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">sqs-abc-defgh-requests</span></p></td></tr><tr><th colspan="3" class="confluenceTh"><p><span style="color: rgb(0,0,0);">Identity Management</span></p></th></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">IAM Roles</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^role-([a-z0-9\-]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">role-abc-01-def</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">IAM User</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^[a-z]{1}([a-z'-]){2,}((0*\d{0,1})|\d{2})$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">rfisch; rfisch01; rfisch-man</span></p></td></tr><tr><th colspan="3" class="confluenceTh"><p><span style="color: rgb(0,0,0);">Data Management</span></p></th></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">Athena (Database)</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^athena-([a-z0-9\-]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">athena-etl-validation</span></p></td></tr><tr><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">Athena (Table)</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">^([a-z0-9]{3})-([a-z0-9\-]+)$</span></p></td><td class="confluenceTd"><p><span style="color: rgb(0,0,0);">etl-data-reconciliation</span></p></td></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><p><br/><br/></p><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

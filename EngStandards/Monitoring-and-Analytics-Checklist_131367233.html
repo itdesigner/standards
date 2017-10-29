@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Monitoring and Analytics Checklist</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Alerting-and-Monitoring_33471432.html">Alerting and Monitoring</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Monitoring and Analytics Checklist
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span> on Oct 28, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>To meet critical SLAs and maintain reliability, modern digital enterprises running applications in the cloud must measure the performance of their revenue generated essential services, distributed applications, and infrastructures. For developers, DevOps and TechOps engineers, it can be confusing to know when to use metrics or log monitoring to isolate code performance anomalies, proactively monitor and baseline their scaled out, dynamic and distributed applications.</p><p>Metrics describe numeric measurements in time. The metric format includes the measured metric name, the metric data value, the timestamp, the metric source, and an optional tag. Metrics convey small information bits, much lighter than logs. Logs, unlike metrics, contain textual information about an event that occurred. Logs are meant to convey detailed information about the application, user, or system activity. The primary purpose of logs is troubleshooting a specific issue after the fact, e.g., code error, exception, security issue, or other.</p><p>This checklist will help you select the right approach for your environment.</p><h2 id="MonitoringandAnalyticsChecklist-Usemetricanalyticsifyou:">Use metric analytics if you:</h2><ul class="inline-task-list" data-inline-tasks-content-id="131367233"><li data-inline-task-id="52">Need to continuously measure and get split-second insights from your cloud application code performance, business KPIs, and infrastructure metrics at high scale. The almost instant insights are essential for digital businesses generating revenue from customer-facing applications.</li><li data-inline-task-id="53">Are concerned with CPU, memory, or storage consumption, in particular, when you are developing and monitoring complex distributed applications requiring benchmarking and storing large code performance data sets. As numeric measurments, metrics can be highly compressed.</li><li data-inline-task-id="54">Run many microservices and containers.</li><li data-inline-task-id="55">Use messaging pipelines for your application monitoring data including Kafka or others.</li><li data-inline-task-id="56">Work for an organization that has many developers that need to collaborate and share metrics analysis and dashboards (such as self-service analytics for engineering teams).</li><li data-inline-task-id="57">Need to apply complex processing on your code performance measurements or business KPI data such as using aggregates, histograms (distributions), and other mathematical transformations.</li></ul><h2 id="MonitoringandAnalyticsChecklist-Usemetricandloganalyticsifyou:">Use metric and log analytics if you:</h2><ul class="inline-task-list" data-inline-tasks-content-id="131367233"><li data-inline-task-id="58">Need to process both continuous metric data events and logs. Metrics analytics helps you get the first-pane of glass across the entire application stack. Then use log monitoring to deepdive into a specific issue to investigate the root-cause after an issue happened.</li><li data-inline-task-id="59">Need proactive query-driven smart alerting.</li><li data-inline-task-id="60">Implementing DevOps principles and continuous delivery of your code.</li><li data-inline-task-id="61">Need to troubleshoot and deep dive into a particular system such as storage or network, after an issue occurred that generated a log.</li></ul><h2 id="MonitoringandAnalyticsChecklist-Useloganalyticsifyou:">Use log analytics if you:</h2><ul class="inline-task-list" data-inline-tasks-content-id="131367233"><li data-inline-task-id="62">Need to analyze only unstructured text-based data from your applications and infrastructure.</li><li data-inline-task-id="63">Can afford application performance data under-sampling and coarser monitoring.</li><li data-inline-task-id="64">Don’t need to develop and don’t need to run highly distributed applications that require high scalability.</li><li data-inline-task-id="65">Are developing monolithic applications that typically do not require frequent code updates requiring continuous monitoring.</li><li data-inline-task-id="66">Are not concerned with slower processing of your application performance data, such as in batch-like processing. </li></ul>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

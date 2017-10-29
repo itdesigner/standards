@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : GraphQL</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tooling-and-Frameworks_131104841.html">Tooling and Frameworks</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : GraphQL
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Sep 07, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h3 id="GraphQL-Summary">Summary</h3><p><a href="http://graphql.com/" class="external-link" rel="nofollow">GraphQL</a> is an application layer query language that interprets a string by a server, which then returns the required data in a specified format. Open sourced by Facebook in 2015, GraphQL was developed internally during the transition from Facebook's HTML5-powered mobile apps to native apps. Today it is the principle graph data query language powering the majority of interactions within iOS and Facebook Android applications. Anyone that has used native iOS or Android apps during the past two years has used GraphQL-powered apps.</p><p>The creators of GraphQL have open-sourced an instruction program on how to implement the server. The goal is to expand GraphQL capabilities to adapt to a wide range of backends. This will allow coders to use the technology in projects of any size to access their own data more efficiently. Product developers will be able to structure servers and provide powerful frameworks, abstractions and tools.</p><h3 id="GraphQL-WhatcanyoudowithGraphQL?">What can you do with GraphQL?</h3><p>GraphQL is a very liberating platform. With GraphQL, product developers no longer need to contend with ad hoc endpoints or worry about accessing data with multiple roundtrip object retrievals. Instead, you can easily create an elegant, declarative-hierarchical query dispatched to one single endpoint. You no longer have to jump back and forth from client to server development environments to test new codes or to create views of data already entered. Now all your experimentation and newly created views are built exclusively in the client development environment. The hassle of moving unstructured data from ad hoc endpoints into business objects is eliminated. Instead, you get a powerful, intuitive type system you can use as a tool-building platform.</p><p>As a product developer, you have the freedom to put more focus on client software and requirements without having to leave your development environment. As your system evolves, you will be able to support shipped clients with confidence while staying well within the limits of mobile apps. You can query exactly what you want, in your own words, across your entire data model application.</p><p>Specifically, GraphQL allows for the following:</p><ul><li class="li1"><span class="s2">GraphQL allows us to specify the data we need and the structure in which we need that data.</span></li><li class="li1"><span class="s2">Different clients can <strong>request different data in different formats</strong> and we will not have to write additional code to handle it</span></li><li class="li1"><span class="s2">Reduce the data volume by retrieving only what you need</span></li><li class="li1"><span class="s2">Reduce the number of calls by seamlessly retrieving linked resources (aggregation)</span></li><li class="li2"><span class="s2">Discover the schema you are typing (self documenting)</span></li></ul><h3 id="GraphQL-HowisGraphQLdifferent?">How is GraphQL different?</h3><p>The GraphQL query language is positioned between client applications and the actual data sources. Think of it as a type of agreement between the client and the server with an efficient query and fetching system. It works independently from data sources and other platforms. A GraphQL server can be created in PHP, Node or any other platform of your choice. People should be able to connect to your GraphQL server with web apps, mobile apps or any other type of apps they may be using. They can then query and mutate the data they are looking for.</p><p>The main difference is that <a href="https://blog.meteor.com/reactive-graphql-d78d307bbcbb" class="external-link" rel="nofollow">GraphQL doesn't come with a transport layer</a>. That end of the operation is handled by a high-level framework, such as Relay. However, GraphQL does have an excellent type system. The system is basically constructed on top of a layer of graphs with a set of rules defined by you. You may not feel the need to display your data groups as a graph, but if you really think about it, most of the time you can structure your data schema in the form of graphs.</p><h3 id="GraphQL-WhenshouldyouuseandnotuseGraphQL?">When should you use and not use GraphQL?</h3><p>At its heart, GraphQL focuses on data and not actions.</p><ul><li>while GraphQL has wide adoption in the mobile world, it is not necessarily easy for external developers to interface with it</li><li>if your solution takes heavy advantage of HTTP caching or other HTTP=specific features, REST may be a better option.  Not that GraphQL can't use features; but, because GraphQL was specifically designed to be protocol agnostic, it does not have built in support automatically.</li><li>GraphQL is really a superior solution when it comes to deprecating portions of your API's.</li><li>Both REST and GraphQL have excellent support for evolution and versioning.</li><li>GraphQL always enable consumers to get only the data they need - making efficient queries and use of network resources</li><li>GraphQL is a perfect fit for highly customizable API's - particularly whre complex querying needs to occur or where aggregation of multiple API calls needs to occur</li><li>GraphQL allows for a single endpoint to return multiple views of the data depending on the consumers current needs - REST typically solves this problem with many endpoints that grow over time</li></ul><h3 id="GraphQL-"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="250" src="attachments/78053424/78217280.gif?height=250" data-image-src="attachments/78053424/78217280.gif" data-unresolved-comment-count="0" data-linked-resource-id="78217280" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="graphql-versioning-marketing-site.gif" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/gif" data-linked-resource-container-id="78053424" data-linked-resource-container-version="3" data-media-id="1c2c6641-0692-4b93-8e46-88f65e6b7329" data-media-type="file"></span></h3><p class="p1"><span class="s1">Ask yourself - at the very least - these following questions:</span></p><ul><li class="p1"><span class="s1">How different are your clients / consumers from each other?</span></li><li class="p1"><span class="s1">Do you trust your clients to handle caching?</span></li><li class="p1"><span class="s1">Do you want “dumb clients” that act like crawlers or clients that know a lot about the API?</span></li><li class="p1"><span class="s1">Are you OK letting go of some HTTP benefits (caching, debugging proxies, etc.)?</span></li><li class="p2"><span class="s1">Are you doing basic CRUD with simple JSON documents or do you need more flexibility?</span></li></ul><h3 id="GraphQL-HowtouseGraphQL">How to use GraphQL</h3><p>GraphQL is a different way of structuring the contract between client and server. The servers publish a set of rules specific to an application. GraphQL then supplies the language to query your data for the correct answer, within the constraints of those rules. This way product developers are able to impose data requirements in a natural form, such as a declarative one and a hierarchical one.</p><p>To understand how to use <a rel="nofollow" href="https://learngraphql.com/basics/introduction" class="external-link">GraphQL</a>, first look at what it's trying to achieve:</p><ul><li>Give client-side developers an efficient way to query data they want to retrieve.</li><li>Give server-side developers an efficient way to get their data out to their users.</li><li>Give everyone an easy and efficient way of accessing data (it uses less resources than the REST API, especially with mobile applications).</li></ul><p>Linked blow are two reference implementations of GraphQL that you can download and review.</p><h3 id="GraphQL-UsefulLinksandadditionalinformation">Useful Links and additional information</h3><ul><li><a href="http://graphql.org/" class="external-link" rel="nofollow">GraphQL from its source </a> - this is the main link for everything GraphQL from the authors that created it</li><li><a href="https://code.tutsplus.com/tutorials/what-is-graphql--cms-29271" class="external-link" rel="nofollow">GraphQL Tutorials</a> - excellent article about graphql and a basic tutorial on how to use it</li><li><a href="attachments/78053424/78217296.key" data-linked-resource-id="78217296" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="GraphQL - a walkthrough.key" data-linked-resource-content-type="application/octet-stream" data-linked-resource-container-id="78053424" data-linked-resource-container-version="3">GraphQL - a walkthrough.key</a> - a presentation walkthrough for creating a GraphQL-based service API</li><li><a href="attachments/78053424/78053436.key" data-linked-resource-id="78053436" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="GraphQL_An_Introduction.key" data-linked-resource-content-type="application/octet-stream" data-linked-resource-container-id="78053424" data-linked-resource-container-version="3">GraphQL_An_Introduction.key</a> - a brief introdution to GraphQL</li><li><a href="https://blog.risingstack.com/graphql-overview-getting-started-with-graphql-and-nodejs/" class="external-link" rel="nofollow">Getting started with GraphQL and Node.js</a> - another tutorial and discussion</li><li><a href="https://dev-blog.apollodata.com/designing-graphql-mutations-e09de826ed97" class="external-link" rel="nofollow">Designing GraphQL mutatuions</a> - an excellent article on best practices and recommendations around GraphQL mutations</li></ul><p><br/></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/78053424/78217280.gif">graphql-versioning-marketing-site.gif</a> (image/gif)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/78053424/78217296.key">GraphQL - a walkthrough.key</a> (application/octet-stream)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/78053424/78053436.key">GraphQL_An_Introduction.key</a> (application/octet-stream)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Metrics That Matter</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Alerting-and-Monitoring_33471432.html">Alerting and Monitoring</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Metrics That Matter
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span> on Oct 28, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 style="" id="MetricsThatMatter-Metrics-Usewhatmatters"><strong>Metrics -  Use what matters</strong></h1><p style="">Metrics are how we assess aspects of our business, applications, and infrastructure. They allow us to measure and report on key indicators, and we can then use that information for making decisions, or to adjust for improved performance, stability and overall quality.</p><p style="">While collecting and analyzing metrics can be hard work, in many respects, the most challenging aspect of working with metrics is identifying which ones you should collect in the first place. You want to spend your time collecting metrics that matter and avoid &quot;vanity metrics,&quot; by which I mean those that don't accurately reflect your environment, or provide extraneous information that might seem useful but does not actually improve outcomes.</p><p style="">Here, I explain why vanity metrics pose a challenge and how to avoid them so that you collect and analyze only those metrics that help to drive positive change.</p><h1 style="" id="MetricsThatMatter-VanityMetrics:FeelAwesome,butBadforAction"><strong>Vanity Metrics: Feel Awesome, but Bad for Action</strong></h1><p style="">Vanity metrics might seem attractive, but they don't deliver true value.</p><p style="">There is an argument to be made for picking metrics which make your product look good, but it's not advisable. Sure, they'll look great to stakeholders, but it will also lull you into a false sense of security.</p><p style="">Another problem with vanity metrics is that if you are using them to drive action, you might be set up to do a whole lot of work maximizing the wrong things.</p><p style="">Metrics should drive action and should highlight aspects of your system that are critical to its health and continued performance, so it is vital that you identify the <a class="external-link" style="" href="https://stackify.com/application-performance-metrics/" rel="nofollow">right metrics to track</a>.</p><h1 style="" id="MetricsThatMatter-MetricsthatMatter"><strong>Metrics that Matter</strong></h1><p style="">Now that you know why vanity metrics are not useful, let's discuss how to identify the metrics that do matter.</p><p style="">I'd like to introduce you to the four A's of effective metrics:</p><h2 style="margin-left: 30.0px;" id="MetricsThatMatter-Accountable"><strong>Accountable</strong></h2><p style="margin-left: 30.0px;">Before you measure anything, determine who the owner is. If the ownership of a metric is ambiguous or shared between multiple teams, you may encounter problems tying the success or failure of the metric to a particular individual or group; or worse, the success of one team may be eclipsed by the sub-optimal performance of another.</p><p style="margin-left: 30.0px;">Establish a clear owner for each metric.The importance of this will become more apparent as we continue with the rest of the characteristics of metrics that matter.</p><h2 style="margin-left: 30.0px;" id="MetricsThatMatter-Actionable"><strong>Actionable</strong></h2><p style="margin-left: 30.0px;">Any metrics which you track should be actionable and should be tied to specific performance targets. If there isn't an action you can take in response to a given metric, the value of that particular metric becomes questionable.</p><h2 style="margin-left: 30.0px;" id="MetricsThatMatter-Accessible"><strong>Accessible</strong></h2><p style="margin-left: 30.0px;">You can have the greatest minds in your organization curate a report with every possible permutation of raw and derived metrics, but if the info isn't in an easily digestible format, it's not going to be implementable by those in the trenches. Metrics and the reports containing them should be easy to understand for anyone who might read them.</p><h2 style="margin-left: 30.0px;" id="MetricsThatMatter-Auditable"><strong>Auditable</strong></h2><p style="margin-left: 30.0px;">Finally, ensure that you can validate the accuracy of metrics. Using metrics as a foundation from which to drive progress is only relevant if the improvement can be measured, and if the particular measurements being instrumented are accurate.</p><h1 style="" id="MetricsThatMatter-MetricsAreKeytoMonitoring"><strong>Metrics Are Key to Monitoring</strong></h1><p style="">Monitoring is the process of collecting metrics from an application in real time or near-real time. The metrics are then used to determine the current state and health of the application and the infrastructure on which it installed.</p><p style="">When implemented correctly, with the right collection of metrics, an effective monitoring plan can ensure that your applications are running efficiently and effectively.</p><p style="">Additionally, if things take a turn for the worse, developers and production support personnel should be able to use the data available from your monitoring system to quickly isolate the cause and formulate a way to resolve it.</p><h1 style="" id="MetricsThatMatter-TipsfortheRightMetrics"><strong>Tips for the Right Metrics</strong></h1><p style="">In addition to ensuring that the metrics you choose meet the requirements outlined by the four A's, there are a couple more guidelines which will ensure you're making the most of your metrics system.</p><h2 style="margin-left: 30.0px;" id="MetricsThatMatter-MonitorRates,NotTotals"><strong>Monitor Rates, Not Totals</strong></h2><p style="margin-left: 30.0px;">First, avoid the temptation to monitor total counts or run total metrics. Total counts are a big part of the vanity metric problem. What you want to monitor instead is a specific rate over time. Calculating the number of transactions being performed over a distinct period will be significantly more useful to developers and stakeholders alike. You can even measure the rate of change over time to highlight whether your system is improving or deteriorating.</p><h2 style="margin-left: 30.0px;" id="MetricsThatMatter-VisibilityIsImportant"><strong>Visibility Is Important</strong></h2><p style="margin-left: 30.0px;">Second, make your metrics visible. The right collection of metrics should highlight both successes and failures. Ensure your metrics are displayed prominently to the owners of the metrics and other key stakeholders within the organization. Emphasize that a downturn in the metrics represents an opportunity for improvement, whereas good metrics should spur on the process of continuous improvement forward.</p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

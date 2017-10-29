@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Service &amp; Distributed Systems Cookbook</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Services-Guidance%2C-Design%2C-and-Review-Criteria_127664218.html">Services Guidance, Design, and Review Criteria</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Service &amp; Distributed Systems Cookbook
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span> on Oct 25, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div style="">As we start to build distributed systems composed from microservices, we’ll also encounter nonfunctional requirements that we don’t normally encounter when developing a monolith. Sometimes the laws of physics get in the way of solving these problems, such as consistency, latency, and network partitions. However, the problems of brittleness and manageability can normally be addressed through the proper application of fairly generic, boilerplate patterns. In this section we’ll examine recipes that help us with these concerns.</div><h2 style="" id="Service&amp;DistributedSystemsCookbook-VersionedandDistributedConfiguration">Versioned and Distributed Configuration</h2><div class="textLayer" style=""><div>In cannot be overstated the importance of proper configuration management for applications, which specifies the injection of configuration via operating system-level environment variables. This method is very suitable for simple systems, but as we scale up to larger systems, sometimes we want additional configuration capabilities:</div><div><ul><li style="">Changing logging levels of a running application in order to debug a production issue</li><li style="">Change the number of threads receiving messages from a message broker</li><li style="">Report all configuration changes made to a production system to support regulatory audits</li><li style="">Toggle features on/off in a running application</li><li style="">Protect secrets (such as passwords) embedded in configuration</li></ul><div style="">In order to support these capabilities, we need a configuration management approach with the following features:</div><ul><li style="">Versioning</li><li style="">Auditability</li><li style="">Encryption</li><li style="">Refresh without restart</li></ul><h2 id="Service&amp;DistributedSystemsCookbook-ServiceRegistration/Discovery">Service Registration / Discovery</h2><div style="">As we create distributed systems, our code’s dependencies cease to be a method call away. Instead, we must make network calls in order to consume them. How do we perform the necessary wiring to allow all of the microservices within a composed system to communicate with one another?</div><div style="">A common architecture pattern in the cloud  is to have frontend (application) and backend (business) services. Backend services are often not accessible directly from the Internet but are rather accessed via the frontend services. The service registry provides a listing of all services and makes them available to frontend services through a client library which performs load balancing and routing to backend services.</div><div style=""><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="250" src="attachments/127631419/127271046.png?height=250" data-image-src="attachments/127631419/127271046.png" data-unresolved-comment-count="0" data-linked-resource-id="127271046" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="service_reg_disc.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="127631419" data-linked-resource-container-version="1" data-media-id="5c80838e-3723-4c8d-bcb7-3c069736d1d8" data-media-type="file"></span></div><h2 style="" id="Service&amp;DistributedSystemsCookbook-RoutingandLoadBalancing">Routing and Load Balancing</h2><div style="">Basic round-robin load balancing is effective for many scenarios, but distributed systems in cloud environments often demand a more advanced set of routing and load balancing behaviors. These are commonly provided by various external, centralized load balancing solutions. However, it’s often true that such solutions do not possess enough information or context to make the best choices for a given application as it attempts to communicate with its dependencies. Also, should such external solutions fail, these failures can cascade across the entire architecture.</div><div style="">Cloud-native solutions often often shift the responsibility for making routing and load balancing solutions to the client.</div><div style=""><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="250" src="attachments/127631419/127598659.png?height=250" data-image-src="attachments/127631419/127598659.png" data-unresolved-comment-count="0" data-linked-resource-id="127598659" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="load_bal.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="127631419" data-linked-resource-container-version="1" data-media-id="f4a92423-ab66-4508-a56b-e6567501c518" data-media-type="file"></span></div><h2 style="" id="Service&amp;DistributedSystemsCookbook-Fault-Tolerance">Fault-Tolerance</h2><div style="">Distributed systems have more potential failure modes than monoliths. As each incoming request must now potentially touch tens (or even hundreds) of different microservices, some failure in one or more of those dependencies is virtually guaranteed.</div><div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><div style=""><em>Without taking steps to ensure fault tolerance, 30 dependencies each with 99.99% uptime would result in 2+ hours downtime/month (99.99%^30^ = 99.7% uptime = 2+ hours in a month).</em></div><div style="margin-left: 360.0px;">—Ben Christensen,</div><div style="margin-left: 360.0px;">Netflix Engineer</div></div></div><div style="">How do we prevent such failures from resulting in the type of cascading failures that would give us such negative availability numbers? Mike Nygard documented several patterns that can help in his book Release It! (Pragmatic Programmers), including:</div><h3 style="" id="Service&amp;DistributedSystemsCookbook-Circuitbreakers">Circuit breakers</h3><div style="">Circuit breakers insulate a service from its dependencies by preventing remote calls when a dependency is determined to be unhealthy, just as electrical circuit breakers protect homes from burning down due to excessive use of power. Circuit breakers are implemented as state machines. When in their closed state, calls are simply passed through to the dependency.</div><div style="">If any of these calls fails, the failure is counted. When the failure count reaches a specified threshold within a specified time period, the circuit trips into the open state. In the open state, time, the circuit transitions into a “half-open” state. In this state, calls are again attempted to the remote dependency. Successful calls transition the circuit breaker back into the closed state, while failed calls return the circuit breaker to the open state.</div><div style=""><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="250" src="attachments/127631419/128057345.png?height=250" data-image-src="attachments/127631419/128057345.png" data-unresolved-comment-count="0" data-linked-resource-id="128057345" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="circuit_breaker.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="127631419" data-linked-resource-container-version="1" data-media-id="2e90fe18-21c2-439f-a91d-28e61b116ba0" data-media-type="file"></span></div><h3 style="" id="Service&amp;DistributedSystemsCookbook-Bulkheads">Bulkheads</h3><div style="">Bulkheads partition a service in order to confine errors and prevent the entire service from failing due to failure in one area.  They are named for partitions that can be sealed to segment a ship into multiple watertight compartments. This can prevent damage (e.g., caused by a torpedo hit) from causing the entire ship to sink. Software systems can utilize bulkheads in many ways. Simply partitioning into microservices is our first line of defense. The partitioning of application processes into Linux containers so that one process cannot takeover an entire machine is another. Yet another example is the division of parallelized work into different thread pools.</div></div></div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/127631419/127271046.png">service_reg_disc.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/127631419/127598659.png">load_bal.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/127631419/128057345.png">circuit_breaker.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

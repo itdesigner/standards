@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Optimization, Conversion, Churn and Impact Scores</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Services-Guidance%2C-Design%2C-and-Review-Criteria_127664218.html">Services Guidance, Design, and Review Criteria</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Optimization, Conversion, Churn and Impact Scores
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span> on Oct 26, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>There’s a widely held belief that the only people who need to care about conversions are people in sales and business development. Wrong. Conversions are the lifeblood of your business. If you touch your company’s website in any way—be it design, marketing, or development—then your actions have an impact on conversions. You need to understand what that impact is. I’m going to explain how to determine which pages you should focus on optimizing in order to increase conversions, reduce churn, and, ultimately, deliver the highest ROI.  You will note that this process requires the close coordination of many different business units to successfully work.</p><h2 id="Optimization,Conversion,ChurnandImpactScores-Whatisaconversion?">What is a conversion?</h2><p>A conversion is what happens when a person who’s browsing a site converts to being a user or buyer of the service or product that site offers. So if you’re a SaaS vendor, a conversion happens when a person signs up to use your service—or if you’re an e-commerce shop, when a person buys something. Conversions can also include actions like signing up for a newsletter or making a donation.</p><p>The <em><strong>conversion funnel</strong></em> is the start-to-finish path that a user takes when they convert from browsing to buying/ downloading/etc. While I will be using conversion here for my examples, the same basic concepts apply to churn and keeping a customer on our platform.</p><p>A conversion funnel for a typical site might look something like this (note that the relative  percentages are arbitrary and extremely optimistic):</p><p><br/></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/129171478/128942121.png?height=400" data-image-src="attachments/129171478/128942121.png" data-unresolved-comment-count="0" data-linked-resource-id="128942121" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="conversion_funnel.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="129171478" data-linked-resource-container-version="1" data-media-id="6d1cf520-78dd-42e0-8bfa-a6a2101bf68e" data-media-type="file"></span></p><p><br/></p><p><em><strong>Conversion rate</strong></em> is the percentage of total user sessions that result in a conversion. In the conversion funnel graphic above, the conversion rate is the number of people who completed a purchase: 10%. Conversion rates are typically in the 2-5% range. Anything higher than that is amazing.</p><p>For a site that does hundreds of thousands of dollars worth of transactions in a day, even tiny changes in conversion rate—such as increasing from 2.1% to 2.2%—can have a huge impact on revenue.</p><p><br/></p></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="Optimization,Conversion,ChurnandImpactScores-PerformanceSlowdownsaffectconversionsdifferentlyondifferentpages">Performance Slowdowns affect conversions differently on different pages</h2><p>When pages get slower, conversion rates suffer. But some types of pages suffer more than others. For example, on retail sites, slow “browse” pages have a greater negative impact on performance than slow “checkout” pages.</p><p>Here you can see that, for one ecommerce vendor, the conversion rate shrank by about 50% when the load time for “browse” pages increased from 1 to 6 seconds (right, top):</p><p>For the same retailer, the impact on conversion rate was much less when checkout pages degraded in speed (right, bottom).</p><p>Looking at these two graphs side by side, you could be tempted to deduce that, because conversions were hurt more by slow “browse” pages than by slow “checkout” pages, the site owner should focus energy on optimizing the browse pages. This might be true—but it might not be true, too. This is where Conversion Impact Scoring comes in.</p><p><span style="color: rgb(96,92,89);">Knowing your pages’ load times is just one piece of the optimization puzzle. You need to correlate load time with other metrics, such as conversions or bounce rate, that are meaningful to your business, and you need to develop a tool — such as the Conversion Impact Score — that can weight your results so that you know what pages to tackle first to get the best ROI for your optimization efforts.</span></p></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="250" src="attachments/129171478/129073181.png?height=250" data-image-src="attachments/129171478/129073181.png" data-unresolved-comment-count="0" data-linked-resource-id="129073181" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-10-26 at 12.33.14 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="129171478" data-linked-resource-container-version="1" data-media-id="8733d908-08ed-4c84-b0e0-74dcac85035f" data-media-type="file"></span></p><p><br/></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="250" src="attachments/129171478/129859604.png?height=250" data-image-src="attachments/129171478/129859604.png" data-unresolved-comment-count="0" data-linked-resource-id="129859604" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-10-26 at 12.33.52 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="129171478" data-linked-resource-container-version="1" data-media-id="267a56a8-5dce-4ee7-b521-8198ed7ee6c5" data-media-type="file"></span></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="Optimization,Conversion,ChurnandImpactScores-WhatistheImpactScore?">What is the Impact Score?</h2><p>The<em><strong> Impact Score</strong></em> is a relative score that ranks page groups by their propensity to negatively impact conversions due to high load times. For each page group, the Conversion Impact Score is calculated using the proportion of overall requests that are associated with that group, along with the correlation between its load times and number of conversions. The more negative the score, the more detrimental to conversions that high load times for that page group are, relative to the other page groups.</p><p>In other words, Conversion Impact Scoring answers this question: how much impact does the performance of this page have on conversions?  <em><strong>For some samples of how these values are calculated, see the references <a href="https://venturi-web-design.com/calculate-sales-conversion-rate/" class="external-link" rel="nofollow">here</a>, <a href="https://www.feverbee.com/roi/calculating-the-customer-satisfaction-score-csat-net-promoter-score-nps-or-customer-sentiment-score-ces/" class="external-link" rel="nofollow">here</a>, and <a href="https://www.marketingsherpa.com/article/how-to/calculate-scores-every-visitor" class="external-link" rel="nofollow">here</a></strong></em><em><strong>.</strong></em></p></div>
+</div>
+</div>
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<h2 id="Optimization,Conversion,ChurnandImpactScores-SampleScenario-HowtouseImpactScorestoPrioritizePerformanceOptimizations">Sample Scenario - How to use Impact Scores to Prioritize Performance Optimizations</h2><p>Now let’s walk through how to use Conversion Impact Scores to make decisions about optimizing your pages.</p><p>In the table below, you can see the Conversion Impact Scores and load times for a set of page groups on a retail site. The second column represents the Conversion Impact Score for each page group, and the third column represents the median page load time for each group. For a complete graph of these details, <a href="attachments/129171478/129105949.png" data-linked-resource-id="129105949" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="conversion-impact-score.png" data-nice-type="PNG Image" data-linked-resource-content-type="image/png" data-linked-resource-container-id="129171478" data-linked-resource-container-version="1">click here</a>. The groups are ranked from those with the highest Conversion Impact Scores (such as product and category pages; in other words, pages viewed in the “browse” phase of the conversion funnel) to pages with the lowest scores (such as checkout and sign-in pages).</p><p><br/></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/129171478/129859612.png?height=400" data-image-src="attachments/129171478/129859612.png" data-unresolved-comment-count="0" data-linked-resource-id="129859612" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-10-26 at 12.43.17 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="129171478" data-linked-resource-container-version="1" data-media-id="00e69e7d-0313-45d9-a757-c49f6795f563" data-media-type="file"></span></p><p><br/></p><p>Some quick observations:</p><ul><li>Some of the fastest page groups—such as Shopping Bag and Wishlist—have relatively low Conversion Impact Scores. This means that page speed isn’t a significant factor in how well these pages convert.</li><li>The page groups with the highest Conversion Impact Scores— such as Product and Category pages—have acceptable load times in the 3-second range.</li><li>The slowest group is Checkout – SendTo, followed by Home, Account – SignIn and Checkout – Order Confirmation.</li></ul><p>Without knowing the Conversion Impact Scores for these page groups, you might focus on optimizing pages according to how slow they load. Looking at load time, this is the order in which you’d prioritize fixing these groups:</p><ol><li>Checkout – SendTo</li><li>Home</li><li>Account – SignIn</li><li>Checkout – OrderConfirmation</li><li>Category Browse 1</li></ol><p>Now here’s how some of these assumptions are incorrect:</p><p style="margin-left: 30.0px;"><em><strong><span style="color: rgb(153,51,0);">ASSUMPTION #1: PRIORITIZING THE CHECKOUT – SENDTO PAGE GROUP BECAUSE IT’S THE SLOWEST </span></strong></em></p><p style="margin-left: 30.0px;">If you looked only at page load times, you might believe that you need to prioritize the Checkout – SendTo group because its performance is dramatically poorer than the other groups. But if you knew its Conversion Impact Score, you’d realize that page speed doesn’t have much impact on conversion rate, so making this group faster wouldn’t be the best use of your limited optimization resources.</p><p style="margin-left: 30.0px;"><em><strong><span style="color: rgb(153,51,0);">ASSUMPTION #2: TACKLING THE ACCOUNT – SIGNIN PAGE GROUP NEXT </span></strong></em></p><p style="margin-left: 30.0px;">Also, if you were to look exclusively at load times, you might believe that when you’re done with optimizing the Checkout – SendTo group, you should focus next on addressing performance issues on the Account – SignIn group. While these pages have a high enough Conversion Impact Score that they merit addressing, they shouldn’t rank high up on your list.</p><p style="margin-left: 30.0px;"><span style="color: rgb(153,51,0);"><em><strong>ASSUMPTION #3: NOT WORRYING ABOUT THE CATEGORY BROWSE 1 AND PRODUCT DETAIL PAGE GROUPS BECAUSE THEY SEEM RELATIVELY FAST </strong></em></span></p><p style="margin-left: 30.0px;">Still looking solely at load times, you might also guess that, because these pages look fairly speedy, you don’t need to worry about them. This is where you’d make your biggest mistake. Because these groups have the highest Conversion Impact Scores, they have the potential to deliver the most benefit to you if you make them faster.</p><p style="margin-left: 30.0px;"><br/></p><p>Knowing the Conversion Impact Scores for this set of pages / groups, this is the order in which you might actually want to prioritize their optimization to give you the best ROI:</p><ol><li>Home</li><li>Category Browse 1</li><li>Product Detail Page</li><li>Choose Your Country</li><li>Shopping Bag</li></ol></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/129171478/128942121.png">conversion_funnel.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/129171478/129073181.png">Screen Shot 2017-10-26 at 12.33.14 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/129171478/129859604.png">Screen Shot 2017-10-26 at 12.33.52 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/129171478/129204238.png">DZone-conversion-impact-score.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/129171478/129105949.png">conversion-impact-score.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/129171478/129859612.png">Screen Shot 2017-10-26 at 12.43.17 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

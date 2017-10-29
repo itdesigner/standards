@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Visitor Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Visitor Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span> on May 07, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Represent an operation to be performed on the elements of an object structure. Visitor lets you define a new operation without changing the classes of the elements on which it operates.</li><li>The classic technique for recovering lost type information.</li><li>Do the right thing based on the type of two objects.</li><li>Double dispatch</li></ul>
+</div></div><p><br/></p><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">2</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">3</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>LOW</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">Many distinct and unrelated operations need to be performed on node objects in a heterogeneous aggregate structure. You want to avoid &quot;polluting&quot; the node classes with these operations. And, you don't want to have to query the type of each node and cast the pointer to the correct type before performing the desired operation.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The Visitor pattern defines a new operation to a collection of objects without changing the objects themselves. The new logic resides in a separate object called the Visitor.</p><p class="ptext">Visitors are useful when building extensibility in a library or framework. If the objects in your project provide a 'visit' method that accepts a Visitor object which can make changes to the receiving object then you are providing an easy way for clients to implement future extensions.</p><p class="ptext">In most programming languages the Visitor pattern requires that the original developer anticipates functional adjustments in the future. This is done by including methods that accept a Visitor and let it operate on the original collection of objects.</p><p class="ptext">Visitor is not important to JavaScript because it offers far more flexibility by the ability to add and remove methods at runtime.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p>The Element hierarchy is instrumented with a &quot;universal method adapter&quot;. The implementation of <code>accept()</code> in each Element derived class is always the same. But – it cannot be moved to the Element base class and inherited by all derived classes because a reference to <code>this</code> in the Element class always maps to the base type Element.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33830339/33830366.png?height=400" data-image-src="attachments/33830339/33830366.png" data-unresolved-comment-count="0" data-linked-resource-id="33830366" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-07 at 8.55.43 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33830339" data-linked-resource-container-version="1" data-media-id="03368caa-2083-4ab6-91ac-ea560c0ae06e" data-media-type="file"></span><span style="color: rgb(68,68,68);">When the polymorphic </span><code>firstDispatch()</code><span style="color: rgb(68,68,68);"> method is called on an abstract </span><code>First</code><span style="color: rgb(68,68,68);"> object, the concrete type of that object is &quot;recovered&quot;. When the polymorphic </span><code>secondDispatch()</code><span style="color: rgb(68,68,68);"> method is called on an abstract </span><code>Second</code><span style="color: rgb(68,68,68);"> object, its concrete type is &quot;recovered&quot;. The application functionality appropriate for this pair of types can now be exercised.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33830339/33830385.png?height=400" data-image-src="attachments/33830339/33830385.png" data-unresolved-comment-count="0" data-linked-resource-id="33830385" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-07 at 8.56.30 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33830339" data-linked-resource-container-version="1" data-media-id="44ba22ff-0494-4530-86fe-d50e154ed3e8" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Visitor pattern represents an operation to be performed on the elements of an object structure without changing the classes on which it operates. This pattern can be observed in the operation of a taxi company. When a person calls a taxi company (accepting a visitor), the company dispatches a cab to the customer. Upon entering the taxi the customer, or Visitor, is no longer in control of his or her own transportation, the taxi (driver) is.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33830339/33830403.png?height=400" data-image-src="attachments/33830339/33830403.png" data-unresolved-comment-count="0" data-linked-resource-id="33830403" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-07 at 8.57.28 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33830339" data-linked-resource-container-version="1" data-media-id="6c256d61-5f09-487f-8d4e-a5c7bde32959" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">In this example three employees are created with the <span class="cd">Employee</span> constructor function. Each is getting a 10% salary raise and 2 more vacation days. Two visitor objects, <span class="cd">ExtraSalary</span> and <span class="cd">ExtraVacation</span>, make the necessary changes to the employee objects.</p><p class="ptext">Note that the visitors, in their <span class="cd">visit</span> methods, access the closure variables <span class="cd">salary</span> and <span class="cd">vacation</span>through a public interface. It is the only way because closures are not accessible from the outside. In fact, <span class="cd">salary</span> and <span class="cd">vacation</span> are not variables, they are function arguments, but it works because they are also part of the closure.</p><p class="ptext">Notice the <span class="cd">self</span> variable. It is used to maintain the current context (stored as a closure variable) and is used in the visit method.</p><p class="ptext">To learn more about these and other more advanced JavaScript concepts check our <a href="http://www.dofactory.com/products/javascript-jquery-design-pattern-framework" class="external-link" rel="nofollow">JavaScript + jQuery Design Pattern Framework</a>.</p><p class="ptext">The <span class="cd">log</span> function is a helper which collects and displays results.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var Employee = function (name, salary, vacation) {
+    var self = this;
+        
+    this.accept = function (visitor) {
+        visitor.visit(self);
+    };
+ 
+    this.getName = function () {
+        return name;
+    };
+ 
+    this.getSalary = function () {
+        return salary;
+    };
+ 
+    this.setSalary = function (sal) {
+        salary = sal;
+    };
+ 
+    this.getVacation = function () {
+        return vacation;
+    };
+ 
+    this.setVacation = function (vac) {
+        vacation = vac;
+    };
+};
+ 
+var ExtraSalary = function () {
+    this.visit = function (emp) {
+        emp.setSalary(emp.getSalary() * 1.1);
+    };
+};
+ 
+var ExtraVacation = function () {
+    this.visit = function (emp) {
+        emp.setVacation(emp.getVacation() + 2);
+    };
+};
+ 
+// log helper
+ 
+var log = (function() {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function(msg) { log += msg + &quot;\n&quot;; },
+        show: function() { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+        
+    var employees = [
+        new Employee(&quot;John&quot;, 10000, 10),
+        new Employee(&quot;Mary&quot;, 20000, 21),
+        new Employee(&quot;Boss&quot;, 250000, 51)
+    ];
+ 
+    var visitorSalary = new ExtraSalary();
+    var visitorVacation = new ExtraVacation();
+        
+    for (var i = 0, len = employees.length; i &lt; len; i++) {
+        var emp = employees[i];
+            
+        emp.accept(visitorSalary);
+        emp.accept(visitorVacation);
+        log.add(emp.getName() + &quot;: $&quot; + emp.getSalary() +
+            &quot; and &quot; + emp.getVacation() + &quot; vacation days&quot;);
+    }
+ 
+    log.show();
+}</pre>
+</div></div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Confirm that the current hierarchy (known as the Element hierarchy) will be fairly stable and that the public interface of these classes is sufficient for the access the Visitor classes will require. If these conditions are not met, then the Visitor pattern is not a good match.</li><li>Create a Visitor base class with a <code>visit(ElementXxx)</code> method for each Element derived type.</li><li>Add an <code>accept(Visitor)</code> method to the Element hierarchy. The implementation in each Element derived class is always the same – <code>accept( Visitor v ) { v.visit( this ); }</code>. Because of cyclic dependencies, the declaration of the Element and Visitor classes will need to be interleaved.</li><li>The Element hierarchy is coupled only to the Visitor base class, but the Visitor hierarchy is coupled to each Element derived class. If the stability of the Element hierarchy is low, and the stability of the Visitor hierarchy is high; consider swapping the 'roles' of the two hierarchies.</li><li>Create a Visitor derived class for each &quot;operation&quot; to be performed on Element objects.<code>visit()</code> implementations will rely on the Element's public interface.</li><li>The client creates Visitor objects and passes each to Element objects by calling <code>accept()</code>.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>The abstract syntax tree of Interpreter is a Composite (therefore Iterator and Visitor are also applicable).</li><li>Iterator can traverse a Composite. Visitor can apply an operation over a Composite.</li><li>The Visitor pattern is like a more powerful Command pattern because the visitor may initiate whatever is appropriate for the kind of object it encounters.</li><li>The Visitor pattern is the classic technique for recovering lost type information without resorting to dynamic casts.</li><li><p>The November 2000 issue of <em>JavaPro</em> has an article by James Cooper (author of a Java companion to the GoF) on the Visitor design pattern. He suggests it &quot;turns the tables on our object-oriented model and creates an external class to act on data in other classes ... while this may seem unclean ... there are good reasons for doing it.&quot;</p><p>His primary example. Suppose you have a hierarchy of Employee-Engineer-Boss. They all enjoy a normal vacation day accrual policy, but, Bosses also participate in a &quot;bonus&quot; vacation day program. As a result, the interface of class Boss is different than that of class Engineer. We cannot polymorphically traverse a Composite-like organization and compute a total of the organization's remaining vacation days. &quot;The Visitor becomes more useful when there are several classes with different interfaces and we want to encapsulate how we get data from these classes.&quot;</p><p>His benefits for Visitor include:</p><ul><li>Add functions to class libraries for which you either do not have the source or cannot change the source</li><li>Obtain data from a disparate collection of unrelated classes and use it to present the results of a global calculation to the user program</li><li>Gather related operations into a single class rather than force you to change or derive classes to add these operations</li><li>Collaborate with the Composite pattern</li></ul><p>Visitor is not good for the situation where &quot;visited&quot; classes are not stable. Every time a new Composite hierarchy derived class is added, every Visitor derived class must be amended.</p></li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33830339/33830366.png">Screen Shot 2017-05-07 at 8.55.43 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33830339/33830385.png">Screen Shot 2017-05-07 at 8.56.30 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33830339/33830403.png">Screen Shot 2017-05-07 at 8.57.28 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

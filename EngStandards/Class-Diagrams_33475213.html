@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Class Diagrams</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Architectural-Documentation_33471477.html">Architectural Documentation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="127434830.html">UML (Unified Modeling Language)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Class Diagrams
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Ryan Fisch</span>, last modified by <span class='editor'> Jerry Shaughnessy</span> on May 08, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Class diagrams are arguably the most used UML diagram type. It is the main building block of any object oriented solution. It shows the classes in a system, attributes and operations of each class and the relationship between each class.</p><p>In most modeling tools, a class has three parts, name at the top, attributes in the middle and operations or methods at the bottom. In large systems with many related classes, classes are grouped together to create class diagrams. Different relationships between classes are shown by different types of arrows.</p><p>Below is an image of a class diagram</p><p><div class="ap-container" id="ap-com.mxgraph.confluence.plugins.plantuml__plantumlcloud2770681187422405000">
+
+  <div class="ap-content" id="embedded-com.mxgraph.confluence.plugins.plantuml__plantumlcloud2770681187422405000"></div>
+  <script class="ap-iframe-body-script">
+  (function(){
+    var data = {
+    "addon_key":"com.mxgraph.confluence.plugins.plantuml",
+    "uniqueKey":"com.mxgraph.confluence.plugins.plantuml__plantumlcloud2770681187422405000",
+    "key":"plantumlcloud",
+    "cp":"/wiki",
+    "uid":"jshaughnessy",
+    "ukey":"ff8080815b5b7758015b5ec83f270001",
+    "general":"",
+    "w":"600px",
+    "h":"400px",
+    "url":"https://plant.draw.io/connect/plantuml/viewer.html?pageId=33475213&filename=Sample+Class+Diagram.png&width=800&height=600&autoSize=true&tz=America%2FNew_York&loc=en-GB&user_id=jshaughnessy&user_key=ff8080815b5b7758015b5ec83f270001&xdm_e=https%3A%2F%2Fplacester.atlassian.net&xdm_c=channel-com.mxgraph.confluence.plugins.plantuml__plantumlcloud2770681187422405000&cp=%2Fwiki&xdm_deprecated_addon_key_do_not_use=com.mxgraph.confluence.plugins.plantuml&lic=none&cv=1.3.303",
+    "contentClassifier":"content",
+    "productCtx":"{\"page.id\":\"33475213\",\"macro.hash\":\"c67e8dfe-2218-4b81-9909-0ab5f6d2594d\",\"data\":\"jZNha8MgEIZ\\/TWAbtLi0pZ+bhI3CGIOwfT\\/iEQSjRc8P+\\/c7kzZ1WRIGSs573uj5qtleeAJHodOZOHEjRRqzXNTQXfqg1OA9fysFrYNuUDXXZBk82Q4dh9mxiIyD2IoEnmVM7SJ7\\/TxXE9UbeHqHDkeNJ6dMO1G9KPcf2UlKh1zZocgO1Sjl4Qjuy2+4K0PoDOgv0OE+NWfTeVuk21YeHlMQLhII55lEjUuscbj0367R1kzQsUocv23kj+E1OURasadU9L2Ca+KaluCH5VuiSyvX\\/C9tMOTW1gApr\\/XPGTmLBh9nEZ\\/Lr3zvU3oj8\\/yZezzqjR3GYrt9GlKJj32xjTUEyvg40V6gkfwifgA=\",\"space.key\":\"EngStandards\",\"user.id\":\"jshaughnessy\",\"page.type\":\"page\",\"content.version\":\"2\",\"page.title\":\"Class Diagrams\",\"macro.body\":\"\",\": = | RAW | = :\":\"autoSize=true|filename=Sample Class Diagram.png|data=jZNha8MgEIZ\\/TWAbtLi0pZ+bhI3CGIOwfT\\/iEQSjRc8P+\\/c7kzZ1WRIGSs573uj5qtleeAJHodOZOHEjRRqzXNTQXfqg1OA9fysFrYNuUDXXZBk82Q4dh9mxiIyD2IoEnmVM7SJ7\\/TxXE9UbeHqHDkeNJ6dMO1G9KPcf2UlKh1zZocgO1Sjl4Qjuy2+4K0PoDOgv0OE+NWfTeVuk21YeHlMQLhII55lEjUuscbj0367R1kzQsUocv23kj+E1OURasadU9L2Ca+KaluCH5VuiSyvX\\/C9tMOTW1gApr\\/XPGTmLBh9nEZ\\/Lr3zvU3oj8\\/yZezzqjR3GYrt9GlKJj32xjTUEyvg40V6gkfwifgA=|width=800|compressed=true|height=600\",\"space.id\":\"33470320\",\"macro.truncated\":\"false\",\"content.type\":\"page\",\"output.type\":\"html_export\",\"page.version\":\"2\",\"autoSize\":\"true\",\"user.key\":\"ff8080815b5b7758015b5ec83f270001\",\"filename\":\"Sample Class Diagram.png\",\"content.id\":\"33475213\",\"width\":\"800\",\"macro.id\":\"c67e8dfe-2218-4b81-9909-0ab5f6d2594d\",\"compressed\":\"true\",\"height\":\"600\"}",
+    "timeZone":"America/New_York",
+    "origin":"https://plant.draw.io",
+    "hostOrigin":"https://placester.atlassian.net"
+};
+    if(window.AP && window.AP.subCreate) {
+      window._AP.appendConnectAddon(data);
+    } else {
+      require(['ac/create'], function(create){
+        create.appendConnectAddon(data);
+      });
+    }
+  }());
+</script>
+</div>
+</p><p><br/></p><h2 id="ClassDiagrams-BasicClassDiagramSymbolsandNotations">Basic Class Diagram Symbols and Notations</h2><h4 id="ClassDiagrams-Classes">Classes</h4><p>Classes represent an abstraction of entities with common characteristics. Associations represent the relationships between classes.</p><p>Illustrate classes with rectangles divided into compartments. Place the name of the class in the first partition (centered, bolded, and capitalized), list the attributes in the second partition (left-aligned, not bolded, and lowercase), and write operations into the third.</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" alt="Class diagram classes" src="https://wcs.smartdraw.com/class-diagram/img/classes.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/class-diagram/img/classes.jpg?bn=1510011069"></span></p><h4 id="ClassDiagrams-ActiveClasses">Active Classes</h4><p>Active classes initiate and control the flow of activity, while passive classes store data and serve other classes. Illustrate active classes with a thicker border.</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" alt="Active class" src="https://wcs.smartdraw.com/class-diagram/img/active-class.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/class-diagram/img/active-class.jpg?bn=1510011069"></span></p><h4 id="ClassDiagrams-Visibility">Visibility</h4><p>Use visibility markers to signify who can access the information contained within a class. Private visibility, denoted with a - sign, hides information from anything outside the class partition. Public visibility, denoted with a + sign, allows all other classes to view the marked information. Protected visibility, denoted with a # sign, allows child classes to access information they inherited from a parent class.</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" alt="Class diagram visibility" src="https://wcs.smartdraw.com/class-diagram/img/visibility.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/class-diagram/img/visibility.jpg?bn=1510011069"></span></p><h4 id="ClassDiagrams-Associations">Associations</h4><p>Associations represent static relationships between classes. Place association names above, on, or below the association line. Use a filled arrow to indicate the direction of the relationship. Place roles near the end of an association. Roles represent the way the two classes see each other.</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" alt="Class diagram associations" src="https://wcs.smartdraw.com/class-diagram/img/association.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/class-diagram/img/association.jpg?bn=1510011069"></span></p><h4 id="ClassDiagrams-Multiplicity(Cardinality)">Multiplicity (Cardinality)</h4><p>Place multiplicity notations near the ends of an association. These symbols indicate the number of instances of one class linked to one instance of the other class. For example, one company will have one or more employees, but each employee works for just one company.</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" alt="Class diagram multiplicity" src="https://wcs.smartdraw.com/class-diagram/img/multiplicity.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/class-diagram/img/multiplicity.jpg?bn=1510011069"></span><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" alt="Class diagram notes" src="https://wcs.smartdraw.com/class-diagram/img/notes.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/class-diagram/img/notes.jpg?bn=1510011069"></span></p><h4 id="ClassDiagrams-Constraint">Constraint</h4><p>Place constraints inside curly braces {}.</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" alt="Class diagram contraints" src="https://wcs.smartdraw.com/class-diagram/img/constrain.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/class-diagram/img/constrain.jpg?bn=1510011069"></span></p><h4 id="ClassDiagrams-CompositionandAggregation">Composition and Aggregation</h4><p>Composition is a special type of aggregation that denotes a strong ownership between Class A, the whole, and Class B, its part. Illustrate composition with a filled diamond. Use a hollow diamond to represent a simple aggregation relationship, in which the &quot;whole&quot; class plays a more important role than the &quot;part&quot; class, but the two classes are not dependent on each other. The diamond ends in both composition and aggregation relationships point toward the &quot;whole&quot; class (i.e., the aggregation).</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" alt="Class diagram composition aggregation" src="https://wcs.smartdraw.com/class-diagram/img/compositionandaggregation.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/class-diagram/img/compositionandaggregation.jpg?bn=1510011069"></span></p><h4 id="ClassDiagrams-Generalization">Generalization</h4><p>Generalization is another name for inheritance or an &quot;is a&quot; relationship. It refers to a relationship between two classes where one class is a specialized version of another. For example, Honda is a type of car. So the class Honda would have a generalization relationship with the class car.</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" alt="Class diagram generalization" src="https://wcs.smartdraw.com/class-diagram/img/generalization.jpg?bn=1510011069" data-image-src="https://wcs.smartdraw.com/class-diagram/img/generalization.jpg?bn=1510011069"></span></p><p>In real life coding examples, the difference between inheritance and aggregation can be confusing. If you have an aggregation relationship, the aggregate (the whole) can access only the PUBLIC functions of the part class. On the other hand, inheritance allows the inheriting class to access both the PUBLIC and PROTECTED functions of the superclass.</p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33475213/33838598.png">Sample Class Diagram.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

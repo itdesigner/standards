@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Microservices Design Patterns</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Microservices Design Patterns
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on May 18, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>The main characteristics of microservices include: functional decomposition or domain-driven design, well-defined interfaces, explicitly published interface, single responsibility principle, and potentially polyglot. Each service is fully autonomous and full-stack. Thus changing a service implementation has no impact to other services as they communicate using well-defined interfaces. There are several advantages of such an application, but its not a <a href="http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html" class="external-link" rel="nofollow">free lunch</a> and requires a significant effort.</p><p>But lets say you understand the required effort, or at least some pieces of it, that is required to build such an application and willing to take a jump. What do you do? What is your approach for architecting such applications? Are there any design patterns on how these microservices work with each other?</p><p>Functional decomposition of your application and the team is the key to building a successful microservices architecture. This allows you to achieve loose coupling (REST interfaces) and high cohesion (multiple services can compose with each other to define higher level services or application).</p><p>Verb (e.g. Checkout) or Nouns (Product) of your application are one of the effective ways to achieve decomposition of your existing application. For example, product, catalog, and checkout can be three separate microservices and then work with each other to provide a complete shopping cart experience.</p><p>Functional decomposition gives the agility, flexibility, scalability, and other *ilities but the business goal is still to create the application. So once different microservices are identified, how do you compose them to provide the application’s functionality?</p><p>This page (and its children) will discuss some of the recommended patterns on how to compose microservices together.</p><p>Design patterns tailored to a microservices architecrure</p><ul><li><strong><a href="Aggregator-Pattern_34082067.html" data-linked-resource-id="34082067" data-linked-resource-version="1" data-linked-resource-type="page">Aggregator</a></strong> - invokes multiple other services to achieve the functionality required by an application</li><li><strong><a href="Proxy-Pattern_34082278.html" data-linked-resource-id="34082278" data-linked-resource-version="1" data-linked-resource-type="page">Proxy</a></strong> - </li><li><strong><a href="Chained-Pattern_34082364.html" data-linked-resource-id="34082364" data-linked-resource-version="1" data-linked-resource-type="page">Chained</a></strong> - <span style="color: rgb(20,20,18);">produce a single consolidated response to the request</span></li><li><span style="color: rgb(20,20,18);"><strong><a href="Branch-Pattern_34082519.html" data-linked-resource-id="34082519" data-linked-resource-version="1" data-linked-resource-type="page">Branch</a></strong> - <span style="color: rgb(20,20,18);">allows simultaneous response processing from two, likely mutually exclusive, chains of microservices</span><br/></span></li><li><span style="color: rgb(20,20,18);"><span style="color: rgb(20,20,18);"><strong><a href="Shared-Data-Pattern_34082597.html" data-linked-resource-id="34082597" data-linked-resource-version="1" data-linked-resource-type="page">Shared Data</a></strong> - transitional phase pattern not appropriate for greenfield development<br/></span></span></li><li><span style="color: rgb(20,20,18);"><span style="color: rgb(20,20,18);"><strong><a href="Asynchronous-Messaging-Pattern_34082678.html" data-linked-resource-id="34082678" data-linked-resource-version="1" data-linked-resource-type="page">Asynchronous Messaging</a> </strong>- <br/></span></span></li></ul>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

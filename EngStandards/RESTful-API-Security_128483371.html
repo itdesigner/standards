@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : RESTful API Security</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Security_33471513.html">Security</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : RESTful API Security
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Oct 27, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>With the explosive growth of RESTful APIs both at Placester and everywhere else, the security layer is often the one that is most overlooked in the architectural design of the API.</p><blockquote><p><em><span style="color: rgb(0,0,128);">The risks associated of not protecting sensitive data, allowing DOS attacks, and not considering farming usage of RESTful APIs could easily put a business at a disadvantage, if not damage the business permanently.</span></em></p></blockquote><h2 id="RESTfulAPISecurity-WHYDOESSECURITYMATTER?"><strong>WHY DOES SECURITY MATTER? </strong></h2><p>There are three core reasons why security should be a serious consideration when designing and deploying a RESTful API.</p><h3 style="margin-left: 30.0px;" id="RESTfulAPISecurity-DATAPROTECTION">DATA PROTECTION</h3><p style="margin-left: 30.0px;">A RESTful API is the way in which a given service can present value to the world. As a result, protection of the data provided via RESTful endpoints should always be a high priority.</p><h3 style="margin-left: 30.0px;" id="RESTfulAPISecurity-DOSATTACKS">DOS ATTACKS</h3><p style="margin-left: 30.0px;">Denial of Service (DOS) attacks can render a RESTful API into a non-functional state if the right security measures are not taken. Consider the case where an entry-level RESTful API is provided for public consumption. While it’s often a great marketing idea to generate usage of your API, it can also lead to catastrophic results when a consumer opts to perform DOS attacks on the API.</p><h3 style="margin-left: 30.0px;" id="RESTfulAPISecurity-ANTI-FARMING">ANTI-FARMING</h3><p style="margin-left: 30.0px;">Today, there are several marketing-heavy websites that offer consumers the best deal on everything from flights to vehicles and even groceries. In many of these cases, the aggregated service is taking advantage of other APIs to obtain the information they want you to utilize. When this happens, the RESTful API is being farmed out for the benefit of another entity.</p><h2 id="RESTfulAPISecurity-SECURITYADOPTIONMEASURES"><strong>SECURITY ADOPTION MEASURES</strong></h2><p>Below are some key concepts that should be part of any RESTful API design.</p><h3 style="margin-left: 30.0px;" id="RESTfulAPISecurity-SESSIONMANAGEMENTANDAUTHENTICATION"><strong>SESSION MANAGEMENT AND AUTHENTICATION </strong></h3><p style="margin-left: 30.0px;">Aside from use of TLS/HTTPS, the most important level of RESTful API security is centered around session management and authentication. For this article, the focus is going to be on API keys, OpenID Connect/OAuth2/ SAML, and session state considerations.</p><h3 style="margin-left: 30.0px;" id="RESTfulAPISecurity-APIKEYS"><strong>API KEYS </strong></h3><p style="margin-left: 30.0px;">The concept of API keys provides the consumer of the endpoint(s) with a unique string (a key) that is part of their HTTP requests. While not a complete security solution, the use of API keys yields a higher level of knowing who is using the API when compared to anonymous usage.</p><p style="margin-left: 30.0px;">API keys can also be used to provide additional services. As an example, the service may opt to have Silver, Gold, and Platinum levels for the RESTful API. At the Silver level, end-users are granted free access, but only to a limited set of endpoints. Gold and Platinum would require some level of payment, with the Platinum level providing more benefits over the Gold option.</p><p style="margin-left: 30.0px;">The preferred manner to use API keys is to include them in the request header. As an example, the API key of <code>67a73dde1bdd1d90210ba</code> is set to the X-API-KEY key/ value pair in the HTTP header when calling the widgets end-point:</p><p style="margin-left: 30.0px;"><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Header-based API Keys</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: Confluence" data-theme="Confluence">curl -H “X-API-KEY: 67a73dde1bdd1d90210ba”
+https://www.example.com/v1/widgets</pre>
+</div></div><p style="margin-left: 30.0px;"><br/></p><p style="margin-left: 30.0px;">Another common use of an API key is to include the key in the URI itself:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>URI-based API Keys</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: bash; gutter: false; theme: Confluence" data-theme="Confluence">https://www.example.com/v1/widgets?api_key =67a73dde1bdd1d90210ba
+</pre>
+</div></div><p style="margin-left: 30.0px;"><br/></p><p style="margin-left: 30.0px;">The problem with this approach is that the API key is revealed in both the browser history and in logs at the API server — exposing the unique key to all who have access to these elements.</p><h3 style="margin-left: 30.0px;" id="RESTfulAPISecurity-OPENIDCONNECT,OAUTH2,ANDSAML"><strong>OPENID CONNECT, OAUTH2, AND SAML </strong></h3><p style="margin-left: 30.0px;">OpenID Connect, OAuth2, and SAML use HTTP protocols as a transport and are used for security purposes. Authentication provides the verification of the individual, while authorization performs the task of granting or revoking access.</p><p style="margin-left: 30.0px;">From an authentication perspective, the following options exist:</p><p style="margin-left: 60.0px;"><strong>OpenID Connect</strong>: Can leverage an existing identity provider (like Google or Facebook) to obtain a token used to validate the end-user’s credentials.</p><p style="margin-left: 60.0px;"><strong>OAuth2</strong>: Can perform pseudo-authentication through the authorization process through delegation (explained below).</p><p style="margin-left: 60.0px;"><strong>SAML</strong>: Uses assertions, protocols, bindings, and profiles to manage authentication, including an identity provider, but is not well-suited for mobile applications.</p><p style="margin-left: 30.0px;">To provide authorization services, the following strategies are employed:</p><p style="margin-left: 60.0px;"><strong>OAuth2</strong>: Provides secure delegated access, allowing actions to be taken on behalf of the user by allowing tokens to be issued by a third-party identity provider. Since OAuth2 must know about the delegated user, authentication is achieved in a pseudo fashion (as noted above).</p><p style="margin-left: 60.0px;"><strong>SAML</strong>: Performs assertions to trusted services, including a token to provide the authorization.</p><h3 style="margin-left: 30.0px;" id="RESTfulAPISecurity-SESSIONSTATECONSIDERATIONS"><strong>SESSION STATE CONSIDERATIONS </strong></h3><p style="margin-left: 30.0px;">RESTful API endpoints should always maintain a stateless session state, meaning everything about the session must be held at the client. Each request from the client must contain all the necessary information for the server to understand the request. In order to streamline the process, the API token along with a session token can be included to provide a “session blob” as part of each transaction.</p><h3 style="margin-left: 30.0px;" id="RESTfulAPISecurity-ACCESSCONTROL"><strong>ACCESS CONTROL </strong></h3><p style="margin-left: 30.0px;">As noted above, authorization for RESTful services can introduce security into provided end-points so that there are limits for those who can issue a HTTP DELETE request to the API.</p><p style="margin-left: 30.0px;">In the simple Java example below, only members of the Admin and Manager roles (i.e. groups) can perform the DELETE request to delete all users, but all users can perform the GET request to obtain a list of users:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Coded Access Control</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Path(“/”)
+@PermitAll
+public class userExample {
+   @DELETE
+   @Path(“users”)
+   @Produces(“text/plain”)
+   @RolesAllowed({“Admin”, “Manager”})
+   public String deleteAllUsers() {
+      return userService.deleteAllUsers();
+   }
+   @GET
+   @Path(“users”)
+   @Produces(“text/plain”)
+   public String getAllUsers() {
+      return userService.getAllUsers();
+   }
+}</pre>
+</div></div><h3 style="margin-left: 30.0px;" id="RESTfulAPISecurity-RATELIMITS"><strong>RATE LIMITS </strong></h3><p style="margin-left: 30.0px;">As noted above, an API key is a valuable strategy to provide a level of identity to consumers of a RESTful API. In addition to providing tiered services, another benefit of using API key is the ability to throttle usage of the API.</p><p style="margin-left: 30.0px;">API management solutions like TIBCO Mashery, Mulesoft, and Dell Boomi allow the ability to throttle API requests, leveraging API key for this functionality. As a result, a consumer who attempts to perform a DOS attack (intentionally or unintentionally) will reach a set threshold at which time all future requests will be rejected.</p><h3 style="margin-left: 30.0px;" id="RESTfulAPISecurity-INPUTVALIDATIONANDHTTPRETURNCODES"><strong>INPUT VALIDATION AND HTTP RETURN CODES </strong></h3><p style="margin-left: 30.0px;">Input validation should always be a consideration when securing RESTful APIs. While the client calling the endpoint may be handling validation, the assumption cannot always be relied upon with RESTful APIs.</p><p style="margin-left: 30.0px;">As an example, if the end-user is attempting to POST data a collection of JSON data related to an address, the service within the RESTful end-point should validate the data and use HTTP return codes to reflect the correct status. In the simplified Java example, Jersey and Jackson are used to call a very basic addressService to both validate and persist the address:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Input Validation and Return Codes</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class addressExample {
+   @POST
+   @Path(“/address”)
+   @Consumes(“application/json”)
+   @Produces(“application/json”)
+   public Address createAddress(Address newAddress) {
+      if (!addressService.isValidAddress(newAddress))
+      {
+          return Response
+          .status(Response.Status.BAD_REQUEST)
+          .entity(“Invalid address provided.”)
+          .type(MediaType.APPLICATION_JSON)
+          .build();
+      } else {
+          String jsonAddress = addressService.convertAddress(newAddress);
+          return Response
+          .status(Response.Status.CREATED)
+          .entity(jsonAddress)
+          .build();
+      }
+   }
+}</pre>
+</div></div><p style="margin-left: 30.0px;">In the example above, the newAddress object (marshalled from JSON to the Address Java object) is validated using the isValidAddress() method. If the address is not valid, an HTTP 401 (Bad Request) code is returned to the user with the text “Invalid address provided.” If the address is considered valid, the convertAddress() will perform the necessary actions, then return a String-based JSON rending of the Address object to be included back to the user, along with a HTTP 201 (Created) return code.</p><h3 style="margin-left: 30.0px;" id="RESTfulAPISecurity-CONCLUSION"><strong>CONCLUSION </strong></h3><p style="margin-left: 30.0px;">Protecting RESTful APIs should always be at the forefront of the API design effort. The risks associated not protecting sensitive data, allowing DOS attacks, and not considering farming usage of RESTful APIs could easily put a business at a disadvantage, if not damage the business permanently.</p><p style="margin-left: 30.0px;">Authorization and authentication can provide the necessary security to RESTful APIs, with implementation of an API key strategy adding significant value — with a low cost to implement.</p><p style="margin-left: 30.0px;">Input validation should always be a part of the RESTful API since there is no guarantee the consumer of the API will be performing any necessary validation. Communication back to the calling client should implement HTTP return codes beyond simply success (200) and error (404)</p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

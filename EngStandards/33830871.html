@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Middlewares / Pipelines</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Conceptual-Patterns_131203160.html">Conceptual Patterns</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Middlewares / Pipelines
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Oct 28, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(89,91,102);">Middlewares or pipelines are a powerful yet simple concept: the </span><strong>output of one unit/function is the input for the next</strong><span style="color: rgb(89,91,102);">.</span></p><p><span style="color: rgb(89,91,102);">Collection pipelines are a programming pattern where you organize some computation as a sequence of operations which compose by taking a collection as output of one operation and feeding it into the next. (Common operations are filter, map, and reduce.) This pattern is common in functional programming, and also in object-oriented languages which have lambdas. This article describes the pattern with several examples of how to form pipelines, both to introduce the pattern to those unfamiliar with it, and to help people understand the core concepts so they can more easily take ideas from one language to another.</span></p><p><span style="color: rgb(89,91,102);"><span style="color: rgb(48,54,51);">The collection pipeline is one of the most common, and pleasing, patterns in software. It's something that's present on the unix command line, the better sorts of OO languages, and gets a lot of attention these days in functional languages. Different environments have slightly different forms, and common operations have different names, but once you get familiar with this pattern you don't want to be without it.</span></span></p>
+</div></div><p><br/></p><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-green confluenceTd" data-highlight-colour="green">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>HIGH</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(0,0,0);">Suppose that the overall computation involves performing a calculation on many sets of data, where the calculation can be viewed in terms of data flowing through a sequence of stages. How can the potential concurrency be exploited?</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p style="">This is the essence of Node.js,<span> </span><em>Pipelines</em><span> </span>are everywhere, under various forms, uses and purposes. Generically, a<span> </span><em>Pipeline</em><span> </span>is a series of processing units connected together, where<span> </span><strong>the output of one unit is the input for the next one</strong>. In Node.js, this often means a<span> </span><strong>series of functions</strong><span> </span>in the form:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">function(/* input/output */, next) {
+	next(/* err and/or output */)
+}</pre>
+</div></div><p style=""><br/></p><p style="">You might know it as<span> </span><strong>middleware</strong><span> </span>and when you think middleware you say<span> </span><a style="" href="http://www.senchalabs.org/connect/" class="external-link" rel="nofollow">Connect</a><span> </span>or<span> </span><a style="" href="http://expressjs.com/" class="external-link" rel="nofollow">Express</a>, but the usage of this pattern goes well beyond that.<span> </span><a style="" href="https://github.com/bnoguchi/hooks-js/" class="external-link" rel="nofollow">Hooks</a><span> </span>for example, a popular<span> </span><em>hooks</em>implementation (we talked about it previously) connects all the pre/post functions in a pipeline (middleware) to “give you maximum flexibility”.</p><p style="">Most of the time you will implement this pattern in some way by using<span> </span><a style="" href="https://github.com/caolan/async#waterfall" class="external-link" rel="nofollow">async.waterfall</a><span> </span>or<span> </span><a style="" href="https://github.com/caolan/async#auto" class="external-link" rel="nofollow">async.auto</a>, or using a<span> </span><a style="" href="https://github.com/kriskowal/q#sequences" class="external-link" rel="nofollow">chain of promises</a><span> </span>and maybe<span> </span><strong>not just as flow control</strong>, but to make some part of you application extensible.</p><p style=""><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">async.waterfall([
+	function(callback){
+		callback(null, &#39;one&#39;, &#39;two&#39;);
+	},
+	function(arg1, arg2, callback){
+		callback(null, &#39;three&#39;);
+	}
+]};</pre>
+</div></div><p style=""><br/></p><p style="">Another Node.js popular component has the traits of a<span> </span><em>Pipeline</em>. Of course I’m talking about the hero called<span> </span><strong><a style="" href="http://nodejs.org/api/stream.html" class="external-link" rel="nofollow">streams</a></strong>, and what is a stream if it cannot be<span> </span><a style="" href="http://nodejs.org/api/stream.html#stream_readable_pipe_destination_options" class="external-link" rel="nofollow">piped</a>? While<span> </span><em>middleware</em><span> </span>and in general function chains are a generic solution to control flow and extensibility,<span> </span><strong><em>streams</em><span> </span>are better suited to process flowing data</strong><span> </span>in the form of bytes or objects.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">fs.createReadStream(&quot;data.gz&quot;)
+	.pipe(zlib.createGunzip())
+	.pipe(through(function write(data) {
+		//... make the data awesome ...
+		this.queue(data);
+	})
+// Write to File
+.pipe(fs.createWriteStream(&quot;out.txt&quot;))</pre>
+</div></div>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p>If you ever used <a href="http://expressjs.com/" class="external-link" rel="nofollow">Express</a> or <a href="http://koajs.com/" class="external-link" rel="nofollow">Koa</a> then you already used this concept.</p><p>It worths checking out how Koa does it:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">app.use = function(fn){  
+  this.middleware.push(fn);
+  return this;
+};</pre>
+</div></div><p class="auto-cursor-target"><span style="color: rgb(89,91,102);">So basically when you add a middleware it just gets pushed into a </span><code>middleware</code><span style="color: rgb(89,91,102);"> array. So far so good, but what happens when a request hits the server?</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var i = middleware.length;  
+while (i--) {  
+  next = middleware[i].call(this, next);
+}</pre>
+</div></div><p class="auto-cursor-target"><span style="color: rgb(89,91,102);">No magic - your middlewares get called one after the other.</span></p>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ul class="inline-task-list" data-inline-tasks-content-id="33830871"><li data-inline-task-id="1"><span class="placeholder-inline-tasks">Use whenever you need tasks to be completed in a specific order</span></li><li data-inline-task-id="2"><span class="placeholder-inline-tasks">can be synchronous or asynchronous</span></li></ul>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p>Advantages:</p><ul><li>they are everywhere in JS</li><li>many many npm packages are built and used via pipelines</li></ul>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<p>see the<a href="https://www.npmjs.com/package/pipeline-js" class="external-link" rel="nofollow"> pipelines.js</a> package for a great implementation of a generic pipeline</p>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Reactor Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Code-Standards_33471212.html">Code Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Node.js_33473087.html">Node.js</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Reactor Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Ryan Fisch</span> on Apr 14, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><br/></p><h2 class="title" id="ReactorPattern-Thereactorpattern">The reactor pattern</h2><p><br/></p><p>In this section, we will analyze the reactor pattern, which is the heart of the Node.js asynchronous nature. We will go through the main concepts behind the pattern, such as the single-threaded architecture and the non-blocking I/O, and we will see how this creates the foundation for the entire Node.js platform.</p><h3 class="title" id="ReactorPattern-I/Oisslow">I/O is slow</h3><p><br/></p><p>I/O is definitely the slowest among the fundamental operations of a computer. Accessing the RAM is in the order of nanoseconds (10e<span>-9</span> seconds), while accessing data on the disk or the network is in the order of milliseconds (10e<span>-3</span> seconds). For the bandwidth, it is the same story; RAM has a transfer rate consistently in the order of GB/s, while disk and network varies from MB/s to, optimistically, GB/s. I/O is usually not expensive in terms of CPU, but it adds a delay between the moment the request is sent and the moment the operation completes. On top of that, we also have to consider the <span class="emphasis"><span>human factor</span></span>; often, the input of an application comes from a real person, for example, the click of a button or a message sent in a real-time chat application, so the speed and frequency of I/O don't depend only on technical aspects, and they can be many orders of magnitude slower than the disk or network.</p><h3 class="title" id="ReactorPattern-BlockingI/O">Blocking I/O</h3><p><br/></p><p>In traditional blocking I/O programming, the function call corresponding to an I/O request will block the execution of the thread until the operation completes. This can go from a few milliseconds, in case of a disk access, to minutes or even more, in case the data is generated from user actions, such as pressing a key. The following pseudocode shows a typical blocking read performed against a socket:</p><pre class="programlisting  language-markup">//blocks the thread until the data is available
+data = socket.read();
+//data is available
+print(data);</pre><p>It is trivial to notice that a web server that is implemented using blocking I/O will not be able to handle multiple connections in the same thread; each I/O operation on a socket will block the processing of any other connection. For this reason, the traditional approach to handle concurrency in web servers is to kick off a thread or a process (or to reuse one taken from a pool) for each concurrent connection that needs to be handled. This way, when a thread blocks for an I/O operation it will not impact the availability of the other requests, because they are handled in separate threads.</p><p>The following image illustrates this scenario:</p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="attachments/33473228/33473281.jpg" data-image-src="attachments/33473228/33473281.jpg" data-unresolved-comment-count="0" data-linked-resource-id="33473281" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="4.jpg" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="33473228" data-linked-resource-container-version="1" data-media-id="fe70e084-3698-448d-ba93-8adfc25d1a92" data-media-type="file"></span></p><p>The preceding image lays emphasis on the amount of time each thread is idle, waiting for new data to be received from the associated connection. Now, if we also consider that any type of I/O can possibly block a request, for example, while interacting with databases or with the filesystem, we soon realize how many times a thread has to block in order to wait for the result of an I/O operation. Unfortunately, a thread is not cheap in terms of system resources, it consumes memory and causes context switches, so having a long running thread for each connection and not using it for most of the time, is not the best compromise in terms of efficiency.</p><p><br/></p><h3 class="title" id="ReactorPattern-Non-blockingI/O">Non-blocking I/O</h3><p><br/></p><p>In addition to blocking I/O, most modern operating systems support another mechanism to access resources, called non-blocking I/O. In this operating mode, the system call always returns immediately without waiting for the data to be read or written. If no results are available at the moment of the call, the function will simply return a predefined constant, indicating that there is no data available to return at that moment.</p><p>For example, in Unix operating systems, the <code class="literal" style="margin-left: 5.0px;">fcntl()</code> function is used to manipulate an existing file descriptor to change its operating mode to non-blocking (with the <code class="literal" style="margin-left: 5.0px;">O_NONBLOCK</code> flag). Once the resource is in non-blocking mode, any read operation will fail with a return code, <code class="literal" style="margin-left: 5.0px;">EAGAIN</code>, in case the resource doesn't have any data ready to be read.</p><p>The most basic pattern for accessing this kind of non-blocking I/O is to actively poll the resource within a loop until some actual data is returned; this is called <span class="strong"><strong>busy-waiting</strong></span>. The following pseudocode shows you how it's possible to read from multiple resources using non-blocking I/O and a polling loop:</p><pre class="programlisting  language-markup">resources = [socketA, socketB, pipeA];
+while(!resources.isEmpty()) {
+  for(i = 0; i &lt; resources.length; i++) {
+    resource = resources[i];
+    //try to read
+    var data = resource.read();
+    if(data === NO_DATA_AVAILABLE)
+      //there is no data to read at the moment
+      continue;
+    if(data === RESOURCE_CLOSED)
+      //the resource was closed, remove it from the list
+      resources.remove(i);
+    else
+      //some data was received, process it
+      consumeData(data);
+  }
+}</pre><p>You can see that, with this simple technique, it is already possible to handle different resources in the same thread, but it's still not efficient. In fact, in the preceding example, the loop will consume precious CPU only for iterating over resources that are unavailable most of the time. Polling algorithms usually result in a huge amount of wasted CPU time.</p><h3 class="title" id="ReactorPattern-Eventdemultiplexing">Event demultiplexing</h3><p><br/></p><p>Busy-waiting is definitely not an ideal technique for processing non-blocking resources, but luckily, most modern operating systems provide a native mechanism to handle concurrent, non-blocking resources in an efficient way; this mechanism is called<span class="strong"><strong>synchronous event demultiplexer</strong></span> or <span class="strong"><strong>event notification interface</strong></span>. This component collects and queues I/O events that come from a set of watched resources, and block until new events are available to process. The following is the pseudocode of an algorithm that uses a generic synchronous event demultiplexer to read from two different resources:</p><pre class="programlisting  language-markup">socketA, pipeB;
+watchedList.add(socketA, FOR_READ);        //[1]
+watchedList.add(pipeB, FOR_READ);
+while(events = demultiplexer.watch(watchedList)) {    //[2]
+  //event loop
+  foreach(event in events) {          //[3]
+    //This read will never block and will always return data
+    data = event.resource.read();
+    if(data === RESOURCE_CLOSED)
+      //the resource was closed, remove it from the watched list
+      demultiplexer.unwatch(event.resource);
+    else
+      //some actual data was received, process it
+      consumeData(data);
+  }
+}</pre><p>These are the important steps of the preceding pseudocode:</p><ol class="orderedlist arabic"><li><p>The resources are added to a data structure, associating each one of them with a specific operation, in our example a read.</p></li><li><p>The event notifier is set up with the group of resources to be watched. This call is synchronous and blocks until any of the watched resources is ready for a read. When this occurs, the event demultiplexer returns from the call and a new set of events is available to be processed.</p></li><li><p>Each event returned by the event demultiplexer is processed. At this point, the resource associated with each event is guaranteed to be ready to read and to not block during the operation. When all the events are processed, the flow will block again on the event demultiplexer until new events are again available to be processed. This is called the <span class="strong"><strong>event loop</strong></span>.</p></li></ol><p>It's interesting to see that with this pattern, we can now handle several I/O operations inside a single thread, without using a busy-waiting technique. The following image shows us how a web server would be able to handle multiple connections using a synchronous event demultiplexer and a single thread:</p><p><br/></p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="attachments/33473228/33473266.jpg" data-image-src="attachments/33473228/33473266.jpg" data-unresolved-comment-count="0" data-linked-resource-id="33473266" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="3.jpg" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="33473228" data-linked-resource-container-version="1" data-media-id="1ef12302-c9ff-4288-8585-05f7c5ee492b" data-media-type="file"></span></p><p><br/></p><p>The previous image helps us understand how concurrency works in a single-threaded application using a synchronous event demultiplexer and non-blocking I/O. We can see that using only one thread does not impair our ability to run multiple I/O bound tasks <span class="emphasis"><span>concurrently</span></span>. The tasks are spread over time, instead of being spread across multiple threads. This has the clear advantage of minimizing the total idle time of the thread, as clearly shown in the image. This is not the only reason for choosing this model. To have only a single thread, in fact, also has a beneficial impact on the way programmers approach concurrency in general. Throughout the book, we will see how the absence of in-process race conditions and multiple threads to synchronize, allows us to use much simpler concurrency strategies.</p><p>In the next chapter, we will have the opportunity to talk more about the concurrency model of Node.js.</p><p><br/></p><h3 class="title" id="ReactorPattern-Thereactorpattern.1">The reactor pattern</h3><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="attachments/33473228/33473240.jpg" data-image-src="attachments/33473228/33473240.jpg" data-unresolved-comment-count="0" data-linked-resource-id="33473240" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="2.jpg" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="33473228" data-linked-resource-container-version="1" data-media-id="16ca7840-aa4b-4774-90d4-86a4677b3253" data-media-type="file"></span></p><p>We can now introduce the <span class="strong"><strong>reactor pattern</strong></span>, which is a specialization of the algorithm presented in the previous section. The main idea behind it is to have a <span class="strong"><strong>handler</strong></span> (which in Node.js is represented by a <span class="strong"><strong>callback</strong></span> function) associated with each I/O operation, which will be invoked as soon as an event is produced and processed by the event loop. The structure of the reactor pattern is shown in the following image:</p><p>This is what happens in an application using the reactor pattern:</p><ol class="orderedlist arabic"><li><p>The application generates a new I/O operation by submitting a request to the <span class="strong"><strong>Event Demultiplexer</strong></span>. The application also specifies a handler, which will be invoked when the operation completes. Submitting a new request to the Event Demultiplexer is a non-blocking call and it immediately returns the control back to the application.</p></li><li><p>When a set of I/O operations completes, the Event Demultiplexer pushes the new events into the <span class="strong"><strong>Event Queue</strong></span>.</p></li><li><p>At this point, the Event Loop iterates over the items of the Event Queue.</p></li><li><p>For each event, the associated handler is invoked.</p></li><li><p>The handler, which is part of the application code, will give back the control to the Event Loop when its execution completes (<span class="strong"><strong>5a</strong></span>). However, new asynchronous operations might be requested during the execution of the handler (<span class="strong"><strong>5b</strong></span>), causing new operations to be inserted in the Event Demultiplexer (<span class="strong"><strong>1</strong></span>), before the control is given back to the Event Loop.</p></li><li><p>When all the items in the Event Queue are processed, the loop will block again on the Event Demultiplexer which will then trigger another cycle.</p></li></ol><p>The asynchronous behavior is now clear: the application expresses the interest to access a resource at one point in time (without blocking) and provides a handler, which will then be invoked at another point in time when the operation completes.</p><h3 class="title" id="ReactorPattern-Note">Note</h3><p>A Node.js application will exit automatically when there are no more pending operations in the Event Demultiplexer, and no more events to be processed inside the Event Queue.</p><p>We can now define the pattern at the heart of Node.js.</p><h3 class="title" id="ReactorPattern-Note.1">Note</h3><p>Pattern (reactor): handles I/O by blocking until new events are available from a set of observed resources, and then reacting by dispatching each event to an associated handler.</p><p><br/></p><h3 class="title" id="ReactorPattern-Thenon-blockingI/OengineofNode.js–libuv">The non-blocking I/O engine of Node.js – libuv</h3><p><br/></p><p>Each operating system has its own interface for the Event Demultiplexer: <code class="literal" style="margin-left: 5.0px;">epoll</code> on Linux, <code class="literal" style="margin-left: 5.0px;">kqueue</code> on Mac OS X, and <span class="strong"><strong>I/O Completion Port API</strong></span> (<span class="strong"><strong>IOCP</strong></span>) on Windows. Besides that, each I/O operation can behave quite differently depending on the type of the resource, even within the same OS. For example, in Unix, regular filesystem files do not support non-blocking operations, so, in order to simulate a non-blocking behavior, it is necessary to use a separate thread outside the Event Loop. All these inconsistencies across and within the different operating systems required a higher-level abstraction to be built for the Event Demultiplexer. This is exactly why the Node.js core team created a C library called <code class="literal" style="margin-left: 5.0px;">libuv</code>, with the objective to make Node.js compatible with all the major platforms and normalize the non-blocking behavior of the different types of resource; <code class="literal" style="margin-left: 5.0px;">libuv</code>today represents the low-level I/O engine of Node.js.</p><p>Besides abstracting the underlying system calls, <code class="literal" style="margin-left: 5.0px;">libuv</code> also implements the reactor pattern, thus providing an API for creating event loops, managing the event queue, running asynchronous I/O operations, and queuing other types of tasks.</p><p><br/></p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image" src="attachments/33473228/33473255.jpg" data-image-src="attachments/33473228/33473255.jpg" data-unresolved-comment-count="0" data-linked-resource-id="33473255" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="1.jpg" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="33473228" data-linked-resource-container-version="1" data-media-id="42a4814e-e5ed-4e89-9ebf-720b41cb3cae" data-media-type="file"></span></p><h3 class="title" id="ReactorPattern-Note.2">Note</h3><p>A great resource to learn more about <code class="literal" style="margin-left: 5.0px;">libuv</code> is the free online book created by Nikhil Marathe, which is available at <a class="external-link" href="http://nikhilm.github.io/uvbook/" rel="nofollow">http://nikhilm.github.io/uvbook/</a>.</p><h3 class="title" id="ReactorPattern-TherecipeforNode.js">The recipe for Node.js</h3><p><br/></p><p>The reactor pattern and <code class="literal" style="margin-left: 5.0px;">libuv</code> are the basic building blocks of Node.js, but we need the following three other components to build the full platform:</p><ul><li style="list-style-type: disc;"><p>A set of bindings responsible for wrapping and exposing <code class="literal" style="margin-left: 5.0px;">libuv</code> and other low-level functionality to JavaScript.</p></li><li style="list-style-type: disc;"><p><span class="strong"><strong>V8</strong></span>, the JavaScript engine originally developed by Google for the Chrome browser. This is one of the reasons why Node.js is so fast and efficient. V8 is acclaimed for its revolutionary design, its speed, and for its efficient memory management.</p></li><li style="list-style-type: disc;"><p>A core JavaScript library (called <span class="strong"><strong>node-core</strong></span>) that implements the high-level Node.js API.</p></li></ul><p>Finally, this is the recipe of Node.js, and the following image represents its final architecture:</p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33473228/33473240.jpg">2.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33473228/33473255.jpg">1.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33473228/33473266.jpg">3.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33473228/33473281.jpg">4.jpg</a> (image/jpeg)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

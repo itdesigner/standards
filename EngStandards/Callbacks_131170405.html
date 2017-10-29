@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Callbacks</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Conceptual-Patterns_131203160.html">Conceptual Patterns</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Callbacks
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Oct 27, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(65,66,59);">In JavaScript, functions are first-class objects; that is, functions are of the type<span> </span></span><em>Object</em><span style="color: rgb(65,66,59);"><span> </span>and they can be used in a first-class manner like any other object (String, Array, Number, etc.) since they are in fact objects themselves. They can be “stored in variables, passed as arguments to functions, created within functions, and returned from functions”.</span></p><p><span style="color: rgb(65,66,59);"><span style="color: rgb(65,66,59);">Because functions are first-class objects, we can pass a function as an argument in another function and later execute that passed-in function or even return it to be executed later. This is the essence of using callback functions in JavaScript. In the rest of this article we will learn everything about JavaScript callback functions. Callback functions are probably the most widely used functional programming technique in JavaScript, and you can find them in just about<span> </span></span><span style="color: rgb(65,66,59);">every piece of JavaScript and jQuery code, yet they remain mysterious to many JavaScript developers. The mystery will be no more, by the time you finish reading this.</span></span></p>
+</div></div><p><br/></p><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-green confluenceTd" data-highlight-colour="green">4</td><td class="highlight-green confluenceTd" data-highlight-colour="green">5</td></tr></tbody></table></div><p>VERY HIGH</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(65,66,59);">A callback function, also known as a higher-order function, is a function that is passed to another function (let’s call this other function “otherFunction”) as a parameter, and the callback function is called (or executed) inside the otherFunction. A callback function is essentially a pattern (an established solution to a common problem), and therefore, the use of a callback function is also known as a callback pattern.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(65,66,59);">Consider this common example of the use of a callback function in javascript:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Classic Callback Scenario</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">var friends = [&quot;Mike&quot;, &quot;Stacy&quot;, &quot;Andy&quot;, &quot;Rick&quot;];
+​
+friends.forEach(function (eachName, index){
+console.log(index + 1 + &quot;. &quot; + eachName); // 1. Mike, 2. Stacy, 3. Andy, 4. Rick​
+});</pre>
+</div></div><p>Note the way we pass an anonymous function (a function without a name) to the forEach method as a parameter.</p><p>So far we have passed anonymous functions as a parameter to other functions or methods. Lets now understand how callbacks work before we look at more concrete examples and start making our own callback functions.</p><p>We can pass functions around like variables and return them in functions and use them in other functions. When we pass a callback function as an argument to another function, we are only passing the function definition. We are not executing the function in the parameter. In other words, we aren’t passing the function with the trailing pair of executing parenthesis () like we do when we are executing a function.</p><p>And since the containing function has the callback function in its parameter as a function definition, it can execute the callback anytime.</p><p>Note that the callback function is not executed immediately. It is “called back” (hence the name) at some specified point inside the containing function’s body.  In the classic example above, the anonymous function will be called later inside the function body.  Even without a name, it can be accessed later via the <em>arguments</em> object by the containing function.</p><p><span style="color: rgb(65,66,59);">When we pass a callback function as an argument to another function, the callback is executed at some point inside the containing function’s body just as if the callback were defined in the containing function. This means the callback is a closure. Read my post,<span> </span></span><a title="Understand JavaScript Closures With Ease" href="http://javascriptissexy.com/understand-javascript-closures-with-ease/" class="external-link" rel="nofollow">Understand JavaScript Closures With Ease</a><span style="color: rgb(65,66,59);"><span> </span>for more on closures. As we know, closures have access to the containing function’s scope, so the callback function can access the containing functions’ variables, and even the variables from the global scope.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p>While uncomplicated, callback functions have a few noteworthy principles we should be familiar with when implementing them.</p><p><br/></p><p><strong>Use Named OR Anonymous Functions as Callbacks</strong><br/>In the earlier forEach example, we used anonymous functions that were defined in the parameter of the containing function. That is one of the common patterns for using callback functions. Another popular pattern is to declare a named function and pass the name of that function to the parameter. Consider this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Named function callback</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence"> // global variable​
+​var allUserData = [];
+​
+​// generic logStuff function that prints to console​
+​function logStuff (userData) {
+    if ( typeof userData === &quot;string&quot;)
+    {
+        console.log(userData);
+    }
+    else if ( typeof userData === &quot;object&quot;)
+    {
+        for (var item in userData) {
+            console.log(item + &quot;: &quot; + userData[item]);
+        }
+    }
+}
+​
+​// A function that takes two parameters, the last one a callback function​
+​function getInput (options, callback) {
+    allUserData.push (options);
+    callback (options);
+}
+​
+​// When we call the getInput function, we pass logStuff as a parameter.​
+​// So logStuff will be the function that will called back (or executed) inside the getInput function​
+getInput ({name:&quot;Rich&quot;, speciality:&quot;JavaScript&quot;}, logStuff);
+​//  name: Rich​
+​// speciality: JavaScript</pre>
+</div></div><p class="auto-cursor-target"><strong>Pass Parameters to Callback Functions</strong><br/><span style="color: rgb(65,66,59);">Since the callback function is just a normal function when it is executed, we can pass parameters to it. We can pass any of the containing function’s properties (or global properties) as parameters to the callback function. In the preceding example, we pass<span> </span></span><em>options</em><span style="color: rgb(65,66,59);"><span> </span>as a parameter to the callback function. Let’s pass a global variable and a local variable:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Parameterized Callback</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">//Global variable​
+​var generalLastName = &quot;Clinton&quot;;
+​
+​function getInput (options, callback) {
+    allUserData.push (options);
+	​// Pass the global variable generalLastName to the callback function​
+    callback (generalLastName, options);
+}</pre>
+</div></div><p><strong>Make Sure Callback is a Function Before Executing It</strong><br/>It is always wise to check that the callback function passed in the parameter is indeed a function before calling it. Also, it is good practice to make the callback function optional.</p><p>Let’s refactor the getInput function from the previous example to ensure these checks are in place.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Parameterized Callback</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">function getInput(options, callback) {
+    allUserData.push(options);
+​
+    // Make sure the callback is a function​
+    if (typeof callback === &quot;function&quot;) {
+    // Call it, since we have confirmed it is callable​
+        callback(options);
+    }
+}</pre>
+</div></div><p>Without the check in place, if the getInput function is called either without the callback function as a parameter or in place of a function a non-function is passed, our code will result in a runtime error.</p><p><br/></p><p><strong>Problem When Using Methods With The<span> </span><em>this</em><span> </span>Object as Callbacks</strong><br/>When the callback function is a method that uses the<span> </span><em>this</em><span> </span>object, we have to modify how we execute the callback function to preserve the<span> </span><em>this</em><span> </span>object context. Or else the<span> </span><em>this</em><span> </span>object will either point to the global window object (in the browser), if callback was passed to a global function. Or it will point to the object of the containing method.<br/>Let’s explore this in code: </p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Parameterized Callback</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">// Define an object with some properties and a method​
+​// We will later pass the method as a callback function to another function​
+​var clientData = {
+    id: 094545,
+    fullName: &quot;Not Set&quot;,
+    // setUserName is a method on the clientData object​
+    setUserName: function (firstName, lastName)  {
+        // this refers to the fullName property in this object​
+      this.fullName = firstName + &quot; &quot; + lastName;
+    }
+}
+​
+​function getUserInput(firstName, lastName, callback)  {
+    // Do other stuff to validate firstName/lastName here​
+​
+    // Now save the names​
+    callback (firstName, lastName);
+}</pre>
+</div></div><p class="auto-cursor-target"><span style="color: rgb(65,66,59);">In the following code example, when clientData.setUserName is executed, this.fullName will not set the fullName property on the clientData object. Instead, it will set fullName on the window object, since getUserInput is a global function. This happens because the<span> </span></span><em>this</em><span style="color: rgb(65,66,59);"><span> </span>object in the global function points to the window object.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Parameterized Callback</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">getUserInput (&quot;Thomas&quot;, &quot;Jefferson&quot;, clientData.setUserName);
+​
+console.log (clientData.fullName);// Not Set​
+​
+​// The fullName property was initialized on the window object​
+console.log (window.fullName); // Thomas Jefferson</pre>
+</div></div><p><strong>Use the Call or Apply Function To Preserve<span> </span><em>this</em></strong><br/>We can fix the preceding problem by using the<span> </span><em>Call</em><span> </span>or<span> </span><em>Apply</em><span> </span>function (we will discuss these in a full blog post later). For now, know that every function in JavaScript has two methods: Call and Apply. And these methods are used to set the<span> </span><em>this</em><span> </span>object inside the function and to pass arguments to the functions.</p><p><strong>Call</strong><span> </span>takes the value to be used as the<span> </span><em>this</em><span> </span>object inside the function as the first parameter, and the remaining arguments to be passed to the function are passed individually (separated by commas of course). The<span> </span><strong>Apply</strong><span> </span>function’s first parameter is also the value to be used as the<span> </span><em>this</em>object inside the function, while the last parameter is an array of values (or the<span> </span><em>arguments</em><span> </span>object) to pass to the function.</p><p>This sounds complex, but lets see how easy it is to use Apply or Call. To fix the problem in the previous example, we will use the Apply function thus:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Parameterized Callback</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">//Note that we have added an extra parameter for the callback object, called &quot;callbackObj&quot;​
+​function getUserInput(firstName, lastName, callback, callbackObj)  {
+    // Do other stuff to validate name here​
+​
+    // The use of the Apply function below will set the this object to be callbackObj​
+    callback.apply (callbackObj, [firstName, lastName]);
+}</pre>
+</div></div><p class="auto-cursor-target"><span style="color: rgb(65,66,59);">With the<span> </span></span><em>Apply</em><span style="color: rgb(65,66,59);"><span> </span>function setting the<span> </span></span><em>this</em><span style="color: rgb(65,66,59);"><span> </span>object correctly, we can now correctly execute the callback and have it set the fullName property correctly on the clientData object:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Parameterized Callback</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">// We pass the clientData.setUserName method and the clientData object as parameters. The clientData object will be used by the Apply function to set the this object​
+ getUserInput (&quot;Thomas&quot;, &quot;Jefferson&quot;, clientData.setUserName, clientData);
+​
+​// the fullName property on the clientData was correctly set​
+console.log (clientData.fullName); // Thomas Jefferson</pre>
+</div></div><p>We would have also used the<span> </span><em>Call</em><span> </span>function, but in this case we used the<span> </span><em>Apply</em><span> </span>function.</p><p><br/></p><p><strong>Multiple Callback Functions Allowed</strong><br/>We can pass more than one callback functions into the parameter of a function, just like we can pass more than one variable. Here is a classic example with jQuery’s AJAX function:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Parameterized Callback</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">function successCallback() {
+    // Do stuff before send​
+}
+​
+​function successCallback() {
+    // Do stuff if success message received​
+}
+​
+​function completeCallback() {
+    // Do stuff upon completion​
+}
+​
+​function errorCallback() {
+    // Do stuff if error received​
+}
+​
+$.ajax({
+    url:&quot;http://fiddle.jshell.net/favicon.png&quot;,
+    success:successCallback,
+    complete:completeCallback,
+    error:errorCallback
+});</pre>
+</div></div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ul class="inline-task-list" data-inline-tasks-content-id="131170405"><li data-inline-task-id="1"><span class="placeholder-inline-tasks">Beware of callback &quot;hell&quot; where there are so many callbacks that it is difficult to follow the flow of logic in the system / application.</span></li></ul>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p>Advantages</p><ul><li>Allow for DRY ( Do Not Repeat Yourself)</li><li>Implements better abstraction</li><li>Better maintainability</li><li>more readable code</li><li>more specialized functions</li><li>widely support by most node modules</li><li>long history of use</li></ul><p>Disadvantages</p><ul><li>can cause callback &quot;hell&quot;</li><li>being superseded by the use of Promises</li></ul>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<p>JavaScript callback functions are wonderful and powerful to use and they provide great benefits to your web applications and code. You should use them when the need arises; look for ways to refactor your code for Abstraction, Maintainability, and Readability with callback functions.</p><p><br/></p><p>For more information on callback &quot;hell&quot; - see the following site: <a href="http://callbackhell.com/" class="external-link" rel="nofollow">callbackhell.com</a></p>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

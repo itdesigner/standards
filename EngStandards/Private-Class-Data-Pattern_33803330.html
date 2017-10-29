@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Private Class Data Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Private Class Data Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on May 05, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li><p>Control write access to class attributes</p></li><li><p>Separate data from methods that use it</p></li><li><p>Encapsulate class data initialization</p></li><li><p>Providing new type of <code>final</code> - <em>final after constructor</em></p></li></ul>
+</div></div><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>MEDIUM</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p>A class may expose its attributes (class variables) to manipulation when manipulation is no longer desirable, e.g. after construction. Using the private class data design pattern prevents that undesirable manipulation.</p><p>A class may have one-time mutable attributes that cannot be declared final. Using this design pattern allows one-time setting of those class attributes.</p><p>The motivation for this design pattern comes from the design goal of protecting class state by minimizing the visibility of its attributes (data).</p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p>The private class data design pattern seeks to reduce exposure of attributes by limiting their visibility.</p><p>It reduces the number of class attributes by encapsulating them in single Data object. It allows the class designer to remove write privilege of attributes that are intended to be set only during construction, even from methods of the target class.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The private class data design pattern solves the problems above by extracting a data class for the target class and giving the target class instance an instance of the extracted data class.</span></p><h3 id="PrivateClassDataPattern-"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33803330/33803352.png" data-image-src="attachments/33803330/33803352.png" data-unresolved-comment-count="0" data-linked-resource-id="33803352" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 11.42.32 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33803330" data-linked-resource-container-version="3" data-media-id="6b9684bb-8a69-4c56-83f3-286342779242" data-media-type="file"></span></h3>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p>In JS there are basically four approaches for managing private data for ES6 classes:</p><ol><li><p>Keeping private data in the environment of a class <code>constructor</code></p></li><li><p>Marking private properties via a naming convention (e.g. a prefixed underscore)</p></li><li><p>Keeping private data in WeakMaps</p></li><li><p>Using symbols as keys for private properties</p></li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<h3 class="auto-cursor-target" id="PrivateClassDataPattern-Keepingprivatedataintheenvironmentofaclassconstructor">Keeping private data in the environment of a class constructor</h3><p>Our running example is a class <code>Countdown</code> that invokes a callback <code>action</code> once a counter (whose initial value is <code>counter</code>) reaches zero. The two parameters <code>action</code> and <code>counter</code> should be stored as private data.</p><p>In the first implementation, we store <code>action</code> and <code>counter</code> in the <em>environment</em> of the class constructor. An environment is the internal data structure, in which a JavaScript engine stores the parameters and local variables that come into existence whenever a new scope is entered (e.g. via a function call or a constructor call). This is the code:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">class Countdown {constructor(counter, action) {Object.assign(this, {dec() {if (counter &lt; 1) return;counter--;if (counter === 0) {action();}}});}}</pre>
+</div></div><p>Using Countdown looks like this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">&gt; let c = new Countdown(2, () =&gt; console.log(&#39;DONE&#39;));&gt; c.dec();&gt; c.dec();DONE</pre>
+</div></div><p>Pro:</p><ul><li><p>The private data is completely safe</p></li><li><p>The names of private properties won’t clash with the names of other private properties (of superclasses or subclasses).</p></li></ul><p>Cons:</p><ul><li><p>The code becomes less elegant, because you need to add all methods to the instance, inside the constructor (at least those methods that need access to the private data).</p></li><li><p>Due to the instance methods, the code wastes memory. If the methods were prototype methods, they would be shared.</p></li></ul><h3 id="PrivateClassDataPattern-Markingprivatepropertiesviaanamingconvention">Marking private properties via a naming convention</h3><p><span style="color: rgb(0,0,0);">The following code keeps private data in properties whose names a marked via a prefixed underscore:</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">class Countdown {constructor(counter, action) {this._counter = counter;this._action = action;}dec() {if (this._counter &lt; 1) return;this._counter--;if (this._counter === 0) {this._action();}}}</pre>
+</div></div><p>Pros:</p><ul><li>Code looks nice.</li><li>We can use prototype methods.</li></ul><p>Cons:</p><ul><li>Not safe, only a guideline for client code.</li><li>The names of private properties can clash.</li></ul><p><br/></p><h3 id="PrivateClassDataPattern-KeepingprivatedatainWeakMaps">Keeping private data in WeakMaps</h3><p><span style="color: rgb(0,0,0);">There is a neat technique involving WeakMaps that combines the advantage of the first approach (safety) with the advantage of the second approach (being able to use prototype methods). This technique is demonstrated in the following code: we use the WeakMaps </span><code>_counter</code><span style="color: rgb(0,0,0);"> and </span><code>_action</code><span style="color: rgb(0,0,0);"> to store private data.</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">let _counter = new WeakMap(); let _action = new WeakMap();class Countdown {constructor(counter, action) {_counter.set(this, counter);_action.set(this, action);}dec() {let counter = _counter.get(this);if (counter &lt; 1) return;counter--;_counter.set(this, counter);if (counter === 0) {_action.get(this)();}}}</pre>
+</div></div><p>Each of the two WeakMaps <code>_counter</code> and <code>_action</code> maps objects to their private data. Due to how WeakMaps work that won’t prevent objects from being garbage-collected. As long as you keep the WeakMaps hidden from the outside world, the private data is safe. If you want to be even safer, you can store <code>WeakMap.prototype.get</code> and <code>WeakMap.prototype.set</code> in temporary variables and invoke those (instead of the methods, dynamically). Then our code wouldn’t be affected if malicious code replaced those methods with ones that snoop on our private data. However, we are only protected against code that runs after our code. There is nothing we can do if it runs before ours.</p><p>Pros:</p><ul><li>We can use prototype methods.</li><li>Safer than a naming convention for property keys.</li><li>The names of private properties can’t clash.</li></ul><p>Con:</p><ul><li>Code is not as elegant as a naming convention.</li></ul><p><br/></p><h3 id="PrivateClassDataPattern-Usingsymbolsaskeysforprivateproperties">Using symbols as keys for private properties</h3><p><span style="color: rgb(0,0,0);">Another storage location for private data are properties whose keys are symbols:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">const _counter = Symbol(&#39;counter&#39;);
+const _action = Symbol(&#39;action&#39;);
+
+class Countdown {
+    constructor(counter, action) {
+        this[_counter] = counter;
+        this[_action] = action;
+    }
+    dec() {
+        if (this[_counter] &lt; 1) return;
+        this[_counter]--;
+        if (this[_counter] === 0) {
+            this[_action]();
+        }
+    }
+}</pre>
+</div></div><p class="auto-cursor-target"><span style="color: rgb(0,0,0);">Each symbol is unique, which is why a symbol-valued property key will never clash with any other property key. Additionally, symbols are somewhat hidden from the outside world, but not completely:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">let c = new Countdown(2, () =&gt; console.log(&#39;DONE&#39;));
+
+console.log(Object.keys(c));
+    // []
+console.log(Reflect.ownKeys(c));
+    // [ Symbol(counter), Symbol(action) ]</pre>
+</div></div><p>Pros:</p><ul><li>We can use prototype methods.</li><li>The names of private properties can’t clash.</li></ul><p>Cons:</p><ul><li>Code is not as elegant as a naming convention.</li><li>Not safe: you can list all property keys (including symbols!) of an object via <code>Reflect.ownKeys()</code>.</li></ul>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Create data class. Move to data class all attributes that need hiding.</li><li>Create in main class instance of data class.</li><li>Main class must initialize data class through the data class's constructor.</li><li>Expose each attribute (variable or property) of data class through a getter.</li><li>Expose each attribute that will change in further through a setter.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33803330/33803352.png">Screen Shot 2017-05-04 at 11.42.32 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

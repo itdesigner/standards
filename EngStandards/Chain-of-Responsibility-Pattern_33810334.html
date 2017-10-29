@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Chain of Responsibility Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Chain of Responsibility Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Aug 31, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.</li><li>Launch-and-leave requests with a single processing pipeline that contains many possible handlers.</li><li>An object-oriented linked list with recursive traversal.</li></ul>
+</div></div><p><br/></p><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>MEDIUM</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">There is a potentially variable number of &quot;handler&quot; or &quot;processing element&quot; or &quot;node&quot; objects, and a stream of requests that must be handled. Need to efficiently process the requests without hard-wiring handler relationships and precedence, or request-to-handler mappings.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33810334/33810349.png" data-image-src="attachments/33810334/33810349.png" data-unresolved-comment-count="0" data-linked-resource-id="33810349" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 12.21.15 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33810334" data-linked-resource-container-version="2" data-media-id="bdbd4ad4-4e53-4218-b070-65f58e8345dc" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p><p class="ptext">The Chain of Responsibility pattern provides a chain of loosely coupled objects one of which can satisfy a request. This pattern is essentially a linear search for an object that can handle a particular request.</p><p><br/></p><p class="ptext">An example of a chain-of-responsibility is event-bubbling in which an event propagates through a series of nested controls one of which may choose to handle the event.</p><p><br/></p><p class="ptext">The Chain of Responsibility patterns is related to the Chaining Pattern which is frequently used in JavaScript (jQuery makes extensive use of this pattern).</p><p><span style="color: rgb(68,68,68);">Encapsulate the processing elements inside a &quot;pipeline&quot; abstraction; and have clients &quot;launch and leave&quot; their requests at the entrance to the pipeline.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33810334/33810368.png?height=400" data-image-src="attachments/33810334/33810368.png" data-unresolved-comment-count="0" data-linked-resource-id="33810368" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 12.22.11 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33810334" data-linked-resource-container-version="2" data-media-id="b37c7fca-6bbe-4c3a-b390-54391b6bcb3d" data-media-type="file"></span></p><p>The pattern chains the receiving objects together, and then passes any request messages from object to object until it reaches an object capable of handling the message. The number and type of handler objects isn't known a priori, they can be configured dynamically. The chaining mechanism uses recursive composition to allow an unlimited number of handlers to be linked.</p><p>Chain of Responsibility simplifies object interconnections. Instead of senders and receivers maintaining references to all candidate receivers, each sender keeps a single reference to the head of the chain, and each receiver keeps a single reference to its immediate successor in the chain.</p><p>Make sure there exists a &quot;safety net&quot; to &quot;catch&quot; any requests which go unhandled.</p><p>Do not use Chain of Responsibility when each request is only handled by one handler, or, when the client object knows which service object should handle the request.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The derived classes know how to satisfy Client requests. If the &quot;current&quot; object is not available or sufficient, then it delegates to the base class, which delegates to the &quot;next&quot; object, and the circle of life continues.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33810334/33810392.png?height=400" data-image-src="attachments/33810334/33810392.png" data-unresolved-comment-count="0" data-linked-resource-id="33810392" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 12.23.45 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33810334" data-linked-resource-container-version="2" data-media-id="d73ad045-2389-4089-a25f-cfaa471c4373" data-media-type="file"></span></p><p><span style="color: rgb(68,68,68);">Multiple handlers could contribute to the handling of each request. The request can be passed down the entire length of the chain, with the last link being careful not to delegate to a &quot;null next&quot;.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Chain of Responsibility pattern avoids coupling the sender of a request to the receiver by giving more than one object a chance to handle the request. ATM use the Chain of Responsibility in money giving mechanism.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">This example differs slightly from the classic Chain of Responsibility pattern in that not one, but all handlers participate in handling the request.</p><p class="ptext">The code demonstrates an elegant solution to a money dispensing machine problem. Say, a customer requires $247 from an ATM machine. What is the combination of bank notes ($100, $50, $20, $10, $5, $1) that satisfies that request?</p><p class="ptext">A <span class="cd">Request</span> is created with the amount requested. Next, a series of <span class="cd">get</span> calls are chained together, each one handling a particular denomination. Each handler determines the number of bank notes dispensed and substracts this amount from the remaining amount. The request object is passed through the chain by returning <span class="cd">this</span> in the <span class="cd">get</span> method.</p><p class="ptext">The <span class="cd">log</span> function is a helper which collects and displays results.</p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample JS Code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">var Request = function(amount) {
+    this.amount = amount;
+    log.add(&quot;Requested: $&quot; + amount + &quot;\n&quot;);
+}
+ 
+Request.prototype = {
+    get: function(bill) {
+        var count = Math.floor(this.amount / bill);
+        this.amount -= count * bill;
+        log.add(&quot;Dispense &quot; + count + &quot; $&quot; + bill + &quot; bills&quot;);
+        return this;
+    }
+}
+ 
+// log helper 
+ 
+var log = (function() {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function(msg) { log += msg + &quot;\n&quot;; },
+        show: function() { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+    var request = new Request(378);
+ 
+    request.get(100).get(50).get(20).get(10).get(5).get(1);
+ 
+    log.show();
+}</pre> 
+ </div>
+</div><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample Typescript code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">namespace ChainOfResponsibilityPattern {
+
+    export class Handler {
+        private handler: Handler;
+        private req: number;
+
+        constructor(req: number) {
+            this.req = req;
+        }
+
+        public setHandler(handler: Handler): void {
+            this.handler = handler;
+        }
+
+        public operation(msg: string, req: number): void {
+            if (req &lt;= this.req) {
+                this.handlerRequest(msg)
+            } else if (this.handler !== null &amp;&amp; this.handler !== undefined) {
+                this.handler.operation(msg, req);
+            }
+        }
+
+        public handlerRequest(msg: string): void {
+            throw new Error(&quot;Abstract method!&quot;);
+        }
+    }
+
+    export class ConcreteHandler1 extends Handler {
+        constructor(req: number) {
+            super(req);
+        }
+        public handlerRequest(msg: string) {
+            console.log(&quot;Message (ConcreteHandler1) :: &quot;, msg);
+        }
+    }
+
+
+    export class ConcreteHandler2 extends Handler {
+        constructor(req: number) {
+            super(req);
+        }
+        public handlerRequest(msg: string) {
+            console.log(&quot;Message :: (ConcreteHandler2) &quot;, msg);
+        }
+    }
+
+    export class ConcreteHandler3 extends Handler {
+        constructor(req: number) {
+            super(req);
+        }
+        public handlerRequest(msg: string) {
+            console.log(&quot;Message :: (ConcreteHandler3) &quot;, msg);
+        }
+    }
+}
+
+
+// USAGE
+namespace ChainOfResponsibilityPattern {
+	export namespace Demo {
+
+		export function show() : void {
+		    var h1: ChainOfResponsibilityPattern.Handler,
+				h2: ChainOfResponsibilityPattern.Handler,
+				h3: ChainOfResponsibilityPattern.Handler,
+				reqs: number[],
+				i: number,
+				max: number;
+
+			reqs = [2, 7, 23, 34, 4, 5, 8, 3];
+
+			h1 = new ChainOfResponsibilityPattern.ConcreteHandler1(3);
+			h2 = new ChainOfResponsibilityPattern.ConcreteHandler2(7);
+			h3 = new ChainOfResponsibilityPattern.ConcreteHandler3(20);
+
+			h1.setHandler(h2);
+			h2.setHandler(h3);
+
+			for (i = 0, max = reqs.length; i &lt; max; i += 1) {
+				h1.operation(&quot;operation is fired!&quot;, reqs[i]);
+			}
+
+		}
+	}
+}
+
+</pre> 
+ </div>
+</div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>The base class maintains a &quot;next&quot; pointer.</li><li>Each derived class implements its contribution for handling the request.</li><li>If the request needs to be &quot;passed on&quot;, then the derived class &quot;calls back&quot; to the base class, which delegates to the &quot;next&quot; pointer.</li><li>The client (or some third party) creates and links the chain (which may include a link from the last node to the root node).</li><li>The client &quot;launches and leaves&quot; each request with the root of the chain.</li><li>Recursive delegation produces the illusion of magic.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Chain of Responsibility, Command, Mediator, and Observer, address how you can decouple senders and receivers, but with different trade-offs. Chain of Responsibility passes a sender request along a chain of potential receivers.</li><li>Chain of Responsibility can use Command to represent requests as objects.</li><li>Chain of Responsibility is often applied in conjunction with Composite. There, a component's parent can act as its successor</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33810334/33810349.png">Screen Shot 2017-05-05 at 12.21.15 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33810334/33810368.png">Screen Shot 2017-05-05 at 12.22.11 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33810334/33810392.png">Screen Shot 2017-05-05 at 12.23.45 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

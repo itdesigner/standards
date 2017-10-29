@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Microservices</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Services-Guidance%2C-Design%2C-and-Review-Criteria_127664218.html">Services Guidance, Design, and Review Criteria</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Microservices
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Oct 28, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><span>While there is no standard, formal definition of microservices, there are certain characteristics that help us identify the style.  </span></p><p><br/></p><blockquote><p><span><em><span>Essentially, microservice architecture is a method of developing software applications as a suite of independently deployable, small, modular services in which each service runs a unique process and communicates through a well-defined, lightweight mechanism to serve a business goal.</span></em></span></p></blockquote><p><br/>For a detailed explanation of Microservices, see Martin Fowler’s seminal approach to the subject <a href="http://martinfowler.com/articles/microservices.html" class="external-link" rel="nofollow">here</a>.<span>The idea behind microservices is that many types of applications become easier to build and maintain when they are broken down into smaller, composable pieces which work together. Each component is developed separately, and the application is then simply the sum of its constituent components. This is in contrast to a traditional, &quot;monolithic&quot; application which is all developed all in one piece.</span></p><p><span>Microservice applications share some important characteristics:</span></p><ul><li><strong>Small in size</strong><span> - microservices are focused on delivering a single goal well</span></li><li><strong>Messaging Enabled </strong><span>- the ability to communicate seamlessly with other services</span></li><li><strong>Bounded by contexts</strong><span> - maintain their own data</span></li><li><strong>Autonomously developed</strong><span> - can be developed in parallel to meet business needs</span></li><li><strong>Independently deployable</strong><span> - can be deployed without impacting other services</span></li><li><strong>Built and released with automated processes</strong><span> - near zero touch deployments</span></li></ul><p><br/><span>A Microservices approach is goal-oriented, solving the problem of systems that are too big. </span><span>More specifically, the real value of microservices is realized when we focus on three key aspects—</span><em><span>speed</span></em><span>, </span><em><span>safety, </span></em><span>and </span><em><span>scale</span></em><span>. Every single decision you make about your software development ends up as a trade-off that impacts these ideals.</span></p><p><span><span>For a detailed explanation of Microservices, see Martin Fowler’s seminal approach to the subject at<span> </span></span></span><a href="http://martinfowler.com/articles/microservices.html" class="external-link" rel="nofollow"><span><span>http://martinfowler.com/articles/microservices.html</span></span></a><span><span>.</span></span><span> </span></p><p><span><span>Microservices architectures enable speed, safety, and scale in several ways:</span></span><span> </span></p><ul><li><span><span>As we decouple the business domain into independently deployable bounded contexts of capabilities, we also decouple the associated change cycles. As long as the changes are restricted to a single bounded context, and the service continues to fulfill its existing contracts, those changes can be made and deployed independent of any coordination with the rest of the business. The result is enablement of more frequent and rapid deployments, allowing for a continuous flow of value. </span></span><span> </span></li><li><span><span>Development can be accelerated by scaling the development organization itself. It’s very difficult to build software faster by adding more people due to the overhead of communication and coordination. <a href="https://en.wikipedia.org/wiki/Fred_Brooks" class="external-link" rel="nofollow">Fred Brooks</a> taught us years ago that adding more people to a late software project makes it later. However, rather than placing all of the developers in a single sandbox, we can create parallel work streams by building more sandboxes through bounded contexts. </span></span><span> </span></li><li><span><span>The new developers that we add to each sandbox can ramp up and become productive more rapidly due to the reduced cognitive load of learning the business domain and the existing code, and building relationships within a smaller team. </span></span><span> </span></li><li><span><span>Adoption of new technology can be accelerated. Large monolithic application architectures are typically associated with long-term commitments to technical stacks. These commitments exist to mitigate the risk of adopting new technology by simply not doing it. Technology adoption mistakes are more expensive in a monolithic architecture, as those mistakes can pollute the entire enterprise architecture. If we adopt new technology within the scope of a single monolith, we isolate and minimize the risk in much the same way that we isolate and minimize the risk of runtime failure. </span></span><span> </span></li></ul><ul><li><span><span>Microservices offer independent, efficient scaling of services. Monolithic architectures can scale, but require us to scale all components, not simply those that are under heavy load. Microservices can be scaled if and only if their associated load requires it.</span></span><span> </span></li></ul><p><span style="margin-left: 0.0px;">There are many resources on the web concerning microservices and how they might be implemented.  Rather than focusing on a specific implementation, it is better to start with general overview references such as:</span></p><ul><li><span style="margin-left: 0.0px;"><a href="https://specify.io/concepts/microservices" class="external-link" rel="nofollow">https://specify.io/concepts/microservices</a></span></li><li><span style="margin-left: 0.0px;"><a href="http://martinfowler.com/articles/microservices.html" class="external-link" rel="nofollow">http://martinfowler.com/articles/microservices.html</a></span></li></ul>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

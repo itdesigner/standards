@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Observer Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Observer Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on May 07, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.</li><li>Encapsulate the core (or common or engine) components in a Subject abstraction, and the variable (or optional or user interface) components in an Observer hierarchy.</li><li>The &quot;View&quot; part of Model-View-Controller.</li></ul>
+</div></div><p><br/></p><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-green confluenceTd" data-highlight-colour="green">4</td><td class="highlight-green confluenceTd" data-highlight-colour="green">5</td></tr></tbody></table></div><p>HIGH</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">A large monolithic design does not scale well as new graphing or monitoring requirements are levied.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The Observer pattern offers a subscription model in which objects subscribe to an event and get notified when the event occurs. This pattern is the cornerstone of event driven programming, including JavaScript. The Observer pattern facilitates good object-oriented design and promotes loose coupling.</p><p class="ptext">When building web apps you end up writing many event handlers. Event handlers are functions that will be notified when a certain event fires. These notifications optionally receive an event argument with details about the event (for example the x and y position of the mouse at a click event).</p><p class="ptext">The event and event-handler paradigm in JavaScript is the manifestation of the Observer design pattern. Another name for the Observer pattern is Pub/Sub, short for Publication/Subscription.</p><p>Define an object that is the &quot;keeper&quot; of the data model and/or business logic (the Subject). Delegate all &quot;view&quot; functionality to decoupled and distinct Observer objects. Observers register themselves with the Subject as they are created. Whenever the Subject changes, it broadcasts to all registered Observers that it has changed, and each Observer queries the Subject for that subset of the Subject's state that it is responsible for monitoring.</p><p>This allows the number and &quot;type&quot; of &quot;view&quot; objects to be configured dynamically, instead of being statically specified at compile-time.</p><p>The protocol described above specifies a &quot;pull&quot; interaction model. Instead of the Subject &quot;pushing&quot; what has changed to all Observers, each Observer is responsible for &quot;pulling&quot; its particular &quot;window of interest&quot; from the Subject. The &quot;push&quot; model compromises reuse, while the &quot;pull&quot; model is less efficient.</p><p>Issues that are discussed, but left to the discretion of the designer, include: implementing event compression (only sending a single change broadcast after a series of consecutive changes has occurred), having a single Observer monitoring multiple Subjects, and ensuring that a Subject notify its Observers when it is about to go away.</p><p>The Observer pattern captures the lion's share of the Model-View-Controller architecture that has been a part of the Smalltalk community for years.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33812923/33812943.png?height=400" data-image-src="attachments/33812923/33812943.png" data-unresolved-comment-count="0" data-linked-resource-id="33812943" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 6.10.33 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33812923" data-linked-resource-container-version="2" data-media-id="f69cff2d-3f67-4674-a027-2794aeaf30f2" data-media-type="file"></span></p><p><span style="color: rgb(68,68,68);">Subject represents the core (or independent or common or engine) abstraction. Observer represents the variable (or dependent or optional or user interface) abstraction. The Subject prompts the Observer objects to do their thing. Each Observer can call back to the Subject as needed.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Observer defines a one-to-many relationship so that when one object changes state, the others are notified and updated automatically. Some auctions demonstrate this pattern. Each bidder possesses a numbered paddle that is used to indicate a bid. The auctioneer starts the bidding, and &quot;observes&quot; when a paddle is raised to accept the bid. The acceptance of the bid changes the bid price which is broadcast to all of the bidders in the form of a new bid.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33812923/33812961.png?height=400" data-image-src="attachments/33812923/33812961.png" data-unresolved-comment-count="0" data-linked-resource-id="33812961" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 6.11.32 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33812923" data-linked-resource-container-version="2" data-media-id="124fbe08-5bca-40e3-b2fa-2cc86e1e38c3" data-media-type="file"></span></p><p><span style="color: rgb(89,91,102);">An object </span><strong>maintains a list of dependents/observers and notifies them</strong><span style="color: rgb(89,91,102);"> automatically on state changes. To implement the observer pattern, </span><code>EventEmitter</code><span style="color: rgb(89,91,102);"> comes to the rescue.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">/ MyFancyObservable.js
+var util = require(&#39;util&#39;);  
+var EventEmitter = require(&#39;events&#39;).EventEmitter;
+
+function MyFancyObservable() {  
+  EventEmitter.call(this);
+}
+
+util.inherits(MyFancyObservable, EventEmitter);  
+</pre>
+</div></div><p>This is it; we just made an observable object! To make it useful, let's add some functionality to it.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">MyFancyObservable.prototype.hello = function (name) {  
+  this.emit(&#39;hello&#39;, name);
+};</pre>
+</div></div><p><span style="color: rgb(89,91,102);">Great, now our observable can emit event - let's try it out!</span></p><pre style=""><br/></pre><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var MyFancyObservable = require(&#39;MyFancyObservable&#39;);  
+var observable = new MyFancyObservable();
+
+observable.on(&#39;hello&#39;, function (name) {  
+  console.log(name);
+});
+
+observable.hello(&#39;john&#39;); </pre>
+</div></div><pre class="auto-cursor-target" style=""><br/></pre>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The <span class="cd">Click</span> object represents the Subject. The <span class="cd">clickHandler</span> function is the subscribing Observer. This handler subscribes, unsubscribes, and then subscribes itself while events are firing. It gets notified only of events #1 and #3.</p><p class="ptext">Notice that the <span class="cd">fire</span> method accepts two arguments. The first one has details about the event and the second one is the context, that is, the <span class="cd">this</span> value for when the eventhandlers are called. If no context is provided <span class="cd">this</span> will be bound to the global object (window).</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">function Click() {
+    this.handlers = [];  // observers
+}
+ 
+Click.prototype = {
+ 
+    subscribe: function(fn) {
+        this.handlers.push(fn);
+    },
+ 
+    unsubscribe: function(fn) {
+        this.handlers = this.handlers.filter(
+            function(item) {
+                if (item !== fn) {
+                    return item;
+                }
+            }
+        );
+    },
+ 
+    fire: function(o, thisObj) {
+        var scope = thisObj || window;
+        this.handlers.forEach(function(item) {
+            item.call(scope, o);
+        });
+    }
+}
+ 
+// log helper
+ 
+var log = (function() {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function(msg) { log += msg + &quot;\n&quot;; },
+        show: function() { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+ 
+    var clickHandler = function(item) { 
+        log.add(&quot;fired: &quot; + item); 
+    };
+ 
+    var click = new Click();
+ 
+    click.subscribe(clickHandler);
+    click.fire(&#39;event #1&#39;);
+    click.unsubscribe(clickHandler);
+    click.fire(&#39;event #2&#39;);
+    click.subscribe(clickHandler);
+    click.fire(&#39;event #3&#39;);
+ 
+    log.show();
+}</pre>
+</div></div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Differentiate between the core (or independent) functionality and the optional (or dependent) functionality.</li><li>Model the independent functionality with a &quot;subject&quot; abstraction.</li><li>Model the dependent functionality with an &quot;observer&quot; hierarchy.</li><li>The Subject is coupled only to the Observer base class.</li><li>The client configures the number and type of Observers.</li><li>Observers register themselves with the Subject.</li><li>The Subject broadcasts events to all registered Observers.</li><li>The Subject may &quot;push&quot; information at the Observers, or, the Observers may &quot;pull&quot; the information they need from the Subject.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Chain of Responsibility, Command, Mediator, and Observer, address how you can decouple senders and receivers, but with different trade-offs. Chain of Responsibility passes a sender request along a chain of potential receivers. Command normally specifies a sender-receiver connection with a subclass. Mediator has senders and receivers reference each other indirectly. Observer defines a very decoupled interface that allows for multiple receivers to be configured at run-time.</li><li>Mediator and Observer are competing patterns. The difference between them is that Observer distributes communication by introducing &quot;observer&quot; and &quot;subject&quot; objects, whereas a Mediator object encapsulates the communication between other objects. We've found it easier to make reusable Observers and Subjects than to make reusable Mediators.</li><li>On the other hand, Mediator can leverage Observer for dynamically registering colleagues and communicating with them.</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33812923/33812943.png">Screen Shot 2017-05-05 at 6.10.33 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33812923/33812961.png">Screen Shot 2017-05-05 at 6.11.32 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Abstract Factory Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Abstract Factory Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Aug 31, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Provide an interface for creating families of related or dependent objects without specifying their concrete classes.</li><li>A hierarchy that encapsulates: many possible &quot;platforms&quot;, and the construction of a suite of &quot;products&quot;.</li><li>The <code>new</code> operator considered harmful.</li></ul>
+</div></div><p>Frequency of use in Javascript: </p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p> MEDIUM</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">If an application is to be portable, it needs to encapsulate platform dependencies. These &quot;platforms&quot; might include: windowing system, operating system, database, etc. Too often, this encapsulation is not engineered in advance, and lots of </span><code>#ifdef</code><span style="color: rgb(68,68,68);"> case statements with options for all currently supported platforms begin to procreate like rabbits throughout the code.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p>Provide a level of indirection that abstracts the creation of families of related or dependent objects without directly specifying their concrete classes. The &quot;factory&quot; object has the responsibility for providing creation services for the entire platform family. Clients never create platform objects directly, they ask the factory to do that for them.</p><p>This mechanism makes exchanging product families easy because the specific class of the factory object appears only once in the application - where it is instantiated. The application can wholesale replace the entire family of products simply by instantiating a different concrete instance of the abstract factory.</p><p>Because the service provided by the factory object is so pervasive, it is routinely implemented as a Singleton.</p><p>In general, an Abstract Factory creates objects that are related by a common theme. In object-oriented programming a Factory is an object that creates other objects. An Abstract Factory has abstracted out a theme which is shared by the newly created objects.</p><p class="ptext">Suppose we have two Abstract Factories whose task it is to create page controls, such as, buttons, textboxes, radio buttons, and listboxes. One is the Light Factory which creates controls that are white and the other the Dark Factory which creates controls that are black. Both Factories creates the same types of controls, but they differ in color, which is their common theme. This is an implementation of the Abstract Factory pattern.</p><p class="ptext">Over time the Abstract Factory and Factory Method patterns have merged into a more general pattern called Factory. A Factory is simply an object that creates other objects.</p><p class="ptext">You may be wondering why you would want to leave the responsibility of the construction of objects to others rather than simply calling a constructor function with the new keyword directly. The reason is that that constructor functions are limited in their control over the overall creation process and sometimes you will need to hand over control to a factory that has broader knowledge.</p><p class="ptext">This includes scenarios in which the creation process involves object caching, sharing or re-using of objects, complex logic, or applications that maintain object and type counts, and objects that interact with different resources or devices. If your application needs more control over the object creation process, consider using a Factory.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Abstract Factory defines a Factory Method per product. Each Factory Method encapsulates the </span><code>new</code><span style="color: rgb(68,68,68);"> operator and the concrete, platform-specific, product classes. Each &quot;platform&quot; is then modeled with a Factory derived class.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33803892/33803920.png" data-image-src="attachments/33803892/33803920.png" data-unresolved-comment-count="0" data-linked-resource-id="33803920" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 12.25.52 AM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33803892" data-linked-resource-container-version="12" data-media-id="4a4d48df-a0d7-4bc5-84f1-226a4dbedb26" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The purpose of the Abstract Factory is to provide an interface for creating families of related objects, without specifying concrete classes. This pattern is found in the sheet metal stamping equipment used in the manufacture of automobiles. The stamping equipment is an Abstract Factory which creates auto body parts. The same machinery is used to stamp right hand doors, left hand doors, right front fenders, left front fenders, hoods, etc. for different models of cars. Through the use of rollers to change the stamping dies, the concrete classes produced by the machinery can be changed within three minutes.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33803892/33803939.png" data-image-src="attachments/33803892/33803939.png" data-unresolved-comment-count="0" data-linked-resource-id="33803939" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 12.27.12 AM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33803892" data-linked-resource-container-version="12" data-media-id="0292fa87-49cf-4275-b5d9-fa03616c597a" data-media-type="file"></span></p><p><span style="color: rgb(89,91,102);">The factory pattern is a creational pattern that doesn't require us to use a constructor but provides a </span><strong>generic interface for creating objects</strong><span style="color: rgb(89,91,102);">. This pattern can be really useful when the creation process is complex.</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">function MyClass (options) {  
+  this.options = options;
+}
+
+function create(options) {  
+  // modify the options here if you want
+  return new MyClass(options);
+}
+
+module.exports.create = create; </pre>
+</div></div><p><span style="color: rgb(89,91,102);">Factories also make testing easier, as you can inject the modules dependencies using this pattern.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">JavaScript does not support class-based inheritance therefore the abstract classes as depicted in the diagram are not used in the JavaScript sample. Abstract classes and interfaces enforce consistent interfaces in derived classes. In JavaScript we must ensure this consistency ourselves by making sure that each 'Concrete' object has the same interface definition (i.e. properties and methods) as the others</p><p class="ptext">In the example we have two Concrete Factories: <span class="cd">EmployeeFactory</span> and <span class="cd">VendorFactory</span>. The first one creates <span class="cd">Employee</span> instances, the second one <span class="cd">Vendor</span> instances. Both products are person types (with the same interface) which allows the client to treat them the same. An array with two employees and two vendors is created. Each person is then asked to say what and who they are.</p><p class="ptext">The <span class="cd">log</span> function is a helper which collects and displays results.</p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample JS Code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">function Employee(name) {
+    this.name = name;
+ 
+    this.say = function () {
+        log.add(&quot;I am employee &quot; + name);
+    };
+}
+ 
+function EmployeeFactory() {
+ 
+    this.create = function(name) {
+        return new Employee(name);
+    };
+}
+ 
+function Vendor(name) {
+    this.name = name;
+ 
+    this.say = function () {
+        log.add(&quot;I am vendor &quot; + name);
+    };
+}
+ 
+function VendorFactory() {
+ 
+    this.create = function(name) {
+        return new Vendor(name);
+    };
+}
+ 
+// log helper
+var log = (function () {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function (msg) { log += msg + &quot;\n&quot;; },
+        show: function () { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+    var persons = [];
+    var employeeFactory = new EmployeeFactory();
+    var vendorFactory = new VendorFactory();
+ 
+    persons.push(employeeFactory.create(&quot;Joan DiSilva&quot;));
+    persons.push(employeeFactory.create(&quot;Tim O'Neill&quot;));
+    persons.push(vendorFactory.create(&quot;Gerald Watson&quot;));
+    persons.push(vendorFactory.create(&quot;Nicole McNight&quot;));
+ 
+    for (var i = 0, len = persons.length; i &lt; len; i++) {
+        persons[i].say();
+    }
+ 
+    log.show();
+}</pre> 
+ </div>
+</div><p class="auto-cursor-target">This is a different example, only in this case we are using typescript which affords us with a great deal more functionality because of its typed nature.</p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample Typescript code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">namespace AbstractFactoryPattern {
+    export interface AbstractProductA {
+        methodA(): string;
+    }
+    export interface AbstractProductB {
+        methodB(): number;
+    }
+
+    export interface AbstractFactory {
+        createProductA(param?: any) : AbstractProductA;
+        createProductB() : AbstractProductB;
+    }
+
+
+    export class ProductA1 implements AbstractProductA {
+        methodA = () =&gt; {
+            return &quot;This is methodA of ProductA1&quot;;
+        }
+    }
+    export class ProductB1 implements AbstractProductB {
+        methodB = () =&gt; {
+            return 1;
+        }
+    }
+
+    export class ProductA2 implements AbstractProductA {
+        methodA = () =&gt; {
+            return &quot;This is methodA of ProductA2&quot;;
+        }
+    }
+    export class ProductB2 implements AbstractProductB {
+        methodB = () =&gt; {
+            return 2;
+        }
+    }
+
+
+    export class ConcreteFactory1 implements AbstractFactory {
+        createProductA(param?: any) : AbstractProductA {
+            return new ProductA1();
+        }
+
+        createProductB(param?: any) : AbstractProductB {
+            return new ProductB1();
+        }
+    }
+    export class ConcreteFactory2 implements AbstractFactory {
+        createProductA(param?: any) : AbstractProductA {
+            return new ProductA2();
+        }
+
+        createProductB(param?: any) : AbstractProductB {
+            return new ProductB2();
+        }
+    }
+
+
+    export class Tester {
+        private abstractProductA: AbstractProductA;
+        private abstractProductB: AbstractProductB;
+
+        constructor(factory: AbstractFactory) {
+            this.abstractProductA = factory.createProductA();
+            this.abstractProductB = factory.createProductB();
+        }
+
+        public test(): void {
+            console.log(this.abstractProductA.methodA());
+            console.log(this.abstractProductB.methodB());
+        }
+    }
+
+ }
+
+// USAGE 
+
+namespace AbstractFactoryPattern {
+	export namespace Demo {
+		export function show() {
+    		// Abstract factory1
+		    var factory1: AbstractFactoryPattern.AbstractFactory = new AbstractFactoryPattern.ConcreteFactory1();
+    		var tester1: AbstractFactoryPattern.Tester = new AbstractFactoryPattern.Tester(factory1);
+		    tester1.test();
+
+		    // Abstract factory2
+		    var factory2: AbstractFactoryPattern.AbstractFactory = new AbstractFactoryPattern.ConcreteFactory2();
+			var tester2: AbstractFactoryPattern.Tester = new AbstractFactoryPattern.Tester(factory2);
+		    tester2.test();
+		}
+	}
+}
+
+</pre> 
+ </div>
+</div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Decide if &quot;platform independence&quot; and creation services are the current source of pain.</li><li>Map out a matrix of &quot;platforms&quot; versus &quot;products&quot;.</li><li>Define a factory interface that consists of a factory method per product.</li><li>Define a factory derived class for each platform that encapsulates all references to the <code>new</code> operator.</li><li>The client should retire all references to <code>new</code>, and use the factory methods to create the product objects.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Sometimes creational patterns are competitors: there are cases when either Prototype or Abstract Factory could be used profitably. At other times they are complementary: Abstract Factory might store a set of Prototypes from which to clone and return product objects, Builder can use one of the other patterns to implement which components get built. Abstract Factory, Builder, and Prototype can use Singleton in their implementation.</li><li>Abstract Factory, Builder, and Prototype define a factory object that's responsible for knowing and creating the class of product objects, and make it a parameter of the system. Abstract Factory has the factory object producing objects of several classes. Builder has the factory object building a complex product incrementally using a correspondingly complex protocol. Prototype has the factory object (aka prototype) building a product by copying a prototype object.</li><li>Abstract Factory classes are often implemented with Factory Methods, but they can also be implemented using Prototype.</li><li>Abstract Factory can be used as an alternative to Facade to hide platform-specific classes.</li><li>Builder focuses on constructing a complex object step by step. Abstract Factory emphasizes a family of product objects (either simple or complex). Builder returns the product as a final step, but as far as the Abstract Factory is concerned, the product gets returned immediately.</li><li>Often, designs start out using Factory Method (less complicated, more customizable, subclasses proliferate) and evolve toward Abstract Factory, Prototype, or Builder (more flexible, more complex) as the designer discovers where more flexibility is needed.</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33803892/33803920.png">Screen Shot 2017-05-05 at 12.25.52 AM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33803892/33803939.png">Screen Shot 2017-05-05 at 12.27.12 AM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Bridge Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Bridge Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Aug 31, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Decouple an abstraction from its implementation so that the two can vary independently.</li><li>Publish interface in an inheritance hierarchy, and bury implementation in its own inheritance hierarchy.</li><li>Beyond encapsulation, to insulation</li></ul>
+</div></div><p>Frequency of use inJavaScript:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">2</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">3</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>LOW</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(36,39,41);">A classic example of the Bridge pattern is used in the definition of shapes in an UI environment (see the </span><a href="http://en.wikipedia.org/wiki/Bridge_pattern" class="external-link" rel="nofollow">Bridge pattern Wikipedia entry</a><span style="color: rgb(36,39,41);">). <span style="color: rgb(36,39,41);">The Bridge pattern becomes handy when you must subclass different times in ways that are orthogonal with one another. Say you must implement a hierarchy of colored shapes. You wouldn't subclass Shape with Rectangle and Circle and then subclass Rectangle with RedRectangle, BlueRectangle and GreenRectangle and the same for Circle, </span></span></p><p><span style="color: rgb(36,39,41);"><span style="color: rgb(36,39,41);">Another popular </span></span>example of the Bridge pattern is an application (the client) and a database driver (the service). The application writes to a well-defined database API, for example ODBC, but behind this API you will find that each driver's implementation is totally different for each database vendor (SQL Server, MySQL, Oracle, etc.).</p><p class="ptext">The Bridge pattern is a great pattern for driver development but it is <strong>rarely seen in JavaScript.</strong></p>
+</div></div><div class="panel" style="background-color: #ffffe6;border-color: #ffffe6;border-style: solid;border-width: 1px;"><div class="panelContent" style="background-color: #ffffe6;">
+<p><span style="color: rgb(0,0,0);">At first sight, the Bridge pattern looks a lot like the Adapter pattern in that a class is used to convert one kind of interface to another. However, the intent of the Adapter pattern is to make one or more classes' interfaces look the same as that of a particular class. The Bridge pattern is designed to separate a class's interface from its implementation so you can vary or replace the implementation without changing the client code.</span></p>
+</div></div><br/><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p>The Client doesn't want to deal with platform-dependent details. The Bridge pattern encapsulates this complexity behind an abstraction &quot;wrapper&quot;.</p><p>Bridge emphasizes identifying and decoupling &quot;interface&quot; abstraction from &quot;implementation&quot; abstraction.</p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33796540/33796696.png" data-image-src="attachments/33796540/33796696.png" data-unresolved-comment-count="0" data-linked-resource-id="33796696" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 11.01.32 AM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33796540" data-linked-resource-container-version="10" data-media-id="67e2d402-3e35-47fd-8878-293faaad6601" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Bridge pattern decouples an abstraction from its implementation, so that the two can vary independently. A household switch controlling lights, ceiling fans, etc. is an example of the Bridge. The purpose of the switch is to turn a device on or off. The actual switch can be implemented as a pull chain, simple two position switch, or a variety of dimmer switches.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Sample Code</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The objective of the example is to show that with the Bridge pattern input and output devices can vary independently (without changes to the code); the devices are loosely coupled by two levels of abstraction.</p><p class="ptext">JavaScript does not support abstract classes therefore Abstraction and Implementor are not included. However, their interfaces (properties and methods) are consistently implemented in RefinedAbstraction and ConcreteImplementor. In our example code the Abstraction represents Input devices and the Implementor represents Output devices.</p><p class="ptext"><span class="cd">Gestures</span> (finger movements) and the <span class="cd">Mouse</span> are very different input devices, but their actions map to a common set of output instructions: click, move, drag, etc. <span class="cd">Screen</span> and <span class="cd">Audio</span> are very different output devices, but they respond to the same set of instructions. Of course, the effects are totally different, that is, video updates vs. sound effects. The Bridge pattern allows any input device to work with any output device.</p><p class="ptext">The <span class="cd">log</span> function is a helper which collects and displays results.</p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample JS Code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">// input devices
+ 
+var Gestures = function (output) {
+    this.output = output;
+ 
+    this.tap = function () { this.output.click(); }
+    this.swipe = function () { this.output.move(); }
+    this.pan = function () { this.output.drag(); }
+    this.pinch = function () { this.output.zoom(); }
+};
+ 
+var Mouse = function (output) {
+    this.output = output;
+ 
+    this.click = function () { this.output.click(); }
+    this.move = function () { this.output.move(); }
+    this.down = function () { this.output.drag(); }
+    this.wheel = function () { this.output.zoom(); }
+};
+ 
+// output devices
+ 
+var Screen = function () {
+    this.click = function () { log.add(&quot;Screen select&quot;); }
+    this.move = function () { log.add(&quot;Screen move&quot;); }
+    this.drag = function () { log.add(&quot;Screen drag&quot;); }
+    this.zoom = function () { log.add(&quot;Screen zoom in&quot;); }
+};
+ 
+var Audio = function () {
+    this.click = function () { log.add(&quot;Sound oink&quot;); }
+    this.move = function () { log.add(&quot;Sound waves&quot;); }
+    this.drag = function () { log.add(&quot;Sound screetch&quot;); }
+    this.zoom = function () { log.add(&quot;Sound volume up&quot;); }
+};
+ 
+// logging helper
+ 
+var log = (function () {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function (msg) { log += msg + &quot;\n&quot;; },
+        show: function () { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+ 
+    var screen = new Screen();
+    var audio = new Audio();
+ 
+    var hand = new Gestures(screen);
+    var mouse = new Mouse(audio);
+ 
+    hand.tap();
+    hand.swipe();
+    hand.pinch();
+ 
+    mouse.click();
+    mouse.move();
+    mouse.wheel();
+ 
+    log.show();
+}
+
+
+</pre> 
+ </div>
+</div><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample Typescript code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">namespace BridgePattern {
+
+    export class Abstraction {
+        implementor: Implementor;
+        constructor(imp: Implementor) {
+            this.implementor = imp;
+        }
+
+        public callIt(s: String): void {
+            throw new Error(&quot;This method is abstract!&quot;);
+        }
+    }
+
+    export class RefinedAbstractionA extends Abstraction {
+        constructor(imp: Implementor) {
+            super(imp);
+        }
+
+        public callIt(s: String): void {
+            console.log(&quot;This is RefinedAbstractionA&quot;);
+            this.implementor.callee(s);
+        }
+    }
+
+    export class RefinedAbstractionB extends Abstraction {
+        constructor(imp: Implementor) {
+            super(imp);
+        }
+
+        public callIt(s: String): void {
+            console.log(&quot;This is RefinedAbstractionB&quot;);
+            this.implementor.callee(s);
+        }
+    }
+
+    export interface Implementor {
+        callee(s: any): void;
+    }
+
+    export class ConcreteImplementorA implements Implementor {
+        public callee(s: any) : void {
+            console.log(&quot;`callee` of ConcreteImplementorA is being called.&quot;);
+            console.log(s);
+        }
+    }
+
+    export class ConcreteImplementorB implements Implementor {
+        public callee(s: any) : void {
+            console.log(&quot;`callee` of ConcreteImplementorB is being called.&quot;);
+            console.log(s);
+        }
+    }
+}
+
+// USAGE
+
+namespace BridgePattern {
+	export namespace Demo {
+
+		export function show() : void {
+		    var abstractionA: BridgePattern.Abstraction = new BridgePattern.RefinedAbstractionA(new BridgePattern.ConcreteImplementorA());
+		    var abstractionB: BridgePattern.Abstraction = new BridgePattern.RefinedAbstractionB(new BridgePattern.ConcreteImplementorB());
+
+			abstractionA.callIt(&quot;abstractionA&quot;);
+			abstractionB.callIt(&quot;abstractionB&quot;);
+		}
+	}
+}
+
+</pre> 
+ </div>
+</div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Decide if two orthogonal dimensions exist in the domain. These independent concepts could be: abstraction/platform, or domain/infrastructure, or front-end/back-end, or interface/implementation.</li><li>Design the separation of concerns: what does the client want, and what do the platforms provide.</li><li>Design a platform-oriented interface that is minimal, necessary, and sufficient. Its goal is to decouple the abstraction from the platform.</li><li>Define a derived class of that interface for each platform.</li><li>Create the abstraction base class that &quot;has a&quot; platform object and delegates the platform-oriented functionality to it.</li><li>Define specializations of the abstraction class if desired.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Adapter makes things work after they're designed; Bridge makes them work before they are.</li><li>Bridge is designed up-front to let the abstraction and the implementation vary independently. Adapter is retrofitted to make unrelated classes work together.</li><li>State, Strategy, Bridge (and to some degree Adapter) have similar solution structures. They all share elements of the &quot;handle/body&quot; idiom. They differ in intent - that is, they solve different problems.</li><li>The structure of State and Bridge are identical (except that Bridge admits hierarchies of envelope classes, whereas State allows only one). The two patterns use the same structure to solve different problems: State allows an object's behavior to change along with its state, while Bridge's intent is to decouple an abstraction from its implementation so that the two can vary independently.</li><li>If interface classes delegate the creation of their implementation classes (instead of creating/coupling themselves directly), then the design usually uses the Abstract Factory pattern to create the implementation objects.</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33796540/33796696.png">Screen Shot 2017-05-04 at 11.01.32 AM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

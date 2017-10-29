@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Builder Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Builder Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Aug 31, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Separate the construction of a complex object from its representation so that the same construction process can create different representations.</li><li>Parse a complex representation, create one of several targets.</li></ul>
+</div></div><p>Frequency of use in JavaScript:</p><div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 19.585%;"><colgroup><col style="width: 20.0%;"/><col style="width: 20.0%;"/><col style="width: 20.0%;"/><col style="width: 20.0%;"/><col style="width: 20.0%;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">2</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">3</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>LOW</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">An application needs to create the elements of a complex aggregate. The specification for the aggregate exists on secondary storage and one of many representations needs to be built in primary storage.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The Builder pattern allows a client to construct a complex object by specifying the type and content only. Construction details are hidden from the client entirely.</p><p class="ptext">The most common motivation for using Builder is to simplify client code that creates complex objects. The client can still direct the steps taken by the Builder without knowing how the actual work is accomplished. Builders frequently encapsulate construction of Composite objects (another GoF design pattern) because the procedures involved are often repetitive and complex.</p><p class="ptext">Usually it is the last step that returns the newly created object which makes it easy for a Builder to participate in fluent interfaces in which multiple method calls, separated by dot operators, are chained together (note: fluent interfaces are implementation of the Chaining Pattern as presented in the Modern patterns section).</p><p class="ptext">Consider the following example:</p><p>Separate the algorithm for interpreting (i.e. reading and parsing) a stored persistence mechanism (e.g. RTF files) from the algorithm for building and representing one of many target products (e.g. ASCII, TeX, text widget). The focus/distinction is on creating complex aggregates.</p><p>The &quot;director&quot; invokes &quot;builder&quot; services as it interprets the external format. The &quot;builder&quot; creates part of the complex object each time it is called and maintains all intermediate state. When the product is finished, the client retrieves the result from the &quot;builder&quot;.</p><p>Affords finer control over the construction process. Unlike creational patterns that construct products in one shot, the Builder pattern constructs the product step by step under the control of the &quot;director&quot;.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Reader encapsulates the parsing of the common input. The Builder hierarchy makes possible the polymorphic creation of many peculiar representations or targets.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33804160/33804184.png" data-image-src="attachments/33804160/33804184.png" data-unresolved-comment-count="0" data-linked-resource-id="33804184" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 12.39.14 AM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33804160" data-linked-resource-container-version="3" data-media-id="c1930b20-0583-4548-a201-e2d423fb9d71" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Builder pattern separates the construction of a complex object from its representation so that the same construction process can create different representations. This pattern is used by fast food restaurants to construct children's meals. Children's meals typically consist of a main item, a side item, a drink, and a toy (e.g., a hamburger, fries, Coke, and toy dinosaur). Note that there can be variation in the content of the children's meal, but the construction process is the same. Whether a customer orders a hamburger, cheeseburger, or chicken, the process is the same. The employee at the counter directs the crew to assemble a main item, side item, and toy. These items are then placed in a bag. The drink is placed in a cup and remains outside of the bag. This same process is used at competing restaurants.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33804160/33804205.png" data-image-src="attachments/33804160/33804205.png" data-unresolved-comment-count="0" data-linked-resource-id="33804205" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 12.40.15 AM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33804160" data-linked-resource-container-version="3" data-media-id="7be19636-8c52-4068-b40d-4a085805abec" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The AbstractBuilder is not used because JavaScript does not support abstract classes. However, the different Builders must implement the same multistep interface for the Director to be able to step through the assembly process</p><p class="ptext">The JavaScript code has a <span class="cd">Shop</span> (the Director) and two builder objects: <span class="cd">CarBuilder</span> and <span class="cd">TruckBuilder</span>. The Shop's construct method accepts a Builder instance which it then takes through a series of assembly steps: step1 and step2. The Builder's get method returns the newly assembled products (<span class="cd">Car</span> objects and <span class="cd">Truck</span> objects).</p><p class="ptext">The client has control over the actual object construction process by offering different builders to the Shop.</p><p class="ptext">The <span class="cd">log</span> function is a helper which collects and displays results.</p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample JS Code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">function Shop() {
+    this.construct = function(builder) {
+        builder.step1();
+        builder.step2();
+        return builder.get();
+    }
+}
+ 
+function CarBuilder() {
+    this.car = null;
+ 
+    this.step1 = function() {
+        this.car = new Car();
+    };
+ 
+    this.step2 = function() {
+        this.car.addParts();
+    };
+ 
+    this.get = function() {
+        return this.car;
+    };
+}
+ 
+function TruckBuilder() {
+    this.truck = null;
+ 
+    this.step1 = function() {
+        this.truck = new Truck();
+    };
+ 
+    this.step2 = function() {
+        this.truck.addParts();
+    };
+ 
+    this.get = function() {
+        return this.truck;
+    };
+}
+ 
+function Car() {
+    this.doors = 0;
+ 
+    this.addParts = function() {
+        this.doors = 4;
+    };
+ 
+    this.say = function() {
+        log.add(&quot;I am a &quot; + this.doors + &quot;-door car&quot;);
+    };
+}
+ 
+function Truck() {
+    this.doors = 0;
+ 
+    this.addParts = function() {
+        this.doors = 2;
+    };
+ 
+    this.say = function() {
+        log.add(&quot;I am a &quot; + this.doors + &quot;-door truck&quot;);
+    };
+}
+ 
+// log helper
+var log = (function () {
+    var log = &quot;&quot;;
+    return {
+        add: function (msg) { log += msg + &quot;\n&quot;; },
+        show: function () { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+    var shop = new Shop();
+    var carBuilder = new CarBuilder();
+    var truckBuilder = new TruckBuilder();
+    var car = shop.construct(carBuilder);
+    var truck = shop.construct(truckBuilder);
+ 
+    car.say();
+    truck.say();
+ 
+    log.show();
+}</pre> 
+ </div>
+</div><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample Typescript code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">namespace BuilderPattern {
+    export class UserBuilder {
+        private name: string;
+        private age: number;
+        private phone: string;
+        private address: string;
+
+        constructor(name: string) {
+            this.name = name;
+        }
+
+        get Name() {
+            return this.name;
+        }
+        setAge(value: number): UserBuilder {
+            this.age = value;
+            return this;
+        }
+        get Age() {
+            return this.age;
+        }
+        setPhone(value: string): UserBuilder {
+            this.phone = value;
+            return this;
+        }
+        get Phone() {
+            return this.phone;
+        }
+        setAddress(value: string): UserBuilder {
+            this.address = value;
+            return this;
+        }
+        get Address() {
+            return this.address;
+        }
+
+        build(): User {
+            return new User(this);
+        }
+    }
+
+    export class User {
+        private name: string;
+        private age: number;
+        private phone: string;
+        private address: string;
+
+        constructor(builder: UserBuilder) {
+            this.name = builder.Name;
+            this.age = builder.Age;
+            this.phone = builder.Phone;
+            this.address = builder.Address
+        }
+
+        get Name() {
+            return this.name;
+        }
+        get Age() {
+            return this.age;
+        }
+        get Phone() {
+            return this.phone;
+        }
+        get Address() {
+            return this.address;
+        }
+    }
+
+}
+
+
+// USAGE
+
+namespace BuilderPattern {
+	export namespace Demo {
+		export function show() : void {
+			var u: BuilderPattern.User = new BuilderPattern.UserBuilder(&quot;Jancsi&quot;)
+                        .setAge(12)
+                        .setPhone(&quot;0123456789&quot;)
+                        .setAddress(&quot;asdf&quot;)
+                        .build();
+    		console.log(u.Name + &quot; &quot; + u.Age + &quot; &quot; + u.Phone + &quot; &quot; + u.Address);
+		}
+	}
+}
+
+</pre> 
+ </div>
+</div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Decide if a common input and many possible representations (or outputs) is the problem at hand.</li><li>Encapsulate the parsing of the common input in a Reader class.</li><li>Design a standard protocol for creating all possible output representations. Capture the steps of this protocol in a Builder interface.</li><li>Define a Builder derived class for each target representation.</li><li>The client creates a Reader object and a Builder object, and registers the latter with the former.</li><li>The client asks the Reader to &quot;construct&quot;.</li><li>The client asks the Builder to return the result.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Sometimes creational patterns are complementary: Builder can use one of the other patterns to implement which components get built. Abstract Factory, Builder, and Prototype can use Singleton in their implementations.</li><li>Builder focuses on constructing a complex object step by step. Abstract Factory emphasizes a family of product objects (either simple or complex). Builder returns the product as a final step, but as far as the Abstract Factory is concerned, the product gets returned immediately.</li><li>Builder often builds a Composite.</li><li>Often, designs start out using Factory Method (less complicated, more customizable, subclasses proliferate) and evolve toward Abstract Factory, Prototype, or Builder (more flexible, more complex) as the designer discovers where more flexibility is needed.</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33804160/33804184.png">Screen Shot 2017-05-05 at 12.39.14 AM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33804160/33804205.png">Screen Shot 2017-05-05 at 12.40.15 AM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

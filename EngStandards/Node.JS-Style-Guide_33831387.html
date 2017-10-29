@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Node.JS Style Guide</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Code-Standards_33471212.html">Code Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Node.js_33473087.html">Node.js</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Node.JS Style Guide
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified by <span class='editor'> Thomas Allen</span> on Jun 13, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Types</b></div><div class="panelContent" style="background-color: white;">
+<p><span>Primitives</span>: When you access a primitive type you work directly on its value</p><ul><li><code>string</code></li><li><code>number</code></li><li><code>boolean</code></li><li><code>null</code></li><li><code>undefined</code></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var foo = 1;
+var bar = foo;
+
+bar = 9;
+
+console.log(foo, bar); // =&gt; 1, 9</pre>
+</div></div><p><br/></p><p><span>Complex</span>: When you access a complex type you work on a reference to its value</p><ul><li><code>object</code></li><li><code>array</code></li><li><code>function</code></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var foo = [1, 2];
+var bar = foo;
+
+bar[0] = 9;
+
+console.log(foo[0], bar[0]); // =&gt; 9, 9</pre>
+</div></div>
+</div></div><p><br/></p><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Objects</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(36,41,46);">Use the literal syntax for object creation.</span></p><ul><li><code>string</code></li><li><code>number</code></li><li><code>boolean</code></li><li><code>null</code></li><li><code>undefined</code></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+var item = new Object();
+
+// good
+var item = {};</pre>
+</div></div><p><br/></p><p><span style="color: rgb(36,41,46);">Use readable synonyms in place of reserved words.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+var superman = {
+  class: &#39;alien&#39;
+};
+
+// bad
+var superman = {
+  klass: &#39;alien&#39;
+};
+
+// good
+var superman = {
+  type: &#39;alien&#39;
+};</pre>
+</div></div>
+</div></div><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Arrays</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(36,41,46);">Use the literal syntax for array creation</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+var items = new Array();
+
+// good
+var items = [];</pre>
+</div></div><p><br/></p><p><span style="color: rgb(36,41,46);"><span style="color: rgb(36,41,46);">If you don't know array length use Array#push.</span><br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var someStack = [];
+
+
+// bad
+someStack[someStack.length] = &#39;abracadabra&#39;;
+
+// good
+someStack.push(&#39;abracadabra&#39;);</pre>
+</div></div><p><span style="color: rgb(36,41,46);">When you need to copy an array use Array#slice. </span><a href="http://jsperf.com/converting-arguments-to-an-array/7" class="external-link" rel="nofollow">jsPerf</a></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var len = items.length;
+var itemsCopy = [];
+var i;
+
+// bad
+for (i = 0; i &lt; len; i++) {
+  itemsCopy[i] = items[i];
+}
+
+// good
+itemsCopy = items.slice();</pre>
+</div></div><p><span style="color: rgb(36,41,46);">To convert an array-like object to an array, use Array#slice.</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">function trigger() {
+  var args = Array.prototype.slice.call(arguments);
+  ...
+}</pre>
+</div></div>
+</div></div><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Strings</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(36,41,46);">Use single quotes </span><code>''</code><span style="color: rgb(36,41,46);"> for strings</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+var name = &quot;Bob Parr&quot;;
+
+// good
+var name = &#39;Bob Parr&#39;;
+
+// bad
+var fullName = &quot;Bob &quot; + this.lastName;
+
+// good
+var fullName = &#39;Bob &#39; + this.lastName;</pre>
+</div></div><p><br/></p><p>Strings longer than 80 characters should be written across multiple lines using string concatenation.</p><p>Note: If overused, long strings with concatenation could impact performance. <a href="http://jsperf.com/ya-string-concat" class="external-link" rel="nofollow">jsPerf</a> &amp; <a href="https://github.com/airbnb/javascript/issues/40" class="external-link" rel="nofollow">Discussion</a></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+var errorMessage = &#39;This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.&#39;;
+
+// bad
+var errorMessage = &#39;This is a super long error that was thrown because \
+of Batman. When you stop to think about how Batman had anything to do \
+with this, you would get nowhere \
+fast.&#39;;
+
+// good
+var errorMessage = &#39;This is a super long error that was thrown because &#39; +
+  &#39;of Batman. When you stop to think about how Batman had anything to do &#39; +
+  &#39;with this, you would get nowhere fast.&#39;;</pre>
+</div></div><p><span style="color: rgb(36,41,46);">When programmatically building up a string, use Array#join instead of string concatenation.</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var items;
+var messages;
+var length;
+var i;
+
+messages = [{
+  state: &#39;success&#39;,
+  message: &#39;This one worked.&#39;
+}, {
+  state: &#39;success&#39;,
+  message: &#39;This one worked as well.&#39;
+}, {
+  state: &#39;error&#39;,
+  message: &#39;This one did not work.&#39;
+}];
+
+length = messages.length;
+
+// bad
+function inbox(messages) {
+  items = &#39;&lt;ul&gt;&#39;;
+
+  for (i = 0; i &lt; length; i++) {
+    items += &#39;&lt;li&gt;&#39; + messages[i].message + &#39;&lt;/li&gt;&#39;;
+  }
+
+  return items + &#39;&lt;/ul&gt;&#39;;
+}
+
+// good
+function inbox(messages) {
+  items = [];
+
+  for (i = 0; i &lt; length; i++) {
+    items[i] = messages[i].message;
+  }
+
+  return &#39;&lt;ul&gt;&lt;li&gt;&#39; + items.join(&#39;&lt;/li&gt;&lt;li&gt;&#39;) + &#39;&lt;/li&gt;&lt;/ul&gt;&#39;;
+}</pre>
+</div></div>
+</div></div><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Functions</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(36,41,46);">Function expressions:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// anonymous function expression
+var anonymous = function() {
+  return true;
+};
+
+// named function expression
+var named = function named() {
+  return true;
+};
+
+// immediately-invoked function expression (IIFE)
+(function() {
+  console.log(&#39;Welcome to the Internet. Please follow me.&#39;);
+})();</pre>
+</div></div><p><br/></p><p><span style="color: rgb(36,41,46);"><span style="color: rgb(36,41,46);">Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead.</span><br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+if (currentUser) {
+  function test() {
+    console.log(&#39;Nope.&#39;);
+  }
+}
+
+// good
+var test;
+if (currentUser) {
+  test = function test() {
+    console.log(&#39;Yup.&#39;);
+  };
+}</pre>
+</div></div><p><span style="color: rgb(36,41,46);">Never name a parameter </span><code>arguments</code><span style="color: rgb(36,41,46);">, this will take precedence over the </span><code>arguments</code><span style="color: rgb(36,41,46);"> object that is given to every function scope.</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+function nope(name, options, arguments) {
+  // ...stuff...
+}
+
+// good
+function yup(name, options, args) {
+  // ...stuff...
+}</pre>
+</div></div>
+</div></div><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Properties</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(36,41,46);"><span style="color: rgb(36,41,46);">Use dot notation when accessing properties.</span><br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var luke = {
+  jedi: true,
+  age: 28
+};
+
+// bad
+var isJedi = luke[&#39;jedi&#39;];
+
+// good
+var isJedi = luke.jedi;</pre>
+</div></div><p><br/></p><p><span style="color: rgb(36,41,46);"><span style="color: rgb(36,41,46);">Use subscript notation </span><code>[]</code><span style="color: rgb(36,41,46);"> when accessing properties with a variable.</span></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var luke = {
+  jedi: true,
+  age: 28
+};
+
+function getProp(prop) {
+  return luke[prop];
+}
+
+var isJedi = getProp(&#39;jedi&#39;);</pre>
+</div></div>
+</div></div><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Variables</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(36,41,46);"><span style="color: rgb(36,41,46);">In legacy code, declare variables using </span><code>var</code></span>. Begin files with <code>&quot;use strict&quot;</code> if not using a preprocessor that does this for you (this makes naked global assignments a runtime error).</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+superPower = new SuperPower();
+
+// good
+var superPower = new SuperPower();</pre>
+</div></div><p>New code should use <code><span style="color: rgb(0,51,102);">const</span></code> and <code>let</code> appropriately. Use <code>const</code> for every variable that will not be reassigned. This will be obvious during testing, as <code>const</code> reassignment is a runtime error.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">// bad
+let body = response.body
+let isEmpty = Boolean(body.trim())
+
+// bad (runtime error!)
+for (const i = 0, l = a.length; i &lt; l; i++) { /* ... */ }
+
+// good
+const body = response.body
+const isEmpty = Boolean(body.trim())
+for (let i = 0, l = a.length; i &lt; l; i++) { /* ... */ }</pre>
+</div></div><p>Note that the variable <code>l</code> in the previous example is incorrectly declared, but that is because a <code>for</code> loop limits us to a single initialization statement. The length could also be assigned outside of the loop, but then it is not scoped to the <code>for</code> loop.</p><p><span style="color: rgb(36,41,46);"><span style="color: rgb(36,41,46);">Declare each variable on a newline, with a </span><code>var</code><span style="color: rgb(36,41,46);"> before each of them.</span><br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+ var items = getItems(),
+      goSportsTeam = true,
+      dragonball = &#39;z&#39;;
+
+// good
+ var items = getItems();
+ var goSportsTeam = true;
+ var dragonball = &#39;z&#39;;</pre>
+</div></div><p><span style="color: rgb(36,41,46);">Declare unassigned variables last. This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+var i;
+var items = getItems();
+var dragonball;
+var goSportsTeam = true;
+var len;
+
+// good
+var items = getItems();
+var goSportsTeam = true;
+var dragonball;
+var length;
+var i;</pre>
+</div></div><p><span style="color: rgb(36,41,46);">Avoid redundant variable names, use </span><code>Object</code><span style="color: rgb(36,41,46);"> instead.</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+var kaleidoscopeName = &#39;..&#39;;
+var kaleidoscopeLens = [];
+var kaleidoscopeColors = [];
+
+// good
+var kaleidoscope = {
+  name: &#39;..&#39;,
+  lens: [],
+  colors: []
+};</pre>
+</div></div><p><span style="color: rgb(36,41,46);">Assign variables at the top of their scope. This helps avoid issues with variable declaration and assignment hoisting related issues.</span></p><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+function() {
+  test();
+  console.log(&#39;doing stuff..&#39;);
+
+  //..other stuff..
+
+  var name = getName();
+
+  if (name === &#39;test&#39;) {
+    return false;
+  }
+
+  return name;
+}
+
+// good
+function() {
+  var name = getName();
+
+  test();
+  console.log(&#39;doing stuff..&#39;);
+
+  //..other stuff..
+
+  if (name === &#39;test&#39;) {
+    return false;
+  }
+
+  return name;
+}
+
+// bad
+function() {
+  var name = getName();
+
+  if (!arguments.length) {
+    return false;
+  }
+
+  return true;
+}
+
+// good
+function() {
+  if (!arguments.length) {
+    return false;
+  }
+
+  var name = getName();
+
+  return true;
+}</pre>
+</div></div>
+</div></div><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Requires</b></div><div class="panelContent" style="background-color: white;">
+<p>Organize your node requires in the following order:</p><ul><li>core modules</li><li>npm modules</li><li>others</li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+var Car = require(&#39;./models/Car&#39;);
+var async = require(&#39;async&#39;);
+var http = require(&#39;http&#39;);
+
+// good
+var http = require(&#39;http&#39;);
+var fs = require(&#39;fs&#39;);
+
+var async = require(&#39;async&#39;);
+var mongoose = require(&#39;mongoose&#39;);
+
+var Car = require(&#39;./models/Car&#39;);</pre>
+</div></div><p><br/></p><p><span style="color: rgb(36,41,46);"><span style="color: rgb(36,41,46);">Do not use the </span><code>.js</code><span style="color: rgb(36,41,46);"> when requiring modules</span><br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+var Batmobil = require(&#39;./models/Car.js&#39;);
+
+// good
+var Batmobil = require(&#39;./models/Car&#39;);
+</pre>
+</div></div>
+</div></div><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Callbacks</b></div><div class="panelContent" style="background-color: white;">
+<p>Always check for errors in callbacks</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">//bad
+database.get(&#39;pokemons&#39;, function(err, pokemons) {
+  console.log(pokemons);
+});
+
+//good
+database.get(&#39;drabonballs&#39;, function(err, drabonballs) {
+  if (err) {
+    // handle the error somehow, maybe return with a callback
+    return console.log(err);
+  }
+  console.log(drabonballs);
+});</pre>
+</div></div><p><br/></p><p><br/></p><p>Return on callbacks</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">//bad
+database.get(&#39;drabonballs&#39;, function(err, drabonballs) {
+  if (err) {
+    // if not return here
+    console.log(err);
+  }
+  // this line will be executed as well
+  console.log(drabonballs);
+});
+
+//good
+database.get(&#39;drabonballs&#39;, function(err, drabonballs) {
+  if (err) {
+    // handle the error somehow, maybe return with a callback
+    return console.log(err);
+  }
+  console.log(drabonballs);
+});
+</pre>
+</div></div><p>Use descriptive arguments in your callback when it is an &quot;interface&quot; for others. It makes your code readable.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+function getAnimals(done) {
+  Animal.get(done);
+}
+
+// good
+function getAnimals(done) {
+  Animal.get(function(err, animals) {
+    if(err) {
+      return done(err);
+    }
+
+    return done(null, {
+      dogs: animals.dogs,
+      cats: animals.cats
+    })
+  });
+}
+</pre>
+</div></div>
+</div></div><div class="panel" style="border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;"><b>Async</b></div><div class="panelContent">
+<p>Use Promises for all async APIs. Wrap callback-based APIs with Promise-based ones:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">const promiseTimeout = timeout =&gt;
+  new Promise((res, rej) =&gt; setTimeout(res, timeout))
+
+const loadSomething = cb =&gt;
+  $.ajax({ /* ... */, success: cb, error: cb })
+
+const promiseLoadSomething = () =&gt;
+  new Promise((res, rej) =&gt;
+    $.ajax({ /* ... */, success: res, error: rej }))</pre>
+</div></div><p class="auto-cursor-target">Or use something like <a href="http://bluebirdjs.com/docs/api/promise.promisify.html" class="external-link" rel="nofollow">http://bluebirdjs.com/docs/api/promise.promisify.html</a> to wrap callback-based APIs.</p><p>Always catch errors unless the promise is guaranteed to succeed (unlikely – but the setTimeout example above is one such function):</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">promiseLoadSomething()
+  .then(resp =&gt; console.log(resp.body))
+  .catch(e =&gt; console.error(e.statusCode))</pre>
+</div></div><p class="auto-cursor-target">Failing to do this will result in silent errors! The new Promise specification makes an uncaught promise rejection a runtime error, but most implementations that we support don't have this yet.</p><p>If using TypeScript, or Babel with async/await, always use inline error handling with try/catch instead of Promise's then/catch:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">try {
+  console.log(await promiseLoadSomething())
+} catch (e) {
+  console.error(e)
+}</pre>
+</div></div><p class="auto-cursor-target">See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function" class="external-link" rel="nofollow">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function</a></p>
+</div></div><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Hoisting</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(36,41,46);"><span style="color: rgb(36,41,46);">Variable declarations get hoisted to the top of their scope, their assignment does not.</span><br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// we know this wouldn&#39;t work (assuming there
+// is no notDefined global variable)
+function example() {
+  console.log(notDefined); // =&gt; throws a ReferenceError
+}
+
+// creating a variable declaration after you
+// reference the variable will work due to
+// variable hoisting. Note: the assignment
+// value of `true` is not hoisted.
+function example() {
+  console.log(declaredButNotAssigned); // =&gt; undefined
+  var declaredButNotAssigned = true;
+}
+
+// The interpreter is hoisting the variable
+// declaration to the top of the scope.
+// Which means our example could be rewritten as:
+function example() {
+  var declaredButNotAssigned;
+  console.log(declaredButNotAssigned); // =&gt; undefined
+  declaredButNotAssigned = true;
+}</pre>
+</div></div><p><br/></p><p><span style="color: rgb(36,41,46);"><span style="color: rgb(36,41,46);">Anonymous function expressions hoist their variable declaration, but not the function assignment.</span></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">function example() {
+  console.log(anonymous); // =&gt; undefined
+
+  anonymous(); // =&gt; TypeError anonymous is not a function
+
+  var anonymous = function() {
+    console.log(&#39;anonymous function expression&#39;);
+  };
+}</pre>
+</div></div><p><span style="color: rgb(36,41,46);">Named function expressions hoist the variable declaration, but neither the function declaration nor the function body.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">function example() {
+  console.log(named); // =&gt; undefined
+
+  named(); // =&gt; TypeError named is not a function
+
+  superPower(); // =&gt; ReferenceError superPower is not defined
+
+  var named = function superPower() {
+    console.log(&#39;Flying&#39;);
+  };
+}
+
+// the same is true when the function name
+// is the same as the variable name.
+function example() {
+  console.log(named); // =&gt; undefined
+
+  named(); // =&gt; TypeError named is not a function
+
+  var named = function named() {
+    console.log(&#39;named&#39;);
+  }
+}</pre>
+</div></div><p><span style="color: rgb(36,41,46);">Function declarations hoist their name and the function body.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">function example() {
+  superPower(); // =&gt; Flying
+
+  function superPower() {
+    console.log(&#39;Flying&#39;);
+  }
+}</pre>
+</div></div>
+</div></div><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Conditional Expressions &amp; Equality</b></div><div class="panelContent" style="background-color: white;">
+<p>Use <code>===</code> and <code>!==</code> over <code>==</code> and <code>!=</code>.</p><p>Conditional expressions are evaluated using coercion with the <code>ToBoolean</code> method and always follow these simple rules:</p><ul><li><span>Objects</span> evaluate to <span>true</span></li><li><span>Undefined</span> evaluates to <span>false</span></li><li><span>Null</span> evaluates to <span>false</span></li><li><span>Booleans</span> evaluate to <span>the value of the boolean</span></li><li><span>Numbers</span> evaluate to <span>false</span> if <span>+0, -0, or NaN</span>, otherwise <span>true</span></li><li><span>Strings</span> evaluate to <span>false</span> if an empty string <code>''</code>, otherwise <span>true</span></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">if ([0]) {
+  // true
+  // An array is an object, objects evaluate to true
+}</pre>
+</div></div><p><br/></p><p><span style="color: rgb(36,41,46);">Use shortcuts.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+if (name !== &#39;&#39;) {
+  // ...stuff...
+}
+
+// good
+if (name) {
+  // ...stuff...
+}
+
+// bad
+if (collection.length &gt; 0) {
+  // ...stuff...
+}
+
+// good
+if (collection.length) {
+  // ...stuff...
+}
+</pre>
+</div></div><p><span style="color: rgb(36,41,46);">For more information see </span><a href="http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108" class="external-link" rel="nofollow">Truth Equality and JavaScript</a><span style="color: rgb(36,41,46);"> by Angus Croll</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Conditional Expressions &amp; Equality</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(36,41,46);">Use </span><code>/** ... */</code><span style="color: rgb(36,41,46);"> for multiline comments. Include a description, specify types and values for all parameters and return values.</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+// make() returns a new element
+// based on the passed in tag name
+//
+// @param {string} tag
+// @return {Element}
+function make(tag) {
+
+  // ...stuff...
+
+  return element;
+}
+
+// good
+/**
+ * make() returns a new element
+ * based on the passed in tag name
+ *
+ * @param {string} tag
+ * @return {Element}
+ */
+function make(tag) {
+
+  // ...stuff...
+
+  return element;
+}</pre>
+</div></div><p><br/></p><p><span style="color: rgb(36,41,46);"><span style="color: rgb(36,41,46);">Use </span><code>//</code><span style="color: rgb(36,41,46);"> for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment.</span><br/></span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+var active = true;  // is current tab
+
+// good
+// is current tab
+var active = true;
+
+// bad
+function getType() {
+  console.log(&#39;fetching type...&#39;);
+  // set the default type to &#39;no type&#39;
+  var type = this._type || &#39;no type&#39;;
+
+  return type;
+}
+
+// good
+function getType() {
+  console.log(&#39;fetching type...&#39;);
+
+  // set the default type to &#39;no type&#39;
+  var type = this._type || &#39;no type&#39;;
+
+  return type;
+}
+</pre>
+</div></div><p>Prefixing your comments with <code>FIXME</code> or <code>TODO</code> helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are <code>FIXME -- need to figure this out</code> or <code>TODO -- need to implement</code>.</p><p><br/></p><p>Use <code>// FIXME:</code> to annotate problems</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">function Calculator() {
+
+  // FIXME: shouldn&#39;t use a global here
+  total = 0;
+
+  return this;
+}
+</pre>
+</div></div><p><br/></p><p><span style="color: rgb(36,41,46);">Use </span><code>// TODO:</code><span style="color: rgb(36,41,46);"> to annotate solutions to problems</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">function Calculator() {
+
+  // TODO: total should be configurable by an options param
+  this.total = 0;
+
+  return this;
+}
+
+// good
+function getType() {
+  console.log(&#39;fetching type...&#39;);
+
+  // set the default type to &#39;no type&#39;
+  var type = this._type || &#39;no type&#39;;
+
+  return type;
+}
+</pre>
+</div></div><p class="auto-cursor-target">Use ESDoc-supported tags and syntax for API documentation: <a href="https://esdoc.org/" class="external-link" rel="nofollow">https://esdoc.org/</a></p>
+</div></div><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Whitespace</b></div><div class="panelContent" style="background-color: white;">
+<p>User soft tabs set to 2 spaces</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+  function() {
+      var name;
+  }
+
+  // bad
+  function() {
+   var name;
+  }
+
+  // good
+  function() {
+    var name;
+  }
+  ```</pre>
+</div></div><p><br/></p><p>Place 1 space before the leading brace</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  function test(){
+    console.log(&#39;test&#39;);
+  }
+
+  // good
+  function test() {
+    console.log(&#39;test&#39;);
+  }
+
+  // bad
+  dog.set(&#39;attr&#39;,{
+    age: &#39;1 year&#39;,
+    breed: &#39;Bernese Mountain Dog&#39;
+  });
+
+  // good
+  dog.set(&#39;attr&#39;, {
+    age: &#39;1 year&#39;,
+    breed: &#39;Bernese Mountain Dog&#39;
+  });
+</pre>
+</div></div><p>Set off operators with spaces</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  var x=y+5;
+
+  // good
+  var x = y + 5;
+</pre>
+</div></div><p>End files with a single newLine character</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  (function(global) {
+    // ...stuff...
+  })(this);
+
+  // bad
+  (function(global) {
+    // ...stuff...
+  })(this);
+
+  // good
+  (function(global) {
+    // ...stuff...
+  })(this);
+</pre>
+</div></div><p><br/></p><p>Use indentation when making long method chains</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  $(&#39;#items&#39;).find(&#39;.selected&#39;).highlight().end().find(&#39;.open&#39;).updateCount();
+
+  // good
+  $(&#39;#items&#39;)
+    .find(&#39;.selected&#39;)
+      .highlight()
+      .end()
+    .find(&#39;.open&#39;)
+      .updateCount();
+
+  // bad
+  var leds = stage.selectAll(&#39;.led&#39;).data(data).enter().append(&#39;svg:svg&#39;).class(&#39;led&#39;, true)
+      .attr(&#39;width&#39;,  (radius + margin) * 2).append(&#39;svg:g&#39;)
+      .attr(&#39;transform&#39;, &#39;translate(&#39; + (radius + margin) + &#39;,&#39; + (radius + margin) + &#39;)&#39;)
+      .call(tron.led);
+
+  // good
+  var leds = stage.selectAll(&#39;.led&#39;)
+      .data(data)
+    .enter().append(&#39;svg:svg&#39;)
+      .class(&#39;led&#39;, true)
+      .attr(&#39;width&#39;,  (radius + margin) * 2)
+    .append(&#39;svg:g&#39;)
+      .attr(&#39;transform&#39;, &#39;translate(&#39; + (radius + margin) + &#39;,&#39; + (radius + margin) + &#39;)&#39;)
+      .call(tron.led);
+</pre>
+</div></div>
+</div></div><p>.</p><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Commas</b></div><div class="panelContent" style="background-color: white;">
+<p>Leading commas should never be used</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">// bad
+  var hero = {
+      firstName: &#39;Bob&#39;
+    , lastName: &#39;Parr&#39;
+    , heroName: &#39;Mr. Incredible&#39;
+    , superPower: &#39;strength&#39;
+  };
+
+  // good
+  var hero = {
+    firstName: &#39;Bob&#39;,
+    lastName: &#39;Parr&#39;,
+    heroName: &#39;Mr. Incredible&#39;,
+    superPower: &#39;strength&#39;,
+  };</pre>
+</div></div><p class="auto-cursor-target">Additional trailing comma should always be used, we don't support any runtimes that have a problem with them and they make for cleaner diffs. See also <a class="external-link" href="https://github.com/airbnb/javascript#commas--dangling" rel="nofollow">https://github.com/airbnb/javascript#commas--dangling</a></p>
+</div></div><p><br/></p><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Semicolons</b></div><div class="panelContent" style="background-color: white;">
+<p>We rely on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Automatic_semicolon_insertion" class="external-link" rel="nofollow">automatic semicolon insertion</a> to separate expressions and new projects should use this. Many existing projects do not rely on ASI, and code in those projects should continue to use semicolons until there is a reason to convert such a project.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // good
+  (function() {
+    var name = &#39;Skywalker&#39;
+    return name
+  })()
+
+  // bad
+  (function() {
+    var name = &#39;Skywalker&#39;;
+    return name;
+  })();
+
+  // bad
+  ;(function() {
+    var name = &#39;Skywalker&#39;;
+    return name;
+  })();</pre>
+</div></div>
+</div></div><p><br/></p><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Type Casting and Coercion</b></div><div class="panelContent" style="background-color: white;">
+<p>Perform type coercion at the beginning of the statement</p><p>With strings:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  //  =&gt; this.reviewScore = 9;
+
+  // bad
+  var totalScore = this.reviewScore + &#39;&#39;;
+
+  // good
+  var totalScore = &#39;&#39; + this.reviewScore;
+
+  // bad
+  var totalScore = &#39;&#39; + this.reviewScore + &#39; total score&#39;;
+
+  // good
+  var totalScore = this.reviewScore + &#39; total score&#39;;</pre>
+</div></div><p><br/></p><p>Use `parseInt` for Numbers and always with a radix for type casting.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  var inputValue = &#39;4&#39;;
+
+  // bad
+  var val = new Number(inputValue);
+
+  // bad
+  var val = +inputValue;
+
+  // bad
+  var val = inputValue &gt;&gt; 0;
+
+  // bad
+  var val = parseInt(inputValue);
+
+  // good
+  var val = Number(inputValue);
+
+  // good
+  var val = parseInt(inputValue, 10);
+</pre>
+</div></div><p>If for whatever reason you are doing something wild and `parseInt` is your bottleneck and need to use Bitshift for [performance reasons](http://jsperf.com/coercion-vs-casting/3), leave a comment explaining why and what you're doing.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // good
+  /**
+   * parseInt was the reason my code was slow.
+   * Bitshifting the String to coerce it to a
+   * Number made it a lot faster.
+   */
+  var val = inputValue &gt;&gt; 0;
+</pre>
+</div></div><p>With booleans</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  var age = 0;
+
+  // bad
+  var hasAge = new Boolean(age);
+
+  // good
+  var hasAge = Boolean(age);
+
+  // good
+  var hasAge = !!age;
+</pre>
+</div></div>
+</div></div><p><br/></p><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Naming Converntions</b></div><div class="panelContent" style="background-color: white;">
+<p>Avoid single letter naming. Be descriptive in your naming.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  function q() {
+    // ...stuff...
+  }
+
+  // good
+  function query() {
+    // ..stuff..
+  }</pre>
+</div></div><p><br/></p><p>Use camelCase when naming objects, functions, and instances</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  var OBJEcttsssss = {};
+  var this_is_my_object = {};
+  function c() {}
+  var u = new user({
+    name: &#39;Bob Parr&#39;
+  });
+
+  // good
+  var thisIsMyObject = {};
+  function thisIsMyFunction() {}
+  var user = new User({
+    name: &#39;Bob Parr&#39;
+  });
+</pre>
+</div></div><p>Use PascalCase when naming constructors or classes</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  function user(options) {
+    this.name = options.name;
+  }
+
+  var bad = new user({
+    name: &#39;nope&#39;
+  });
+
+  // good
+  function User(options) {
+    this.name = options.name;
+  }
+
+  var good = new User({
+    name: &#39;yup&#39;
+  });
+</pre>
+</div></div><p class="auto-cursor-target">Also write acronyms in PascalCase:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">// bad (&quot;HTTP&quot;)
+const isHTTPRequest = false
+
+// good (&quot;Http&quot;)
+const isHttpRequest = false</pre>
+</div></div><p><br/></p><p>Use a leading underscore `_` when naming private properties</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  this.__firstName__ = &#39;Panda&#39;;
+  this.firstName_ = &#39;Panda&#39;;
+
+  // good
+  this._firstName = &#39;Panda&#39;;
+</pre>
+</div></div><p>When saving a reference to 'this' use '_this'</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  function() {
+    var self = this;
+    return function() {
+      console.log(self);
+    };
+  }
+
+  // bad
+  function() {
+    var that = this;
+    return function() {
+      console.log(that);
+    };
+  }
+
+  // good
+  function() {
+    var _this = this;
+    return function() {
+      console.log(_this);
+    };
+  }</pre>
+</div></div><p>Name your functions. This is helpful for stack traces</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  var log = function(msg) {
+    console.log(msg);
+  };
+
+  // good
+  var log = function log(msg) {
+    console.log(msg);
+  };
+</pre>
+</div></div>
+</div></div><p><br/></p><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Accessors</b></div><div class="panelContent" style="background-color: white;">
+<p>Accessor functions for properties are not required - if you do make accessor functions use getVal() and setVal('hello')</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  dragon.age();
+
+  // good
+  dragon.getAge();
+
+  // bad
+  dragon.age(25);
+
+  // good
+  dragon.setAge(25);</pre>
+</div></div><p><br/></p><p>If the property is a boolean, use isVal() or hasVal()</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  if (!dragon.age()) {
+    return false;
+  }
+
+  // good
+  if (!dragon.hasAge()) {
+    return false;
+  }
+</pre>
+</div></div><p>It's okay to create get() and set() functions, but be consistent.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  function Jedi(options) {
+    options || (options = {});
+    var lightsaber = options.lightsaber || &#39;blue&#39;;
+    this.set(&#39;lightsaber&#39;, lightsaber);
+  }
+
+  Jedi.prototype.set = function(key, val) {
+    this[key] = val;
+  };
+
+  Jedi.prototype.get = function(key) {
+    return this[key];
+  };
+</pre>
+</div></div>
+</div></div><p><br/></p><div class="panel" style="background-color: white;border-color: gray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: gray;background-color: gray;color: white;"><b>Constructors</b></div><div class="panelContent" style="background-color: white;">
+<p>Assign methods to the prototype object, instead of overwriting the prototype with a new object. Overwriting the prototype makes inheritance impossible: by resetting the prototype you'll overwrite the base!</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  function Jedi() {
+    console.log(&#39;new jedi&#39;);
+  }
+
+  // bad
+  Jedi.prototype = {
+    fight: function fight() {
+      console.log(&#39;fighting&#39;);
+    },
+
+    block: function block() {
+      console.log(&#39;blocking&#39;);
+    }
+  };
+
+  // good
+  Jedi.prototype.fight = function fight() {
+    console.log(&#39;fighting&#39;);
+  };
+
+  Jedi.prototype.block = function block() {
+    console.log(&#39;blocking&#39;);
+  };</pre>
+</div></div><p><br/></p><p>Methods can return `this` to help with method chaining.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  // bad
+  Jedi.prototype.jump = function() {
+    this.jumping = true;
+    return true;
+  };
+
+  Jedi.prototype.setHeight = function(height) {
+    this.height = height;
+  };
+
+  var luke = new Jedi();
+  luke.jump(); // =&gt; true
+  luke.setHeight(20) // =&gt; undefined
+
+  // good
+  Jedi.prototype.jump = function() {
+    this.jumping = true;
+    return this;
+  };
+
+  Jedi.prototype.setHeight = function(height) {
+    this.height = height;
+    return this;
+  };
+
+  var luke = new Jedi();
+
+  luke.jump()
+    .setHeight(20);
+</pre>
+</div></div><p>It's okay to write a custom toString() method, just make sure it works successfully and causes no side effects.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">  function Jedi(options) {
+    options || (options = {});
+    this.name = options.name || &#39;no name&#39;;
+  }
+
+  Jedi.prototype.getName = function getName() {
+    return this.name;
+  };
+
+  Jedi.prototype.toString = function toString() {
+    return &#39;Jedi - &#39; + this.getName();
+  };
+</pre>
+</div></div>
+</div></div><p><br/></p><p>..MORE TO GO</p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

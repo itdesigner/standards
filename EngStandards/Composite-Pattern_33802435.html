@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Composite Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Composite Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on May 05, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Compose objects into tree structures to represent whole-part hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.</li><li>Recursive composition</li><li>&quot;Directories contain entries, each of which could be a directory.&quot;</li><li>1-to-many &quot;has a&quot; up the &quot;is a&quot; hierarchy</li></ul>
+</div></div><p>Frequency of use in JavaScript:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-green confluenceTd" data-highlight-colour="green">4</td><td class="highlight-green confluenceTd" data-highlight-colour="green">5</td></tr></tbody></table></div><p>HIGH</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">Application needs to manipulate a hierarchical collection of &quot;primitive&quot; and &quot;composite&quot; objects. Processing of a primitive object is handled one way, and processing of a composite object is handled differently. Having to query the &quot;type&quot; of each object before attempting to process it is not desirable.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p>Define an abstract base class (Component) that specifies the behavior that needs to be exercised uniformly across all primitive and composite objects. Subclass the Primitive and Composite classes off of the Component class. Each Composite object &quot;couples&quot; itself only to the abstract type Component as it manages its &quot;children&quot;.</p><p>Use this pattern whenever you have &quot;composites that contain components, each of which could be a composite&quot;.</p><p>Child management methods [e.g. <code>addChild()</code>, <code>removeChild()</code>] should normally be defined in the Composite class. Unfortunately, the desire to treat Primitives and Composites uniformly requires that these methods be moved to the abstract Component class. See the &quot;Additional Notes&quot; section below for a discussion of &quot;safety&quot; versus &quot;transparency&quot; issues.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">Composites that contain Components, each of which could be a Composite.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33802435/33802468.png" data-image-src="attachments/33802435/33802468.png" data-unresolved-comment-count="0" data-linked-resource-id="33802468" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 10.53.36 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33802435" data-linked-resource-container-version="5" data-media-id="89d2e10e-0f64-4063-af56-1edf1667b9ba" data-media-type="file"></span></p><p>Menus that contain menu items, each of which could be a menu.</p><p>Row-column GUI layout managers that contain widgets, each of which could be a row-column GUI layout manager.</p><p>Directories that contain files, each of which could be a directory.</p><p>Containers that contain Elements, each of which could be a Container.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Composite composes objects into tree structures and lets clients treat individual objects and compositions uniformly. Although the example is abstract, arithmetic expressions are Composites. An arithmetic expression consists of an operand, an operator (+ - * /), and another operand. The operand can be a number, or another arithmetic expression. Thus, 2 + 3 and (2 + 3) + (4 * 6) are both valid expressions.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33802435/33802493.png" data-image-src="attachments/33802435/33802493.png" data-unresolved-comment-count="0" data-linked-resource-id="33802493" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 10.54.58 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33802435" data-linked-resource-container-version="5" data-media-id="de692b8c-c5d8-4bca-92a1-fef7a88680f4" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Sample Code</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">In our example a tree structure is created from <span class="cd">Node</span> objects. Each node has a name and 4 methods: <span class="cd">add</span>, <span class="cd">remove</span>, <span class="cd">getChild</span>, and <span class="cd">hasChildren</span>. The methods are added to <span class="cd">Node</span>'s prototype. This reduces the memory requirements as these methods are now shared by all nodes. <span class="cd">Node</span> is fully recursive and there is no need for separate Component or Leaf objects.</p><p class="ptext">A small Composite tree is built by adding nodes to parent nodes. Once complete we invoke <span class="cd">traverse</span> which iterates over each node in the tree and displays its name and depth (by showing indentation).</p><p class="ptext">The <span class="cd">log</span> function is a helper which collects and displays results.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var Node = function (name) {
+    this.children = [];
+    this.name = name;
+}
+ 
+Node.prototype = {
+    add: function (child) {
+        this.children.push(child);
+    },
+ 
+    remove: function (child) {
+        var length = this.children.length;
+        for (var i = 0; i &lt; length; i++) {
+            if (this.children[i] === child) {
+                this.children.splice(i, 1);
+                return;
+            }
+        }
+    },
+ 
+    getChild: function (i) {
+        return this.children[i];
+    },
+ 
+    hasChildren: function () {
+        return this.children.length &gt; 0;
+    }
+}
+ 
+// recursively traverse a (sub)tree
+ 
+function traverse(indent, node) {
+    log.add(Array(indent++).join(&quot;--&quot;) + node.name);
+ 
+    for (var i = 0, len = node.children.length; i &lt; len; i++) {
+        traverse(indent, node.getChild(i));
+    }
+}
+ 
+// logging helper
+ 
+var log = (function () {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function (msg) { log += msg + &quot;\n&quot;; },
+        show: function () { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+    var tree = new Node(&quot;root&quot;);
+    var left = new Node(&quot;left&quot;)
+    var right = new Node(&quot;right&quot;);
+    var leftleft = new Node(&quot;leftleft&quot;);
+    var leftright = new Node(&quot;leftright&quot;);
+    var rightleft = new Node(&quot;rightleft&quot;);
+    var rightright = new Node(&quot;rightright&quot;);
+ 
+    tree.add(left);
+    tree.add(right);
+    tree.remove(right);  // note: remove
+    tree.add(right);
+ 
+    left.add(leftleft);
+    left.add(leftright);
+ 
+    right.add(rightleft);
+    right.add(rightright);
+ 
+    traverse(1, tree);
+ 
+    log.show();
+}</pre>
+</div></div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Ensure that your problem is about representing &quot;whole-part&quot; hierarchical relationships.</li><li>Consider the heuristic, &quot;Containers that contain containees, each of which could be a container.&quot; For example, &quot;Assemblies that contain components, each of which could be an assembly.&quot; Divide your domain concepts into container classes, and containee classes.</li><li>Create a &quot;lowest common denominator&quot; interface that makes your containers and containees interchangeable. It should specify the behavior that needs to be exercised uniformly across all containee and container objects.</li><li>All container and containee classes declare an &quot;is a&quot; relationship to the interface.</li><li>All container classes declare a one-to-many &quot;has a&quot; relationship to the interface.</li><li>Container classes leverage polymorphism to delegate to their containee objects.</li><li>Child management methods [e.g. <code>addChild()</code>, <code>removeChild()</code>] should normally be defined in the Composite class. Unfortunately, the desire to treat Leaf and Composite objects uniformly may require that these methods be promoted to the abstract Component class. See the Gang of Four for a discussion of these &quot;safety&quot; versus &quot;transparency&quot; trade-offs.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Composite and Decorator have similar structure diagrams, reflecting the fact that both rely on recursive composition to organize an open-ended number of objects.</li><li>Composite can be traversed with Iterator. Visitor can apply an operation over a Composite. Composite could use Chain of Responsibility to let components access global properties through their parent. It could also use Decorator to override these properties on parts of the composition. It could use Observer to tie one object structure to another and State to let a component change its behavior as its state changes.</li><li>Composite can let you compose a Mediator out of smaller pieces through recursive composition.</li><li>Decorator is designed to let you add responsibilities to objects without subclassing. Composite's focus is not on embellishment but on representation. These intents are distinct but complementary. Consequently, Composite and Decorator are often used in concert.</li><li>Flyweight is often combined with Composite to implement shared leaf nodes.</li><li><span style="color: rgb(68,68,68);">The whole point of the Composite pattern is that the Composite can be treated atomically, just like a leaf. If you want to provide an Iterator protocol, fine, but I think that is outside the pattern itself. At the heart of this pattern is the ability for a client to perform operations on an object without needing to know that there are many objects inside.</span></li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33802435/33802468.png">Screen Shot 2017-05-04 at 10.53.36 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33802435/33802493.png">Screen Shot 2017-05-04 at 10.54.58 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

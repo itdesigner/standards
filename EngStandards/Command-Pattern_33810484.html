@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Command Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Command Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Aug 31, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Encapsulate a request as an object, thereby letting you parametrize clients with different requests, queue or log requests, and support undoable operations.</li><li>Promote &quot;invocation of a method on an object&quot; to full object status</li><li>An object-oriented callback</li></ul>
+</div></div><p><br/></p><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-green confluenceTd" data-highlight-colour="green">4</td><td class="highlight-green confluenceTd" data-highlight-colour="green">5</td></tr></tbody></table></div><p>HIGH</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">Need to issue requests to objects without knowing anything about the operation being requested or the receiver of the request.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The Command pattern encapsulates actions as objects. Command objects allow for loosely coupled systems by separating the objects that issue a request from the objects that actually process the request. These requests are called events and the code that processes the requests are called event handlers.</p><p class="ptext">Suppose you are building an application that supports the Cut, Copy, and Paste clipboard actions. These actions can be triggered in different ways throughout the app: by a menu system, a context menu (e.g. by right clicking on a textbox), or by a keyboard shortcut.</p><p class="ptext">Command objects allow you to centralize the processing of these actions, one for each operation. So, you need only one Command for processing all Cut requests, one for all Copy requests, and one for all Paste requests.</p><p class="ptext">Because commands centralize all processing, they are also frequently involved in handling Undo functionality for the entire application</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The client that creates a command is not the same client that executes it. This separation provides flexibility in the timing and sequencing of commands. Materializing commands as objects means they can be passed, staged, shared, loaded in a table, and otherwise instrumented or manipulated like any other object.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33810484/33810507.png?height=400" data-image-src="attachments/33810484/33810507.png" data-unresolved-comment-count="0" data-linked-resource-id="33810507" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 12.30.12 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33810484" data-linked-resource-container-version="2" data-media-id="0b4cb930-ee3c-4fee-952b-55276a270d07" data-media-type="file"></span><span style="color: rgb(68,68,68);">Command objects can be thought of as &quot;tokens&quot; that are created by one client that knows what need to be done, and passed to another client that has the resources for doing it.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Command pattern allows requests to be encapsulated as objects, thereby allowing clients to be parametrized with different requests. The &quot;check&quot; at a diner is an example of a Command pattern. The waiter or waitress takes an order or command from a customer and encapsulates that order by writing it on the check. The order is then queued for a short order cook. Note that the pad of &quot;checks&quot; used by each waiter is not dependent on the menu, and therefore they can support commands to cook many different items.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="400" src="attachments/33810484/33810526.png?height=400" data-image-src="attachments/33810484/33810526.png" data-unresolved-comment-count="0" data-linked-resource-id="33810526" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-05 at 12.31.11 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33810484" data-linked-resource-container-version="2" data-media-id="69259d9c-910b-4793-ac15-94a5f399222b" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">In our example we have a calculator with 4 basic operations: <span class="cd">add</span>, <span class="cd">subtract</span>, <span class="cd">multiply</span> and <span class="cd">divide</span>. Each operation is encapsulated by a <span class="cd">Command</span> object.</p><p class="ptext">The <span class="cd">Calculator</span> maintains a stack of commands. Each new command is executed and pushed onto the stack. When an <span class="cd">undo</span> request arrives, it simply pops the last command from the stack and executes the reverse action.</p><p class="ptext">JavaScript's function objects (and callbacks) are native command objects. They can be passed around like objects; in fact, they are true objects.</p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample JS Code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">function add(x, y) { return x + y; }
+function sub(x, y) { return x - y; }
+function mul(x, y) { return x * y; }
+function div(x, y) { return x / y; }
+ 
+var Command = function (execute, undo, value) {
+    this.execute = execute;
+    this.undo = undo;
+    this.value = value;
+}
+ 
+var AddCommand = function (value) {
+    return new Command(add, sub, value);
+};
+ 
+var SubCommand = function (value) {
+    return new Command(sub, add, value);
+};
+ 
+var MulCommand = function (value) {
+    return new Command(mul, div, value);
+};
+ 
+var DivCommand = function (value) {
+    return new Command(div, mul, value);
+};
+ 
+var Calculator = function () {
+    var current = 0;
+    var commands = [];
+ 
+    function action(command) {
+        var name = command.execute.toString().substr(9, 3);
+        return name.charAt(0).toUpperCase() + name.slice(1);
+    }
+ 
+    return {
+        execute: function (command) {
+            current = command.execute(current, command.value);
+            commands.push(command);
+            log.add(action(command) + &quot;: &quot; + command.value);
+        },
+ 
+        undo: function () {
+            var command = commands.pop();
+            current = command.undo(current, command.value);
+            log.add(&quot;Undo &quot; + action(command) + &quot;: &quot; + command.value);
+        },
+ 
+        getCurrentValue: function () {
+            return current;
+        }
+    }
+}
+ 
+// log helper
+ 
+var log = (function () {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function (msg) { log += msg + &quot;\n&quot;; },
+        show: function () { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+    var calculator = new Calculator();
+ 
+    // issue commands
+ 
+    calculator.execute(new AddCommand(100));
+    calculator.execute(new SubCommand(24));
+    calculator.execute(new MulCommand(6));
+    calculator.execute(new DivCommand(2));
+ 
+    // reverse last two commands
+ 
+    calculator.undo();
+    calculator.undo();
+ 
+    log.add(&quot;\nValue: &quot; + calculator.getCurrentValue());
+    log.show();
+}</pre> 
+ </div>
+</div><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample Typescript code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">namespace CommandPattern {
+    export class Command {
+        public execute(): void {
+            throw new Error(&quot;Abstract method!&quot;);
+        }
+    }
+
+    export class ConcreteCommand1 extends Command {
+        private receiver: Receiver;
+
+        constructor(receiver: Receiver) {
+            super();
+            this.receiver = receiver;
+        }
+
+        public execute(): void {
+            console.log(&quot;`execute` method of ConcreteCommand1 is being called!&quot;);
+            this.receiver.action();
+        }
+    }
+
+    export class ConcreteCommand2 extends Command {
+        private receiver: Receiver;
+
+        constructor(receiver: Receiver) {
+            super();
+            this.receiver = receiver;
+        }
+
+        public execute(): void {
+            console.log(&quot;`execute` method of ConcreteCommand2 is being called!&quot;);
+            this.receiver.action();
+        }
+    }
+
+    export class Invoker {
+        private commands: Command[];
+
+        constructor() {
+            this.commands = [];
+        }
+
+        public storeAndExecute(cmd: Command) {
+            this.commands.push(cmd);
+            cmd.execute();
+        }
+    }
+
+    export class Receiver {
+        public action(): void {
+            console.log(&quot;action is being called!&quot;);
+        }
+    }
+}
+
+(function main() {
+    var receiver: CommandPattern.Receiver = new CommandPattern.Receiver(),
+        command1: CommandPattern.Command  = new CommandPattern.ConcreteCommand1(receiver),
+        command2: CommandPattern.Command  = new CommandPattern.ConcreteCommand2(receiver),
+        invoker : CommandPattern.Invoker  = new CommandPattern.Invoker();
+
+    invoker.storeAndExecute(command1);
+    invoker.storeAndExecute(command2);
+
+}());
+
+// USAGE
+namespace CommandPattern {
+	export namespace Demo {
+
+		export function show() : void {
+		    var receiver: CommandPattern.Receiver = new CommandPattern.Receiver(),
+				command1: CommandPattern.Command  = new CommandPattern.ConcreteCommand1(receiver),
+				command2: CommandPattern.Command  = new CommandPattern.ConcreteCommand2(receiver),
+				invoker : CommandPattern.Invoker  = new CommandPattern.Invoker();
+
+			invoker.storeAndExecute(command1);
+			invoker.storeAndExecute(command2);
+
+
+		}
+	}
+}
+</pre> 
+ </div>
+</div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Define a Command interface with a method signature like <code>execute()</code>.</li><li>Create one or more derived classes that encapsulate some subset of the following: a &quot;receiver&quot; object, the method to invoke, the arguments to pass.</li><li>Instantiate a Command object for each deferred execution request.</li><li>Pass the Command object from the creator (aka sender) to the invoker (aka receiver).</li><li>The invoker decides when to <code>execute()</code>.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Chain of Responsibility, Command, Mediator, and Observer, address how you can decouple senders and receivers, but with different trade-offs. Command normally specifies a sender-receiver connection with a subclass.</li><li>Chain of Responsibility can use Command to represent requests as objects.</li><li>Command and Memento act as magic tokens to be passed around and invoked at a later time. In Command, the token represents a request; in Memento, it represents the internal state of an object at a particular time. Polymorphism is important to Command, but not to Memento because its interface is so narrow that a memento can only be passed as a value.</li><li>Command can use Memento to maintain the state required for an undo operation.</li><li>MacroCommands can be implemented with Composite.</li><li>A Command that must be copied before being placed on a history list acts as a Prototype.</li><li>Two important aspects of the Command pattern: interface separation (the invoker is isolated from the receiver), time separation (stores a ready-to-go processing request that's to be stated later).</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33810484/33810507.png">Screen Shot 2017-05-05 at 12.30.12 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33810484/33810526.png">Screen Shot 2017-05-05 at 12.31.11 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

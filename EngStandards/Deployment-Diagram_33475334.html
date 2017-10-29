@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Deployment Diagram</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Architectural-Documentation_33471477.html">Architectural Documentation</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="127434830.html">UML (Unified Modeling Language)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Deployment Diagram
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Ryan Fisch</span>, last modified by <span class='editor'> Jerry Shaughnessy</span> on Oct 25, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><span style="color: rgb(0,0,0);">A<span> </span></span>UML 2<span style="color: rgb(0,0,0);"><span> </span>deployment diagram depicts a static view of the run-time configuration of processing nodes and the components that run on those nodes. </span></p><p><span style="color: rgb(0,0,0);">In other words, deployment diagrams show the hardware for your system, the software that is installed on that hardware, and the middleware used to connect the disparate machines to one another. You want to create a deployment diagram for applications that are deployed to several machines, for example a point-of-sales application running on a thin-client network computer which interacts with several internal servers behind your corporate firewall or a customer service system deployed using a web services architecture such as Microsoft's .NET. Deployment diagrams can also be created to<span> </span></span>explore the architecture<span style="color: rgb(0,0,0);"><span> </span>of embedded systems, showing how the hardware and software components work together. In short, you may want to consider creating a deployment diagram for all but the most trivial of systems.</span></p><p>To determine whether you need to create a deployment model, ask yourself this: if you knew nothing about the system and someone asked you to install it and/or maintain and support it, would you want a description of how the parts of the system fit together? When I ask this question of the project teams I work with, we almost always decide to develop some form of deployment model. More important, practice has shown that deployment modeling is well worth it. Deployment models force you to think about important deployment issues long before you must deliver the actual system.</p><p>When determining how to model the deployment architecture for a system, regardless of the artifacts chosen, I will typically:</p><ol><li><strong>Identify the scope of the model</strong>. Does the diagram address how to deploy a version of a single application or does it depict the deployment of all systems within your organization?</li><li><strong>Consider fundamental technical issues</strong>. What existing systems will yours need to interact/integrate with? How robust does your system need to be (will there be redundant hardware to failover to)? What/who will need to connect to and/or interact with your system and how will they do it (via the Internet, exchanging data files, and so forth)? What middleware, including the operating system and communications approaches/protocols, will your system use? What hardware and/or software will your users directly interact with (PCs, network computers, browsers, and so forth)? How do you intend to monitor the system once it has been deployed? How secure does the system need to be (do you need a firewall, do you need to physically secure hardware, and so forth)?</li><li><strong>Identify the distribution architecture</strong>. Do you intend to take a fat-client approach where the business logic is contained in a desktop application or a thin-client approach where business logic is deployed to an application server? Will your application have two tiers, three tiers, or more? Your distribution architecture strategy will often be predetermined for your application, particularly if you are deploying your system to an existing technical environment.</li><li><strong>Identify the nodes and their connections</strong>. Your distribution strategy will define the general type of nodes you will have, but not the exact details. You need to make platform decisions, such as the hardware and operating systems to be deployed, including how the various nodes will be connected (perhaps via RMI and a message bus as in<span> </span>Figure 2).</li><li><strong>Distribute software to nodes</strong>. Both versions of the deployment diagrams indicate the software that is deployed on each node, critical information for anyone involved in development, installation, or operation of the system.</li></ol><p>Figure 1<span> below </span>presents an example of a fully rendered UML 2 deployment diagram for the student administration application. The three-dimensional boxes represent nodes, either software or hardware. Physical nodes should be labeled with the stereotype<span> </span><em>device</em>, to indicate that it's a physical device such as a computer or switch. As you can see I didn't indicate that<span> </span><em>WebServer</em><span> </span>is a device – it will at least be some sort of software artifact and very well may be one or more physical devices as well but my team hasn't made that decision yet. Remember, models evolve over time. Connections between nodes are represented with simple lines, and are assigned stereotypes such as<span> </span><em>RMI</em><span> </span>and<span> </span><em>message bus</em><span> </span>to indicate the type of connection.</p><p>Nodes can contain other nodes or software artifacts. The<span> </span><em>ApplicationServer</em><span> </span>node contains<span> </span><em>Node.js</em><span> </span>(a software node) which in turn contains three software components, a deployment specification, and a software artifact. The software components use the same notation as<span> </span>component diagrams<span> </span>(I could have annotated them with their interfaces although that wouldn't have added any value in my opinion). Deployment specifications are basically configuration files, such as an EJB deployment descriptor or lambda environment options, which define how a node should operate. They are depicted as two-sectioned rectangles with the stereotype<span> </span><em>deployment spec</em>, the top box indicates the name and the bottom box lists the deployment properties (if any) for the node. In my opinion the deployment properties is superfluous as this is the type of information that is contained in the actual deployment specification file at run time. Software artifacts are shown with the visual stereotype of a page with a folded corner or with the textual stereotype<span> </span><em>artifact</em><span> </span>(or both sometimes, which I also believe is superfluous). In this case the software artifact is a fictional persistence framework purchased from<span> </span>AmbySoft<span> </span>(the vendor is indicated with a UML property string).</p><p><br/></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="Figure 1." width="800" confluence-query-params="effects=border-simple,shadow-kn" src="attachments/33475334/127205378.png?effects=border-simple,shadow-kn&amp;width=800" data-image-src="attachments/33475334/127205378.png" data-unresolved-comment-count="0" data-linked-resource-id="127205378" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2017-10-25_12-42-21.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33475334" data-linked-resource-container-version="3" data-media-id="268691a3-868a-4f2f-8c4d-6d826c722c8b" data-media-type="file" title="Figure 1."></span></p><p><br/></p><p>When you stop and think about it, the stereotypes that I've applied to the connections aren't correct. In reality the software on the web server is communicating via the RMI protocol over the connection to the software on the application server. The physical connection between the physical hardware nodes is at a lower level, perhaps an Ethernet connection, so in reality I really should have modeled a connection between the hardware nodes with<span> </span><em>Ethernet</em><span> </span>as a stereotype and a second connection between software elements with the<span> </span><em>RMI</em><span> </span>stereotype. I'd also need to model a dependency relationship between the software connection and the hardware connection, perhaps with the stereotype of<span> </span><em>over</em>. Although this would be more accurate it would be a lot of work that I likely wouldn't get much benefit from. Remember, agile models don't need to be perfect, they need to be<span> </span><a href="Just-Barely-Good-Enough-Documentation_127303692.html" data-linked-resource-id="127303692" data-linked-resource-version="3" data-linked-resource-type="page">just barely good enough</a>.</p><p>I never draw deployment diagrams following the style show in<span> </span>Figure 1, except when I'm writing about deployment modeling, because in my opinion this notation is visually wasteful. A better example is shown in<span> </span>Figure 2. Software elements are now simply listed by their physical filenames, information that developers are very likely to be interested in, and thus a more compact diagram is possible. I've also used a drum as a visual stereotype for the<span> </span><em>University DB</em><span> </span>database, making it easier to distinguish on the diagram. Another difference is that the concise version shows less details, not as many tagged values are shown as this information can be captured in either supporting documentation, configuration files, or source code. Deployment diagrams tend to become very large very quickly because they reflect the physical complexities of your system, therefore a concise notation becomes critical to your success.</p><p><span style="color: rgb(0,0,0);"><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" alt="Figure 2" width="800" confluence-query-params="effects=border-simple,shadow-kn" src="attachments/33475334/127303684.png?effects=border-simple,shadow-kn&amp;width=800" data-image-src="attachments/33475334/127303684.png" data-unresolved-comment-count="0" data-linked-resource-id="127303684" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2017-10-25_12-46-7.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33475334" data-linked-resource-container-version="3" data-media-id="51676350-26bc-43a5-8fdc-0c4d99ebc61b" data-media-type="file" title="Figure 2"></span></span></p><p><span style="color: rgb(0,0,0);">How agile are deployment diagrams? As always, it depends on your goals. Very often less-detailed<span> </span></span>network diagrams<span style="color: rgb(0,0,0);">, which are arguably deployment diagrams with extensive use of visual stereotypes, are a better option. This is particularly true when you are modeling an environment consisting of a many interconnected machines. Sometimes a high-level<span> </span></span>free-form diagram<span style="color: rgb(0,0,0);"><span> </span>is a better option because the notation is much more flexible. The information contained in<span> </span></span>Figure 2<span style="color: rgb(0,0,0);"><span> </span>can just as readily be captured in either a network diagram or a free-form diagram in combination with installation scripts. When you think about it installation scripts are effectively &quot;deployment source code&quot;.</span></p><p><br/></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33475334/127205378.png">image2017-10-25_12-42-21.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33475334/127303684.png">image2017-10-25_12-46-7.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

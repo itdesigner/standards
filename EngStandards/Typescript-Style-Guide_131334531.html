@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Typescript Style Guide</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Code-Standards_33471212.html">Code Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Typescript_131367165.html">Typescript</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Typescript Style Guide
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span> on Oct 28, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p class="comments-section">People have asked me for my opinions on this. Personally I don't enforce these a lot on my teams and projects but it does help to have these mentioned as a tie breaker when someone feels the need to have such strong consistency. There are other things that I feel much more strongly about and those are covered in the<span> </span><a href="https://basarat.gitbooks.io/typescript/docs/tips/main.html" class="external-link" rel="nofollow">tips chapter</a><span> </span>(e.g. type assertion is bad, property setters are bad) 🌹.</p><p class="comments-section">Key Sections:</p><ul><li>Variable</li><li>Class</li><li>Interface</li><li>Type</li><li>Namespace</li><li>Enum</li><li><code>null</code><span> </span>vs.<span> </span><code>undefined</code></li><li>Formatting</li><li>Single vs. Double Quotes</li><li>Tabs vs. Spaces</li><li>Use semicolons</li><li>Annotate Arrays as<span> </span><code>Type[]</code></li><li>File Names</li></ul><h2 id="TypescriptStyleGuide-VariableandFunction">Variable and Function</h2><ul><li>Use<span> </span><code>camelCase</code><span> </span>for variable and function names</li></ul><blockquote><p class="comments-section">Reason: Conventional JavaScript</p></blockquote><p style="margin-left: 30.0px;"><strong>Bad</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">var</span> FooVar;
+<span class="hljs-function" style="color: rgb(66,113,174);"><span class="hljs-keyword" style="color: rgb(137,89,168);">function</span> <span class="hljs-title" style="color: rgb(142,144,140);">BarFunc</span>() </span>{ }
+</code></pre><p style="margin-left: 30.0px;"><strong>Good</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">var</span> fooVar;
+<span class="hljs-function" style="color: rgb(66,113,174);"><span class="hljs-keyword" style="color: rgb(137,89,168);">function</span> <span class="hljs-title" style="color: rgb(142,144,140);">barFunc</span>() </span>{ }
+</code></pre><h2 id="TypescriptStyleGuide-Class">Class</h2><ul><li>Use<span> </span><code>PascalCase</code><span> </span>for class names.</li></ul><blockquote><p class="comments-section">Reason: This is actually fairly conventional in standard JavaScript.</p></blockquote><p style="margin-left: 30.0px;"><strong>Bad</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">class</span> foo { }
+</code></pre><p style="margin-left: 30.0px;"><strong>Good</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">class</span> Foo { }
+</code></pre><ul><li>Use<span> </span><code>camelCase</code><span> </span>of class members and methods</li></ul><blockquote><p class="comments-section">Reason: Naturally follows from variable and function naming convention.</p></blockquote><p style="margin-left: 30.0px;"><strong>Bad</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">class</span> Foo {
+    Bar: <span class="hljs-built_in" style="color: rgb(245,135,31);">number</span>;
+    Baz() { }
+}
+</code></pre><p style="margin-left: 30.0px;"><strong>Good</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">class</span> Foo {
+    bar: <span class="hljs-built_in" style="color: rgb(245,135,31);">number</span>;
+    baz() { }
+}
+</code></pre><h2 id="TypescriptStyleGuide-Interface">Interface</h2><ul><li>Use<span> </span><code>PascalCase</code><span> </span>for name.</li></ul><blockquote><p class="comments-section">Reason: Similar to class</p></blockquote><ul><li>Use<span> </span><code>camelCase</code><span> </span>for members.</li></ul><blockquote><p class="comments-section">Reason: Similar to class</p></blockquote><ul><li><strong>Don't</strong><span> </span>prefix with<span> </span><code>I</code></li></ul><blockquote><p class="comments-section">Reason: Unconventional.<span> </span><code>lib.d.ts</code><span> </span>defines important interfaces without an<span> </span><code>I</code><span> </span>(e.g. Window, Document etc).</p></blockquote><p style="margin-left: 30.0px;"><strong>Bad</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">interface</span> IFoo {
+}
+</code></pre><p style="margin-left: 30.0px;"><strong>Good</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">interface</span> Foo {
+}
+</code></pre><h2 id="TypescriptStyleGuide-Type">Type</h2><ul><li>Use<span> </span><code>PascalCase</code><span> </span>for name.</li></ul><blockquote><p class="comments-section">Reason: Similar to class</p></blockquote><ul><li>Use<span> </span><code>camelCase</code><span> </span>for members.</li></ul><blockquote><p class="comments-section">Reason: Similar to class</p></blockquote><h2 id="TypescriptStyleGuide-Namespace">Namespace</h2><ul><li>Use<span> </span><code>PascalCase</code><span> </span>for names</li></ul><blockquote><p class="comments-section">Reason: Convention followed by the TypeScript team. Namespaces are effectively just a class with static members. Class names are<span> </span><code>PascalCase</code><span> </span>=&gt; Namespace names are<span> </span><code>PascalCase</code></p></blockquote><p style="margin-left: 30.0px;"><strong>Bad</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">namespace</span> foo {
+}
+</code></pre><p style="margin-left: 30.0px;"><strong>Good</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">namespace</span> Foo {
+}
+</code></pre><h2 id="TypescriptStyleGuide-Enum">Enum</h2><ul><li>Use<span> </span><code>PascalCase</code><span> </span>for enum names</li></ul><blockquote><p class="comments-section">Reason: Similar to Class. Is a Type.</p></blockquote><p style="margin-left: 30.0px;"><strong>Bad</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">enum</span> color {
+}
+</code></pre><p style="margin-left: 30.0px;"><strong>Good</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">enum</span> Color {
+}
+</code></pre><ul><li>Use<span> </span><code>PascalCase</code><span> </span>for enum member</li></ul><blockquote><p class="comments-section">Reason: Convention followed by TypeScript team i.e. the language creators e.g<span> </span><code>SyntaxKind.StringLiteral</code>. Also helps with translation (code generation) of other languages into TypeScript.</p></blockquote><p style="margin-left: 30.0px;"><strong>Bad</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">enum</span> Color {
+    red
+}
+</code></pre><p style="margin-left: 30.0px;"><strong>Good</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">enum</span> Color {
+    Red
+}
+</code></pre><h2 id="TypescriptStyleGuide-Nullvs.Undefined">Null vs. Undefined</h2><ul><li>Prefer not to use either for explicit unavailability</li></ul><blockquote><p class="comments-section">Reason: these values are commonly used to keep a consistent structure between values. In TypeScript you use<span> </span><em>types</em><span> </span>to denote the structure</p></blockquote><p style="margin-left: 30.0px;"><strong>Bad</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">let</span> foo = {x:<span class="hljs-number" style="color: rgb(245,135,31);">123</span>,y:<span class="hljs-literal" style="color: rgb(245,135,31);">undefined</span>};
+</code></pre><p style="margin-left: 30.0px;"><strong>Good</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">let</span> foo:{x:<span class="hljs-built_in" style="color: rgb(245,135,31);">number</span>,y?:<span class="hljs-built_in" style="color: rgb(245,135,31);">number</span>} = {x:<span class="hljs-number" style="color: rgb(245,135,31);">123</span>};
+</code></pre><ul><li>Use<span> </span><code>undefined</code><span> </span>in general (do consider returning an object like<span> </span><code>{valid:boolean,value?:Foo}</code>instead)</li></ul><p style="margin-left: 30.0px;"><strong><em>Bad</em></strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">return</span> <span class="hljs-literal" style="color: rgb(245,135,31);">null</span>;
+</code></pre><p style="margin-left: 30.0px;"><strong><em>Good</em></strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">return</span> <span class="hljs-literal" style="color: rgb(245,135,31);">undefined</span>;
+</code></pre><ul><li>Use<span> </span><code>null</code><span> </span>where its a part of the API or conventional</li></ul><blockquote><p class="comments-section">Reason: It is conventional in Node.js e.g.<span> </span><code>error</code><span> </span>is<span> </span><code>null</code><span> </span>for NodeBack style callbacks.</p></blockquote><p style="margin-left: 30.0px;"><strong>Bad</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts">cb(<span class="hljs-literal" style="color: rgb(245,135,31);">undefined</span>)
+</code></pre><p style="margin-left: 30.0px;"><strong>Good</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts">cb(<span class="hljs-literal" style="color: rgb(245,135,31);">null</span>)
+</code></pre><ul><li>Use<span> </span><em>truthy</em><span> </span>check for<span> </span><strong>objects</strong><span> </span>being<span> </span><code>null</code><span> </span>or<span> </span><code>undefined</code></li></ul><p style="margin-left: 30.0px;"><strong>Bad</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">if</span> (error === <span class="hljs-literal" style="color: rgb(245,135,31);">null</span>)
+</code></pre><p style="margin-left: 30.0px;"><strong>Good</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">if</span> (error)
+</code></pre><ul><li>Use<span> </span><code>== undefined</code><span> </span>/<span> </span><code>!= undefined</code><span> </span>(not<span> </span><code>===</code><span> </span>/<span> </span><code>!==</code>) to check for<span> </span><code>null</code><span> </span>/<span> </span><code>undefined</code><span> </span>on primitives as it works for both<span> </span><code>null</code>/<code>undefined</code><span> </span>but not other falsy values (like<span> </span><code>''</code>,<code>0</code>,<code>false</code>) e.g.</li></ul><p style="margin-left: 30.0px;"><strong>Bad</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">if</span> (error !== <span class="hljs-literal" style="color: rgb(245,135,31);">null</span>)
+</code></pre><p style="margin-left: 30.0px;"><strong>Good</strong></p><pre style="margin-left: 30.0px;"><code class="lang-ts"><span class="hljs-keyword" style="color: rgb(137,89,168);">if</span> (error != <span class="hljs-literal" style="color: rgb(245,135,31);">undefined</span>)
+</code></pre><p class="comments-section" style="margin-left: 30.0px;">PS:<span> </span><a href="https://basarat.gitbooks.io/typescript/docs/tips/null.html" class="external-link" rel="nofollow">More about<span> </span><code>null</code></a></p><h2 id="TypescriptStyleGuide-Formatting">Formatting</h2><p class="comments-section">The TypeScript compiler ships with a very nice formatting language service. Whatever output it gives by default is good enough to reduce the cognitive overload on the team.</p><p class="comments-section">Use<span> </span><a href="https://github.com/vvakame/typescript-formatter" class="external-link" rel="nofollow"><code>tsfmt</code></a><span> </span>to automatically format your code on the command line. Also your IDE (atom/vscode/vs/sublime) already has formatting support built-in.</p><p class="comments-section">Examples:</p><pre><code class="lang-ts"><span class="hljs-comment" style="color: rgb(142,144,140);">// Space before type i.e. foo:&lt;space&gt;string</span>
+<span class="hljs-keyword" style="color: rgb(137,89,168);">const</span> foo: <span class="hljs-built_in" style="color: rgb(245,135,31);">string</span> = <span class="hljs-string" style="color: rgb(113,140,0);">&quot;hello&quot;</span>;
+</code></pre><h2 id="TypescriptStyleGuide-Quotes">Quotes</h2><ul><li>Prefer single quotes (<code>'</code>) unless escaping.</li></ul><blockquote><p class="comments-section">Reason: More JavaScript teams do this (e.g.<span> </span><a href="https://github.com/airbnb/javascript" class="external-link" rel="nofollow">airbnb</a>,<span> </span><a href="https://github.com/feross/standard" class="external-link" rel="nofollow">standard</a>,<span> </span><a href="https://github.com/npm/npm" class="external-link" rel="nofollow">npm</a>,<span> </span><a href="https://github.com/nodejs/node" class="external-link" rel="nofollow">node</a>,<span> </span><a href="https://github.com/angular/angular/" class="external-link" rel="nofollow">google/angular</a>,<span> </span><a href="https://github.com/facebook/react" class="external-link" rel="nofollow">facebook/react</a>). Its easier to type (no shift needed on most keyboards).<span> </span><a href="https://github.com/prettier/prettier/issues/1105" class="external-link" rel="nofollow">Prettier team recommends single quotes as well</a></p><p class="comments-section">Double quotes are not without merit: Allows easier copy paste of objects into JSON. Allows people to use other languages to work without changing their quote character. Allows you to use apostrophes e.g.<span> </span><code>He's not going.</code>. But I'd rather not deviate from where the JS Community is fairly decided.</p></blockquote><ul><li>When you can't use double quotes, try using back ticks (`).</li></ul><blockquote><p class="comments-section">Reason: These generally represent the intent of complex enough strings.</p></blockquote><h2 id="TypescriptStyleGuide-Spaces">Spaces</h2><ul><li>Use<span> </span><code>2</code><span> </span>spaces. Not tabs.</li></ul><blockquote><p class="comments-section">Reason: More JavaScript teams do this (e.g.<span> </span><a href="https://github.com/airbnb/javascript" class="external-link" rel="nofollow">airbnb</a>,<span> </span><a href="https://github.com/rwaldron/idiomatic.js" class="external-link" rel="nofollow">idiomatic</a>,<span> </span><a href="https://github.com/feross/standard" class="external-link" rel="nofollow">standard</a>,<span> </span><a href="https://github.com/npm/npm" class="external-link" rel="nofollow">npm</a>,<span> </span><a href="https://github.com/nodejs/node" class="external-link" rel="nofollow">node</a>,<span> </span><a href="https://github.com/angular/angular/" class="external-link" rel="nofollow">google/angular</a>,<span> </span><a href="https://github.com/facebook/react" class="external-link" rel="nofollow">facebook/react</a>). The TypeScript/VSCode teams use 4 spaces but are definitely the exception in the ecosystem.</p></blockquote><h2 id="TypescriptStyleGuide-Semicolons">Semicolons</h2><ul><li>Use semicolons.</li></ul><blockquote><p class="comments-section">Reasons: Explicit semicolons helps language formatting tools give consistent results. Missing ASI (automatic semicolon insertion) can trip new devs e.g.<span> </span><code>foo() \n (function(){})</code><span> </span>will be a single statement (not two).</p></blockquote><h2 id="TypescriptStyleGuide-Array">Array</h2><ul><li>Annotate arrays as<span> </span><code>foos:Foo[]</code><span> </span>instead of<span> </span><code>foos:Array&lt;Foo&gt;</code>.</li></ul><blockquote><p class="comments-section">Reasons: Its easier to read. Its used by the TypeScript team. Makes easier to know something is an array as the mind is trained to detect<span> </span><code>[]</code>.</p></blockquote><h2 id="TypescriptStyleGuide-Filename">Filename</h2><p class="comments-section">Name files with<span> </span><code>camelCase</code>. E.g.<span> </span><code>accordian.tsx</code>,<span> </span><code>myControl.tsx</code>,<span> </span><code>utils.ts</code>,<span> </span><code>map.ts</code><span> </span>etc.</p><blockquote><p class="comments-section">Reason: Conventional across many JS teams.</p></blockquote>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

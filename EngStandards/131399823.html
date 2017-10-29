@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Pub / Sub</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Conceptual-Patterns_131203160.html">Conceptual Patterns</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Pub / Sub
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Oct 28, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<p style="text-align: justify;">The pattern works using a middleman; an agent that bridges publishers and subscribers. Publishers are the objects that fire events when they are done doing some processing and subscribers are objects who wish to be notified when the publisher is done – i.e. they are interested in the work of publishers.</p><p style="text-align: justify;">A good example is that of a radio station where people tune in to their favourite programs. The publisher has no knowledge of the subscribers or what programs they are listening to; he only needs to publish his program. Subscribers too have no way of knowing what goes on during program production; when their favourite program is running, they can respond by tuning in or informing a friend.</p><p style="text-align: justify;">PubSub achieves very loose coupling: instead of looking for ways to link up two discrete systems; you can have one hand off messages and have the second part consume these messages.</p><p style="text-align: justify;">While similar to a Queue, a Pub/Sub is different in that EVERY receiver gets a copy of the message wherein as a queue, only one of the consumers gets a copy (competing consumer).</p>
+</div></div><p><br/></p><p>Frequency of us in JavaScript:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-green confluenceTd" data-highlight-colour="green">4</td><td class="highlight-green confluenceTd" data-highlight-colour="green">5</td></tr></tbody></table></div><p>VERY HIGH</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p>The Pub/Sub pattern is an excellent solution when:</p><ul><li>an event can trigger one or more unknown actions</li><li>actions / activities need to be added and removed on a regular basis</li><li>work can be completed asynchronously by a different process</li><li>work needs to be scaled across many devices</li><li>many processes need to respond to an event</li></ul>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p style="text-align: justify;"><strong>Publishers</strong><span> </span>are the entities who create/publish a message on a topic.<span> </span><strong>Subscribers</strong><span> </span>are the entities who subscribe to messages on a topic.</p><p style="text-align: justify;">In a topic based Publish-Subscribe pattern, Publishers tag each message with the a<span> </span><strong>topic </strong>instead of referencing specific Subscribers. Messaging system then sends the message to all Subscribers who have asked to receive messages on that topic.</p><p style="text-align: justify;">Publishers only concern themselves with creating the original message and can leave the task of servicing the Subscribers to the messaging infrastructure (this is where pattern comes into picture).</p><p><br/></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p style="text-align: justify;"><span style=""><strong>Design of the Publish-Subscribe pattern:</strong></span></p><p style="text-align: justify;"><br/></p><p><br/></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="250" src="attachments/131399823/131072190.png?height=250" data-image-src="attachments/131399823/131072190.png" data-unresolved-comment-count="0" data-linked-resource-id="131072190" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2017-10-27_23-25-45.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="131399823" data-linked-resource-container-version="2" data-media-id="b3f3fd35-9c8b-4846-a879-97bf40a55853" data-media-type="file"></span></p><p style="text-align: justify;"><br/></p><p style="text-align: justify;">There are <strong>three</strong> components in Pub-Sub pattern: Publisher, Subscriber and PubSub Service.</p><ol style="text-align: justify;"><li><strong>Message Publisher</strong><span> </span>sends messages to the PubSub Service without any knowledge of message subscribers</li><li><strong>Message Subscribers</strong><span> </span>will only get the messages for which topics they are registered with the PubSubService.<strong> E.g.</strong><span> </span>say we have three different topics (message types): a, b, c but only topic a is of interest to Subscriber 1, topics b and c are of interest to Subscriber 2 and Subscriber 3 wants messages for topics a and c. So subscriber 1 will be notified for topic a, Subscriber 2 will be notified for topics b and c, and Subscriber 3 will be notified for topics a and c by the PubSub Service.</li><li><strong>Publishers</strong><span> </span>tag each message with a topic, and send it to the<span> </span><strong>PubSubService which acts like a middleman</strong><span> </span>between Publishers and receivers.</li><li><strong>Subscriber</strong><span> </span>registers itself with PubSubService (middleman) and tells that it’s interested in messages related to a particular topic.</li><li>Publisher-Subscriber pattern is highly<span> </span><strong>loosely coupled architecture</strong><span> </span>where the publishers don’t know who the subscribers are and subscribers don’t know who the publishers of topic are.</li><li>While Pub-Sub pattern is very similar to Observer pattern there are 2 main differences:<ol><li>In<span> </span><strong>Observer pattern</strong>, the observers are aware of the observables. In<span> </span><strong>Publisher-Subscriber pattern<span> </span></strong>the publishers and subscribers don’t need to know each other.</li><li><strong>Observer </strong>pattern is mostly implemented in a <strong><em>synchronous</em></strong> way i.e. the observable calls the appropriate method of all its observers when some event occurs. The<span> </span><strong>Publisher-Subscriber</strong> pattern is mostly implemented in an <strong><em>asynchronous</em></strong> way (using message queue).</li></ol></li></ol><p>Typical implementations of Pub/Sub use all three components running in separate processes, although it is possible to implement all of them within a single scope.  In combining them all, there is a loss of some of the scaling benefits (depending on the programming toolset).  </p><p>Typical examples of Pub/Sub tools in common use include: AWS SNS, Azure ServiceBus, RabbitMQ, Tibco, and any number of open source implementations.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p style="text-align: justify;">Let me use one of the most common features in modern web applications to introduce the problem: sending notification emails. Let’s say we’re building an e-commerce site and we’d like to send a notification email to the customer when they make a purchase. A simple solution, and probably the most common one, could be something like this:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Non Pub/Sub Sample</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">var Order = function(params) {
+  this.params = params;
+};
+
+Order.prototype = {
+  save: function() {
+    // save order
+    console.log(&quot;Order saved&quot;);
+    this.sendEmail();
+  },
+
+  sendEmail: function() {
+    var mailer = new Mailer();
+    mailer.sendPurchaseEmail(this.params);
+  }
+};
+
+var Mailer = function() {};
+
+Mailer.prototype = {
+  sendPurchaseEmail: function(params) {
+    console.log(&quot;Email sent to &quot; + params.userEmail);
+  }
+};
+
+&gt; var order = new Order({ userEmail: &#39;john@gmail.com&#39;  })
+&gt; order.save();
+&gt; &quot;Order saved&quot;
+&gt; &quot;Email sent to john@gmail.com&quot;</pre>
+</div></div><p style="text-align: justify;"><br/></p><p style="text-align: justify;">You got the idea, right? This code has a few problems. Probably the most important one is that<span> </span><code>Order</code><span> </span>and<span> </span><code>Mailer</code><span> </span>are tightly coupled. Usually you know two components are coupled when a change to one requires a change in the other one, and that’s the case. If we want to change the name of the<span> </span><code>sendPurchaseEmail</code>method or their params, we’ll have to change<span> </span><code>Order</code><span> </span>implementation as well. This change may look something pretty straightforward, but in a large application this bad practice means having a tightly coupled application where a small change can easily end up in a waterfall of changes.</p><p style="text-align: justify;">Another problem you’ll find using that approach is that you’ll have to mock lot of stuff in your tests, becoming a nightmare in large applications.</p><p style="text-align: justify;">So now that we know the problems of this approach, let’s have a look at how we can improve this code using the<span> </span><strong>Publish/Subscribe</strong><span> </span>pattern.</p><p style="text-align: justify;">Now that we know how the pub/sub pattern works, we can use it to improve the code shown above. Let’s start creating our event system.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Improved Sample</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">var EventBus = {
+  topics: {},
+
+  subscribe: function(topic, listener) {
+    // create the topic if not yet created
+    if(!this.topics[topic]) this.topics[topic] = [];
+
+    // add the listener
+    this.topics[topic].push(listener);
+  },
+
+  publish: function(topic, data) {
+    // return if the topic doesn&#39;t exist, or there are no listeners
+    if(!this.topics[topic] || this.topics[topic].length &lt; 1) return;
+
+    // send the event to all listeners
+    this.topics[topic].forEach(function(listener) {
+      listener(data || {});
+    });
+  }
+};</pre>
+</div></div><p style="text-align: justify;"><br/></p><p style="text-align: justify;">This is a simple implementation of the pub/sub pattern, you can find some libraries that make a full implementation of the pattern like<span> </span><a href="http://radio.uxder.com/" class="external-link" rel="nofollow">Radio.js</a>,<span> </span><a href="http://amplifyjs.com/api/pubsub/" class="external-link" rel="nofollow">Amplify.js</a><span> </span>and many others.</p><p style="text-align: justify;">Now we can use our brand new<span> </span><code>EventBus</code><span> </span>object to send messages between objects</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Improved Sample</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">&gt; EventBus.subscribe(&#39;foo&#39;, alert);
+&gt; EventBus.publish(&#39;foo&#39;, &#39;Hello World!&#39;);</pre>
+</div></div><div class="highlight" style="text-align: left;"><pre><br/></pre></div><p style="text-align: justify;">Now let’s see how to use the<span> </span><code>EventBus</code><span> </span>to decouple<span> </span><code>Order</code><span> </span>and<span> </span><code>Mailer</code></p><p style="text-align: justify;"><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Improved Sample</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">var Mailer = function() {
+  EventBus.subscribe(&#39;order/new&#39;, this.sendPurchaseEmail);
+};
+
+Mailer.prototype = {
+  sendPurchaseEmail: function(userEmail) {
+    console.log(&quot;Sent email to &quot; + userEmail);
+  }
+};
+
+var Order = function(params) {
+  this.params = params;
+};
+
+Order.prototype = {
+  saveOrder: function() {
+    EventBus.publish(&#39;order/new&#39;, this.params.userEmail);
+  }
+};
+
+&gt; var mailer = new Mailer();
+&gt; var order = new Order({userEmail: &#39;john@gmail.com&#39;});
+&gt; order.saveOrder();
+&gt; &quot;Sent email to john@gmail.com&quot;</pre>
+</div></div><p style="text-align: justify;"><br/></p><div class="highlight" style="text-align: left;"><pre><br/></pre></div><p style="text-align: justify;">You can see how<span> </span><code>Order</code><span> </span>and<span> </span><code>Mailer</code><span> </span>don’t know anything about each other. Now we can change the implementation of both functions without caring about the impact of the changes, it’s just a matter of preserving the events we’re firing or listening to. Furthermore we can test both functions in isolation without the need of mock objects, which is always a great thing.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="auto-cursor-target">Below is a Pub/Sub pattern implemented solely within a javascript component.  In this sample, we are not using any external Pub/Sub frameworks such as SNS.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">var makePubSub = function () {
+	var callbacks = {},
+        publish = function (){
+            //Turn arguments object into real array
+            var args = Array.prototype.slice.call(arguments, 0);
+    
+            //Extract the event name which is the first entry
+            var ev = args.shift();
+
+            //Return if callbacks object doesn&#39;t contain 
+	    //any entry for event
+            var list, i, l;
+            if(!callbacks[ev]) { return this; }
+            list = callbacks[ev];
+    
+            //Invoke the callbacks, passing in the rest of parameters
+            for (i=0, l=list.length; i&lt;l; i=i+1){
+                list[i].apply(this, args);
+            }
+
+            return this;
+        },
+        subscribe = function (ev, callback){
+	    //Check if ev is already registered
+	    // If it isn&#39;t create an array entry for it
+            if(!callbacks[ev]){
+                callbacks[ev] = [];
+            }
+            callbacks[ev].push(callback);
+            return this;
+        };
+
+	return {pub: publish, sub: subscribe};
+};
+
+test = makePubSub()
+test.sub(&#39;alert&#39;, function(){alert(&#39;hello&#39;);})
+test.pub(&#39;alert&#39;)</pre>
+</div></div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ul class="inline-task-list" data-inline-tasks-content-id="131399823"><li data-inline-task-id="1"><span class="placeholder-inline-tasks">Ideal when you need a number of actions to occur that do not depend on each other or being executed in any particular order</span></li><li data-inline-task-id="2"><span class="placeholder-inline-tasks">excellent when you need to loosely couple systems</span></li><li data-inline-task-id="3"><span class="placeholder-inline-tasks">great to use when you want or need to offload work to an external out-of-band process</span></li></ul>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p>Advantages</p><ul><li>loose coupling</li><li>asynchronous operations out of band</li><li>deferred work</li><li>queuing like behavior</li><li>scalable design</li><li>cleaner code implementation</li><li>single responsibility principle easy to implement</li></ul><p>Disadvantages</p><ul><li>more complexity</li><li>a more difficult to follow work flow</li><li>the need to track events across multiple systems</li><li>The middleman might not notify the system of message delivery status; so there is no way to know of failed or successful deliveries. Tighter coupling is needed to guarantee this.</li><li>Publishers have no knowledge of the status of the subscriber and vice versa. How can you be sure everything is alright on the other end? You never can say…</li><li>As the number of subscribers and publishers increase, the increasing number of messages being exchanged leads to instabilities in this architecture; it buckles under load.</li><li>Intruders (malicious publishers) can invade the system and breach it; this can lead to bad messages being published and subscribers having access to messages that they shouldn’t normally receive.</li><li>Update relationships between subscribers and publishers can be a thorny issue – afterall they don’t know about each other.</li><li>The need for a middleman/broker, message specification and participant rules adds some more complexity to the system.</li></ul>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/131399823/131072190.png">image2017-10-27_23-25-45.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

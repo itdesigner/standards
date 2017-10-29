@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Adapter Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Adapter Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Aug 31, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p><br/></p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Convert the interface of a class into another interface clients expect. Adapter lets classes work together that couldn't otherwise because of incompatible interfaces.</li><li>Wrap an existing class with a new interface.</li><li>Impedance match an old component to a new system</li></ul>
+</div></div><p>Frequency of use in JavaScript:</p><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col/><col/><col/><col/><col/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-green confluenceTd" data-highlight-colour="green">4</td><td class="highlight-yellow confluenceTd" data-highlight-colour="yellow">5</td></tr></tbody></table></div><p>MEDIUM HIGH</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">An &quot;off the shelf&quot; component offers compelling functionality that you would like to reuse, but its &quot;view of the world&quot; is not compatible with the philosophy and architecture of the system currently being developed.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p>Reuse has always been painful and elusive. One reason has been the tribulation of designing something new, while reusing something old. There is always something not quite right between the old and the new. It may be physical dimensions or misalignment. It may be timing or synchronization. It may be unfortunate assumptions or competing standards.</p><p>It is like the problem of inserting a new three-prong electrical plug in an old two-prong wall outlet – some kind of adapter or intermediary is necessary.</p><p>Adapter is about creating an intermediary abstraction that translates, or maps, the old component to the new system. Clients call methods on the Adapter object which redirects them into calls to the legacy component. This strategy can be implemented either with inheritance or with aggregation.</p><p>Adapter functions as a wrapper or modifier of an existing class. It provides a different or translated view of that class.</p><p style="text-align: justify;">To use an adapter:</p><ol style="text-align: justify;"><li>The client makes a request to the adapter by calling a method on it using the target interface.</li><li>The adapter translates that request on the adaptee using the adaptee interface.</li><li>Client receive the results of the call and is unaware of adapter’s presence.</li></ol>
+</div></div><p><br/></p><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">Below, a legacy Rectangle component's </span><code>display()</code><span style="color: rgb(68,68,68);"> method expects to receive &quot;x, y, w, h&quot; parameters. But the client wants to pass &quot;upper left x and y&quot; and &quot;lower right x and y&quot;. This incongruity can be reconciled by adding an additional level of indirection – i.e. an Adapter object.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33796071/33796203.png" data-image-src="attachments/33796071/33796203.png" data-unresolved-comment-count="0" data-linked-resource-id="33796203" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 10.31.04 AM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33796071" data-linked-resource-container-version="9" data-media-id="bf01ca57-6c0d-4937-a03a-fc64506a733c" data-media-type="file"></span></p><p><span style="color: rgb(68,68,68);">The Adapter could also be thought of as a &quot;wrapper&quot;.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33796071/33796216.png" data-image-src="attachments/33796071/33796216.png" data-unresolved-comment-count="0" data-linked-resource-id="33796216" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 10.32.20 AM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33796071" data-linked-resource-container-version="9" data-media-id="d1fb7b33-406b-4f5b-814f-6402683bc1e6" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Adapter pattern allows otherwise incompatible classes to work together by converting the interface of one class into an interface expected by the clients. Socket wrenches provide an example of the Adapter. A socket attaches to a ratchet, provided that the size of the drive is the same. Typical drive sizes in the United States are 1/2&quot; and 1/4&quot;. Obviously, a 1/2&quot; drive ratchet will not fit into a 1/4&quot; drive socket unless an adapter is used. A 1/2&quot; to 1/4&quot; adapter has a 1/2&quot; female connection to fit on the 1/2&quot; drive ratchet, and a 1/4&quot; male connection to fit in the 1/4&quot; drive socket.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Sample Code</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">The example code below shows an online shopping cart in which a shipping object is used to compute shipping costs. The old <span class="cd">Shipping</span> object is replaced by a new and improved Shipping object that is more secure and offers better prices.</p><p class="ptext">The new object is named <span class="cd">AdvancedShipping</span> and has a very different interface which the client program does not expect. <span class="cd">ShippingAdapter</span> allows the client program to continue functioning without any API changes by mapping (adapting) the old <span class="cd">Shipping</span> interface to the new <span class="cd">AdvancedShipping</span> interface.</p><p class="ptext">The <span class="cd">log</span> function is a helper which collects and displays results.</p><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample JS Code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">// old interface
+ 
+function Shipping() {
+    this.request = function(zipStart, zipEnd, weight) {
+        // ...
+        return &quot;$49.75&quot;;
+    }
+}
+ 
+// new interface
+ 
+function AdvancedShipping() {
+    this.login = function(credentials) { /* ... */ };
+    this.setStart = function(start) { /* ... */ };
+    this.setDestination = function(destination) { /* ... */ };
+    this.calculate = function(weight) { return &quot;$39.50&quot;; };
+}
+ 
+// adapter interface
+ 
+function ShippingAdapter(credentials) {
+    var shipping = new AdvancedShipping();
+ 
+    shipping.login(credentials);
+ 
+    return {
+        request: function(zipStart, zipEnd, weight) {
+            shipping.setStart(zipStart);
+            shipping.setDestination(zipEnd);
+            return shipping.calculate(weight);
+        }
+    };
+}
+ 
+// log helper
+ 
+var log = (function () {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function (msg) { log += msg + &quot;\n&quot;; },
+        show: function () { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+    var shipping = new Shipping();
+    var credentials = {token: &quot;30a8-6ee1&quot;};
+    var adapter = new ShippingAdapter(credentials);
+ 
+    // original shipping object and interface
+ 
+    var cost = shipping.request(&quot;78701&quot;, &quot;10010&quot;, &quot;2 lbs&quot;);
+    log.add(&quot;Old cost: &quot; + cost);
+ 
+    // new shipping object with adapted interface
+ 
+    cost = adapter.request(&quot;78701&quot;, &quot;10010&quot;, &quot;2 lbs&quot;);
+ 
+    log.add(&quot;New cost: &quot; + cost);
+    log.show();
+}
+
+
+</pre> 
+ </div>
+</div><div class="code panel pdl" style="border-width: 1px;">
+ <div class="codeHeader panelHeader pdl hide-border-bottom" style="border-bottom-width: 1px;">
+  <b class=" code-title">Sample Typescript code</b>
+  <span class="collapse-source expand-control" style="display:none;"><span class="expand-control-icon icon">&nbsp;</span><span class="expand-control-text">Expand source</span></span>
+  <span class="collapse-spinner-wrapper"></span>
+ </div>
+ <div class="codeContent panelContent pdl hide-toolbar"> 
+  <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse; collapse: true" data-theme="Eclipse">namespace AdapterPattern {
+
+    export class Adaptee {
+        public method(): void {
+            console.log(&quot;`method` of Adaptee is being called&quot;);
+        }
+    }
+
+    export interface Target {
+        call(): void;
+    }
+
+    export class Adapter implements Target {
+        public call(): void {
+            console.log(&quot;Adapter's `call` method is being called&quot;);
+            var adaptee: Adaptee = new Adaptee();
+            adaptee.method();
+        }
+    }
+}
+
+// USAGE
+namespace AdapterPattern {
+	export namespace Demo {
+
+		export function show() : void {
+			var adapter: AdapterPattern.Adapter = new AdapterPattern.Adapter();
+			adapter.call();
+		}
+	}
+}
+</pre> 
+ </div>
+</div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Identify the players: the component(s) that want to be accommodated (i.e. the client), and the component that needs to adapt (i.e. the adaptee).</li><li>Identify the interface that the client requires.</li><li>Design a &quot;wrapper&quot; class that can &quot;impedance match&quot; the adaptee to the client.</li><li>The adapter/wrapper class &quot;has a&quot; instance of the adaptee class.</li><li>The adapter/wrapper class &quot;maps&quot; the client interface to the adaptee interface.</li><li>The client uses (is coupled to) the new interface</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<ul style="text-align: justify;"><li>All requests are forwarded, so there is a slight increase in the overhead.</li><li>Sometimes many adaptations are required along an adapter chain to reach the type which is required.</li></ul>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Adapter makes things work after they're designed; Bridge makes them work before they are.</li><li>Bridge is designed up-front to let the abstraction and the implementation vary independently. Adapter is retrofitted to make unrelated classes work together.</li><li>Adapter provides a different interface to its subject. Proxy provides the same interface. Decorator provides an enhanced interface.</li><li>Adapter is meant to change the interface of an existing object. Decorator enhances another object without changing its interface. Decorator is thus more transparent to the application than an adapter is. As a consequence, Decorator supports recursive composition, which isn't possible with pure Adapters.</li><li>Facade defines a new interface, whereas Adapter reuses an old interface. Remember that Adapter makes two existing interfaces work together as opposed to defining an entirely new one.</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33796071/33796121.svg">Adapter_1.svg</a> (image/svg+xml)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33796071/33796127.svg">Adapter_2.svg</a> (image/svg+xml)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33796071/33796203.png">Screen Shot 2017-05-04 at 10.31.04 AM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33796071/33796216.png">Screen Shot 2017-05-04 at 10.32.20 AM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

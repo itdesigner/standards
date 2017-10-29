@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Common API Mistakes</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Services-Guidance%2C-Design%2C-and-Review-Criteria_127664218.html">Services Guidance, Design, and Review Criteria</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Common API Mistakes
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on Oct 28, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout two-right-sidebar" data-layout="two-right-sidebar">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<p>Have you ever used an API that returned an HTML error page instead of the JSON you expected, causing your code to blow up? What about receiving a 200 OK status code with a cryptic error message in your response?</p><p>Building an API can be as quick as serving fast food. Frameworks like Express, Flask, and Sinatra combined with Heroku or zeit’s now help any developer have an API up and running in a few minutes.</p><p>However, building a truly secure, sturdy, hearty API can take a little more work, just as a chef takes more time when crafting a great meal. You need great docs, clear and concise error messages, and to meet developers’ expectations of how your API should work.</p><p>On the other side of the table, we have developers interacting with these APIs. And we, as developers, sometimes make mistakes. We can make false assumptions about how an endpoint should work, not read the docs closely enough, or just not have enough coffee that morning to parse an error message.</p><p>Proper testing and monitoring tools can help us uncover issues that would otherwise stay hidden by a lack of integration tests, or real-world use case scenarios.</p><p>Here’s our list of 6 common mistakes that can catch you off guard, why they happen, and how you can avoid them.</p><h2 style="margin-left: 30.0px;" id="CommonAPIMistakes-USINGHTTP://INSTEADOFHTTPS://"><strong>USING HTTP:// INSTEAD OF HTTPS:// </strong></h2><p style="margin-left: 30.0px;">Forgetting a single “s” can get you in a lot of trouble when testing an API. Some APIs may only support HTTPS, while others may support HTTP for some endpoints and not others.</p><p style="margin-left: 30.0px;">Even when an API supports both, you might still run into some errors. For example, some APIs redirect HTTP traffic to their HTTPS counterpart, but not all frameworks will be configured to follow a 302 status code. Node.js request module, for example, will follow GET redirects by default, but you have to explicitly set followAllRedirects to true if you want to follow redirects to POST and other methods.</p><p style="margin-left: 30.0px;">APIs may also stop supporting HTTP, so it’s important to stay up-to-date with any changes. Good API providers will let users know beforehand via email and any social media channels they have. Another step you can take is to use a tool like Hitch, which lets you follow certain APIs and be notified if anything changes.</p><p style="margin-left: 30.0px;">If you’re asking yourself if your API should support HTTPS, then the answer is yes. The process for getting certificates used to be a hassle, but with solutions like Let’s Encrypt and Cloudflare, there’s no excuse to not support HTTPS.  If you’re unsure why you should do it, or don’t think you should because you’re not transmitting any sensitive data, I highly recommend reading Why HTTPS for Everything? from <a href="http://CIO.gov" class="external-link" rel="nofollow">CIO.gov</a>.</p><h2 style="margin-left: 30.0px;" id="CommonAPIMistakes-UNEXPECTEDERRORCODES"><strong> UNEXPECTED ERROR CODES </strong></h2><p style="margin-left: 30.0px;">A good API error message will allow developers to quickly find why, and how, they can fix a failed call. A bad API error message will cause an increase in blood pressure, along with a high number of support tickets and wasted time.</p><p style="margin-left: 30.0px;">I ran into this issue a couple of weeks ago while trying to retrieve an API’s access token. The code grant flow would return an error message saying that my request was invalid, but it wouldn’t give me any more details. After an hour banging my head against the wall, I realized I hadn’t paid attention to the docs and forgot to include an Authorization header with a base64 encoded string of my application’s client_id and client_secret.</p><p style="margin-left: 30.0px;">Good usage of HTTP status code and clear error messages may not be sexy, but it can be the difference between a developer evangelizing your API and an angry comment.</p><p style="margin-left: 30.0px;">Steve Marx had this to say in “How many HTTP status codes should your API use?”: “...developers will have an easier time learning and understanding an API if it follows the same conventions as other APIs they’re familiar with.” As an API provider, you don’t have to implement 70+ different status codes. Another great advice by Steve is:</p><blockquote><p style="margin-left: 30.0px;">“Following this pragmatic approach, APIs should probably use at least 3 status codes (e.g. 200, 400, 500) and should augment with status codes that have specific, actionable meaning across multiple APIs. Beyond that, keep your particular developer audience in mind and try to meet their expectations.”</p></blockquote><p style="margin-left: 30.0px;">Twilio is a great example of best practices for status code and error messages. They go the extra mile and include links in their responses, so the error message is concise while still providing the developer with more information in case they need it.</p><p style="margin-left: 30.0px;"><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" height="250" confluence-query-params="effects=border-simple,shadow-kn" src="attachments/131334618/131236242.png?effects=border-simple,shadow-kn&amp;height=250" data-image-src="attachments/131334618/131236242.png" data-unresolved-comment-count="0" data-linked-resource-id="131236242" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-10-28 at 9.28.08 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="131334618" data-linked-resource-container-version="2" data-media-id="fca238e0-c37e-41ab-806a-eeaf8e492ee7" data-media-type="file"></span></p><p style="margin-left: 30.0px;">As API consumers, we need to be careful and not assume that an API 200 status code means the request made a successful call and returned the information we want. Some APIs, like Facebook’s Graph API, always return a 200 status code, with the error being included in the response data. So, when testing and monitoring APIs, always be careful and don’t automatically assume that a 200 means everything is OK.</p><p style="margin-left: 30.0px;">Another great resource about response handling is Mike Stowe’s blog post on API Best Practices: Response Handling.</p><h2 style="margin-left: 30.0px;" id="CommonAPIMistakes-USINGTHEWRONGHTTPMETHOD"><strong>USING THE WRONG HTTP METHOD </strong></h2><p style="margin-left: 30.0px;">This is an easy one, but surprisingly common. A lot of times this can be blamed on poor documentation. Maybe the endpoints do not explicitly say what methods are supported between GET/POST/PUT etc., or they have the wrong verb.</p><p style="margin-left: 30.0px;">Tools can also play tricks on you if you’re not careful. For example, let’s say you want to make a GET request with a request-body (not a great practice, but it happens). If you make a curl request using the -d option, and don’t use the -XGET flag, it will automatically default to POST and include the Content-Type: application/x-www-formurlencoded header.</p><p style="margin-left: 30.0px;">This post by Daniel Stenberg (author and maintainer of curl) on the unnecessary use of curl -X also illustrates another possibility you might run into this issue when dealing with redirects:</p><blockquote><p style="margin-left: 30.0px;">“One of most obvious problems is that if you also tell curl to follow HTTP redirects (using -L or –location), the -X option will also be used on the redirected-to requests which may not at all be what the server asks for and the user expected.”</p></blockquote><p style="margin-left: 30.0px;">Other times, we might fall into past assumptions and just use the wrong method. For example, the Runscope API uses POST when creating new resources, such as test steps or environments, and PUT when modifying them. But Stripe’s API uses POST methods when creating and updating objects.</p><p style="margin-left: 30.0px;">Both approaches are valid, and Stormpath has a great blog post talking about their differences, and how to handle them as an API provider. No matter which one you choose, just be consistent throughout your API and make sure to have correct and up-to-date docs, so your users don’t run into this error.</p><h2 style="margin-left: 30.0px;" id="CommonAPIMistakes-SENDINGINVALIDAUTHORIZATIONCREDENTIALS"><strong> SENDING INVALID AUTHORIZATION CREDENTIALS </strong></h2><p style="margin-left: 30.0px;">APIs that implement OAuth 2, such as PayPal, usually require the developer to include an Authorization header for each request. It’s common to confuse that with Authentication instead, so if your request is failing, make sure you’re using the correct word.</p><p style="margin-left: 30.0px;">Another issue that pops up with Authorization headers is actually constructing it correctly. OAuth 2 tokens need to be prepended with “Bearer” for them to work:</p><p style="margin-left: 30.0px;"><br/><div
+            style="display: inline-block; background-color: yellow"
+>
+    <code>Authorization: Bearer your_api_token</code>
+</div>
+<code> </code></p><p style="margin-left: 30.0px;"><br/></p><p style="margin-left: 30.0px;">It’s also important when using HTTP Basic authentication to pay close attention to the syntax of the header value. The form is as follows:</p><p style="margin-left: 30.0px;"><br/><div
+            style="display: inline-block; background-color: yellow"
+>
+    <code>Authorization: Basic base64_encode(username:password)</code>
+</div>
+<br/></p><p style="margin-left: 30.0px;">Common mistakes include forgetting the Basic (note the space) prefix, not encoding the username and password or forgetting the colon between them. If an API provider only requires a username without a password (like Stripe, where your API key is the username), you’ll need that pesky colon after the username, even if there’s no password.</p><h2 style="margin-left: 30.0px;" id="CommonAPIMistakes-NOTSPECIFYINGCONTENT-TYPEORACCEPTHEADER"><strong>NOT SPECIFYING CONTENT-TYPE OR ACCEPT HEADER </strong></h2><p style="margin-left: 30.0px;">Accept and Content-Type headers negotiate the type of information that will be sent or received between a client and server. Some APIs will accept requests that don’t contain any of those headers, and just default to a common format like JSON or XML.</p><p style="margin-left: 30.0px;">Other APIs are a little more strict. Some might return a 403 error if you’re not explicit about the Accept header value and require you to include those headers on requests. That way, the server knows what information the client is sending, and also what format they expect to receive in return.</p><p style="margin-left: 30.0px;">This issue can also because some confusion if you are testing your API with different tools. curl, for example, along with other popular testing tools, will automatically include an Accept header for any MIME type: */* with every request. We, at Runscope, don’t add a default Accept header, so this can get you different results when testing the same endpoint.</p><h2 style="margin-left: 30.0px;" id="CommonAPIMistakes-APISRETURNINGINVALIDCONTENTTYPESWHENTHEREISANERROR"><strong>APIS RETURNING INVALID CONTENT TYPES WHEN THERE IS AN ERROR</strong></h2><p style="margin-left: 30.0px;"><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="642" confluence-query-params="effects=border-simple,shadow-kn" src="attachments/131334618/131367253.png?effects=border-simple,shadow-kn&amp;width=642" data-image-src="attachments/131334618/131367253.png" data-unresolved-comment-count="0" data-linked-resource-id="131367253" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-10-28 at 9.35.14 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="131334618" data-linked-resource-container-version="2" data-media-id="39a8b401-06d9-4ea0-bf26-549bc0daaf01" data-media-type="file"></span></p><p style="margin-left: 30.0px;">I can say that this is one of my pet peeves with APIs. Seeing that line in a response makes my blood pressure go sky high.</p><p style="margin-left: 30.0px;">Well, sometimes that’s my fault. If you forget to send an Accept header with your request, the API can’t be sure what response format you’re expecting.</p><p style="margin-left: 30.0px;">For API providers, some frameworks and web servers default to HTML. For example, Symfony, a PHP framework, defaults to returning a 500 HTML error. So, if you’re creating an API that has no business returning HTML, make sure to check the defaults error response.</p><p style="margin-left: 30.0px;">Another reason this might happen may not have to do with your API, but with the routing mesh or load balancer that sits in front of your API. For example, if you have a Nginx instance fronting your API and it encounters a request timeout or other error, it may return an HTML error before your API instances even have a chance to know what’s going on.</p></div>
+</div>
+<div class="cell aside" data-type="aside">
+<div class="innerCell">
+<h2 id="CommonAPIMistakes-/*&lt;![CDATA[*/div.rbtoc1509255714771{padding:0px;}div.rbtoc1509255714771ul{list-style:disc;margin-left:0px;}div.rbtoc1509255714771li{margin-left:0px;padding-left:0px;}/*]]&gt;*/USINGHTTP://INSTEADOFHTTPS://#CommonAPIMistakes-USINGHTTP://INST"><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1509255714771 {padding: 0px;}
+div.rbtoc1509255714771 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1509255714771 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1509255714771'>
+<ul class='toc-indentation'>
+<li><a href='#CommonAPIMistakes-USINGHTTP://INSTEADOFHTTPS://'>USING HTTP:// INSTEAD OF HTTPS://</a></li>
+<li><a href='#CommonAPIMistakes-UNEXPECTEDERRORCODES'>UNEXPECTED ERROR CODES</a></li>
+<li><a href='#CommonAPIMistakes-USINGTHEWRONGHTTPMETHOD'>USING THE WRONG HTTP METHOD</a></li>
+<li><a href='#CommonAPIMistakes-SENDINGINVALIDAUTHORIZATIONCREDENTIALS'>SENDING INVALID AUTHORIZATION CREDENTIALS</a></li>
+<li><a href='#CommonAPIMistakes-NOTSPECIFYINGCONTENT-TYPEORACCEPTHEADER'>NOT SPECIFYING CONTENT-TYPE OR ACCEPT HEADER</a></li>
+<li><a href='#CommonAPIMistakes-APISRETURNINGINVALIDCONTENTTYPESWHENTHEREISANERROR'>APIS RETURNING INVALID CONTENT TYPES WHEN THERE IS AN ERROR</a></li>
+<li><a href='#CommonAPIMistakes-'></a></li>
+</ul>
+</div></h2><p><br/></p></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/131334618/131236242.png">Screen Shot 2017-10-28 at 9.28.08 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/131334618/131367253.png">Screen Shot 2017-10-28 at 9.35.14 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

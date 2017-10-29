@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Flyweight Pattern</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Design-Patterns_33471172.html">Design Patterns</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33797582.html">Classic Design Patterns (GoF)</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Flyweight Pattern
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span>, last modified on May 05, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="contentLayout2">
+<div class="columnLayout single" data-layout="single">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Intent</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Use sharing to support large numbers of fine-grained objects efficiently.</li><li>The GUI strategy of replacing heavy-weight widgets with light-weight gadgets.</li></ul>
+</div></div><p>Frequency of use in JavaScript:</p><div class="table-wrap"><table class="confluenceTable"><colgroup><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/><col style="width: 30.0px;"/></colgroup><tbody><tr><td class="highlight-green confluenceTd" data-highlight-colour="green">1</td><td class="highlight-green confluenceTd" data-highlight-colour="green">2</td><td class="highlight-green confluenceTd" data-highlight-colour="green">3</td><td class="highlight-green confluenceTd" data-highlight-colour="green">4</td><td class="highlight-green confluenceTd" data-highlight-colour="green">5</td></tr></tbody></table></div><p>HIGH</p><p><br/></p><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Problem</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">Designing objects down to the lowest levels of system &quot;granularity&quot; provides optimal flexibility, but can be unacceptably expensive in terms of performance and memory usage.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: #173C6F;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #173C6F;background-color: #173C6F;color: white;"><b>Discussion</b></div><div class="panelContent" style="background-color: white;">
+<p>The Flyweight pattern describes how to share objects to allow their use at fine granularity without prohibitive cost. Each &quot;flyweight&quot; object is divided into two pieces: the state-dependent (extrinsic) part, and the state-independent (intrinsic) part. Intrinsic state is stored (shared) in the Flyweight object. Extrinsic state is stored or computed by client objects, and passed to the Flyweight when its operations are invoked.</p><p class="ptext">The Flyweight pattern conserves memory by sharing large numbers of fine-grained objects efficiently. Shared flyweight objects are immutable, that is, they cannot be changed as they represent the characteristics that are shared with other objects.</p><p class="ptext">Essentially Flyweight is an 'object normalization technique' in which common properties are factored out into shared flyweight objects. (Note: the idea is similar to data model normalization, a process in which the modeler attempts to minimize redundancy).</p><p class="ptext">An example of the Flyweight Pattern is within the JavaScript engine itself which maintains a list of immutable strings that are shared across the application.</p><p class="ptext">Other examples include characters and line-styles in a word processor, or 'digit receivers' in a public switched telephone network application. You will find flyweights mostly in utility type applications such as word processors, graphics programs, and network apps; they are less often used in data-driven business type applications.</p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Structure / Implementation</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">Flyweights are stored in a Factory's repository. The client restrains herself from creating Flyweights directly, and requests them from the Factory. Each Flyweight cannot stand on its own. Any attributes that would make sharing impossible must be supplied by the client whenever a request is made of the Flyweight. If the context lends itself to &quot;economy of scale&quot; (i.e. the client can easily compute or look-up the necessary attributes), then the Flyweight pattern offers appropriate leverage.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33803114/33803140.png" data-image-src="attachments/33803114/33803140.png" data-unresolved-comment-count="0" data-linked-resource-id="33803140" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 11.32.37 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33803114" data-linked-resource-container-version="2" data-media-id="6a2b1fd2-47c1-42ab-bea3-a9d29b207286" data-media-type="file"></span></p><p><span style="color: rgb(68,68,68);">The </span><code>Ant</code><span style="color: rgb(68,68,68);">, </span><code>Locust</code><span style="color: rgb(68,68,68);">, and </span><code>Cockroach</code><span style="color: rgb(68,68,68);"> classes can be &quot;light-weight&quot; because their instance-specific state has been de-encapsulated, or externalized, and must be supplied by the client.</span></p><p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" src="attachments/33803114/33803155.png" data-image-src="attachments/33803114/33803155.png" data-unresolved-comment-count="0" data-linked-resource-id="33803155" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="Screen Shot 2017-05-04 at 11.33.22 PM.png" data-base-url="https://placester.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="33803114" data-linked-resource-container-version="2" data-media-id="08b74c55-9318-4f5a-9323-e325dfa88391" data-media-type="file"></span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Practical Example</b></div><div class="panelContent" style="background-color: white;">
+<p><span style="color: rgb(68,68,68);">The Flyweight uses sharing to support large numbers of objects efficiently. Modern web browsers use this technique to prevent loading same images twice. When browser loads a web page, it traverse through all images on that page. Browser loads all new images from Internet and places them the internal cache. For already loaded images, a flyweight object is created, which has some unique data like position within the page, but everything else is referenced to the cached one.</span></p>
+</div></div><div class="panel" style="background-color: white;border-color: black;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: black;background-color: black;color: white;"><b>Code Sample</b></div><div class="panelContent" style="background-color: white;">
+<p class="ptext">In our example code we are building computers. Many models, makes, and processor combinations are common, so these characteristics are factored out and shared by Flyweight objects.</p><p class="ptext">The <span class="cd">FlyweightFactory</span> maintains a pool of <span class="cd">Flyweight</span> objects. When requested for a <span class="cd">Flyweight</span> object the <span class="cd">FlyweightFactory</span> will check if one already exists; if not a new one will be created and stored for future reference. All subsequent requests for that same computer will return the stored <span class="cd">Flyweight</span> object.</p><p class="ptext">Several different computers are added to a <span class="cd">ComputerCollection</span>. At the end we have a list of 7 <span class="cd">Computer</span> objects that share only 2 <span class="cd">Flyweights</span>. These are small savings, but with large datasets the memory savings can be significant.</p><p class="ptext">The <span class="cd">log</span> function is a helper which collects and displays results.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;"><b>Sample JS Code</b></div><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: true; theme: Eclipse" data-theme="Eclipse">function Flyweight (make, model, processor) {
+    this.make = make;
+    this.model = model;
+    this.processor = processor;
+};
+ 
+var FlyWeightFactory = (function () {
+    var flyweights = {};
+ 
+    return {
+ 
+        get: function (make, model, processor) {
+            if (!flyweights[make + model]) {
+                flyweights[make + model] = 
+                    new Flyweight(make, model, processor);
+            }
+            return flyweights[make + model];
+        },
+ 
+        getCount: function () {
+            var count = 0;
+            for (var f in flyweights) count++;
+            return count;
+        }
+    }
+})();
+ 
+function ComputerCollection () {
+    var computers = {};
+    var count = 0;
+ 
+    return {
+        add: function (make, model, processor, memory, tag) {
+            computers[tag] = 
+                new Computer(make, model, processor, memory, tag);
+            count++;
+        },
+ 
+        get: function (tag) {
+            return computers[tag];
+        },
+ 
+        getCount: function () {
+            return count;
+        }
+    };
+}
+ 
+var Computer = function (make, model, processor, memory, tag) {
+    this.flyweight = FlyWeightFactory.get(make, model, processor);
+    this.memory = memory;
+    this.tag = tag;
+    this.getMake = function () {
+        return this.flyweight.make;
+    }
+    // ...
+}
+ 
+// log helper
+ 
+var log = (function () {
+    var log = &quot;&quot;;
+ 
+    return {
+        add: function (msg) { log += msg + &quot;\n&quot;; },
+        show: function () { alert(log); log = &quot;&quot;; }
+    }
+})();
+ 
+function run() {
+    var computers = new ComputerCollection();
+    
+    computers.add(&quot;Dell&quot;, &quot;Studio XPS&quot;, &quot;Intel&quot;, &quot;5G&quot;, &quot;Y755P&quot;);
+    computers.add(&quot;Dell&quot;, &quot;Studio XPS&quot;, &quot;Intel&quot;, &quot;6G&quot;, &quot;X997T&quot;);
+    computers.add(&quot;Dell&quot;, &quot;Studio XPS&quot;, &quot;Intel&quot;, &quot;2G&quot;, &quot;U8U80&quot;);
+    computers.add(&quot;Dell&quot;, &quot;Studio XPS&quot;, &quot;Intel&quot;, &quot;2G&quot;, &quot;NT777&quot;);
+    computers.add(&quot;Dell&quot;, &quot;Studio XPS&quot;, &quot;Intel&quot;, &quot;2G&quot;, &quot;0J88A&quot;);
+    computers.add(&quot;HP&quot;, &quot;Envy&quot;, &quot;Intel&quot;, &quot;4G&quot;, &quot;CNU883701&quot;);
+    computers.add(&quot;HP&quot;, &quot;Envy&quot;, &quot;Intel&quot;, &quot;2G&quot;, &quot;TXU003283&quot;);
+ 
+    log.add(&quot;Computers: &quot; + computers.getCount());
+    log.add(&quot;Flyweights: &quot; + FlyWeightFactory.getCount());
+    log.show();
+}</pre>
+</div></div>
+</div></div></div>
+</div>
+</div>
+<div class="columnLayout two-equal" data-layout="two-equal">
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Checklist</b></div><div class="panelContent" style="background-color: white;">
+<ol><li>Ensure that object overhead is an issue needing attention, and, the client of the class is able and willing to absorb responsibility realignment.</li><li>Divide the target class's state into: shareable (intrinsic) state, and non-shareable (extrinsic) state.</li><li>Remove the non-shareable state from the class attributes, and add it the calling argument list of affected methods.</li><li>Create a Factory that can cache and reuse existing class instances.</li><li>The client must use the Factory instead of the new operator to request objects.</li><li>The client (or a third party) must look-up or compute the non-shareable state, and supply that state to class methods.</li></ol>
+</div></div><div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Advantages / Disadvantages</b></div><div class="panelContent" style="background-color: white;">
+<p><br/></p>
+</div></div></div>
+</div>
+<div class="cell normal" data-type="normal">
+<div class="innerCell">
+<div class="panel" style="background-color: white;border-color: lightgray;border-style: solid;border-width: 1px;"><div class="panelHeader" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: lightgray;background-color: lightgray;"><b>Additional Notes</b></div><div class="panelContent" style="background-color: white;">
+<ul><li>Whereas Flyweight shows how to make lots of little objects, Facade shows how to make a single object represent an entire subsystem.</li><li>Flyweight is often combined with Composite to implement shared leaf nodes.</li><li>Terminal symbols within Interpreter's abstract syntax tree can be shared with Flyweight.</li><li>Flyweight explains when and how State objects can be shared.</li></ul>
+</div></div></div>
+</div>
+</div>
+</div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33803114/33803140.png">Screen Shot 2017-05-04 at 11.32.37 PM.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/33803114/33803155.png">Screen Shot 2017-05-04 at 11.33.22 PM.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

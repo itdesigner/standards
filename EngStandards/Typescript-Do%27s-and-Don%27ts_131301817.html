@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Engineering Standards : Typescript Do&#39;s and Don&#39;ts</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">Engineering Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="33470365.html">Engineering Standards &amp; Best Practices</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Code-Standards_33471212.html">Code Standards</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Typescript_131367165.html">Typescript</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Engineering Standards : Typescript Do&#39;s and Don&#39;ts
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Jerry Shaughnessy</span> on Oct 28, 2017
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 style="" id="TypescriptDo&#39;sandDon&#39;ts-GeneralTypes">General Types</h1><h2 style="margin-left: 30.0px;" id="TypescriptDo&#39;sandDon&#39;ts-Number,String,Boolean,andObject"><code>Number</code>,<span> </span><code>String</code>,<span> </span><code>Boolean</code>, and<span> </span><code>Object</code></h2><p style="margin-left: 30.0px;"><em>Don’t</em><span> </span>ever use the types<span> </span><code>Number</code>,<span> </span><code>String</code>,<span> </span><code>Boolean</code>, or<span> </span><code>Object</code>. These types refer to non-primitive boxed objects that are almost never used appropriately in JavaScript code.</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* WRONG */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">reverse</span>(<span class="hljs-params">s: <span class="hljs-built_in" style="color: rgb(0,72,171);">String</span></span>): <span class="hljs-title" style="color: rgb(0,72,171);">String</span></span>;
+</code></pre><p style="margin-left: 30.0px;"><em>Do</em><span> </span>use the types<span> </span><code>number</code>,<span> </span><code>string</code>, and<span> </span><code>boolean</code>.</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* OK */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">reverse</span>(<span class="hljs-params">s: <span class="hljs-built_in" style="color: rgb(0,72,171);">string</span></span>): <span class="hljs-title" style="color: rgb(0,72,171);">string</span></span>;
+</code></pre><p style="margin-left: 30.0px;">Instead of<span> </span><code>Object</code>, use the non-primitive<span> </span><code>object</code><span> </span>type (<a style="" href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-2.html#object-type" class="external-link" rel="nofollow">added in TypeScript 2.2</a>).</p><h2 style="margin-left: 30.0px;" id="TypescriptDo&#39;sandDon&#39;ts-Generics">Generics</h2><p style="margin-left: 30.0px;"><em>Don’t</em><span> </span>ever have a generic type which doesn’t use its type parameter. See more details in<span> </span><a style="" href="https://github.com/Microsoft/TypeScript/wiki/FAQ#why-doesnt-type-inference-work-on-this-interface-interface-foot---" class="external-link" rel="nofollow">TypeScript FAQ page</a>.</p><h1 style="" id="TypescriptDo&#39;sandDon&#39;ts-CallbackTypes">Callback Types</h1><h2 style="margin-left: 30.0px;" id="TypescriptDo&#39;sandDon&#39;ts-ReturnTypesofCallbacks">Return Types of Callbacks</h2><p style="margin-left: 30.0px;"><em>Don’t</em><span> </span>use the return type<span> </span><code>any</code><span> </span>for callbacks whose value will be ignored:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* WRONG */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: (</span>) =&gt; <span class="hljs-title" style="color: rgb(0,72,171);">any</span>) </span>{
+    x();
+}
+</code></pre><p style="margin-left: 30.0px;"><em>Do</em><span> </span>use the return type<span> </span><code>void</code><span> </span>for callbacks whose value will be ignored:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* OK */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: (</span>) =&gt; <span class="hljs-title" style="color: rgb(0,72,171);">void</span>) </span>{
+    x();
+}
+</code></pre><p style="margin-left: 30.0px;"><em>Why</em>: Using<span> </span><code>void</code><span> </span>is safer because it prevents you from accidently using the return value of<span> </span><code>x</code><span> </span>in an unchecked way:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: (</span>) =&gt; <span class="hljs-title" style="color: rgb(0,72,171);">void</span>) </span>{
+    <span class="hljs-keyword">var</span> k = x(); <span class="hljs-comment" style="color: rgb(115,129,145);">// oops! meant to do something else</span>
+    k.doSomething(); <span class="hljs-comment" style="color: rgb(115,129,145);">// error, but would be OK if the return type had been 'any'</span>
+}
+</code></pre><h2 style="margin-left: 30.0px;" id="TypescriptDo&#39;sandDon&#39;ts-OptionalParametersinCallbacks">Optional Parameters in Callbacks</h2><p style="margin-left: 30.0px;"><em>Don’t</em><span> </span>use optional parameters in callbacks unless you really mean it:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* WRONG */</span>
+<span class="hljs-interface"><span class="hljs-keyword">interface</span> Fetcher </span>{
+    getObject(done: (data: <span class="hljs-built_in" style="color: rgb(0,72,171);">any</span>, elapsedTime?: <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>) =&gt; <span class="hljs-built_in" style="color: rgb(0,72,171);">void</span>): <span class="hljs-built_in" style="color: rgb(0,72,171);">void</span>;
+}
+</code></pre><p style="margin-left: 30.0px;">This has a very specific meaning: the<span> </span><code>done</code><span> </span>callback might be invoked with 1 argument or might be invoked with 2 arguments. The author probably intended to say that the callback might not care about the<span> </span><code>elapsedTime</code><span> </span>parameter, but there’s no need to make the parameter optional to accomplish this – it’s always legal to provide a callback that accepts fewer arguments.</p><p style="margin-left: 30.0px;"><em>Do</em><span> </span>write callback parameters as non-optional:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* OK */</span>
+<span class="hljs-interface"><span class="hljs-keyword">interface</span> Fetcher </span>{
+    getObject(done: (data: <span class="hljs-built_in" style="color: rgb(0,72,171);">any</span>, elapsedTime: <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>) =&gt; <span class="hljs-built_in" style="color: rgb(0,72,171);">void</span>): <span class="hljs-built_in" style="color: rgb(0,72,171);">void</span>;
+}
+</code></pre><h2 style="margin-left: 30.0px;" id="TypescriptDo&#39;sandDon&#39;ts-OverloadsandCallbacks">Overloads and Callbacks</h2><p style="margin-left: 30.0px;"><em>Don’t</em><span> </span>write separate overloads that differ only on callback arity:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* WRONG */</span>
+<span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">beforeAll</span>(<span class="hljs-params">action: (</span>) =&gt; <span class="hljs-title" style="color: rgb(0,72,171);">void</span>, <span class="hljs-title" style="color: rgb(0,72,171);">timeout</span>?: <span class="hljs-title" style="color: rgb(0,72,171);">number</span>): <span class="hljs-title" style="color: rgb(0,72,171);">void</span></span>;
+<span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">beforeAll</span>(<span class="hljs-params">action: (done: DoneFn</span>) =&gt; <span class="hljs-title" style="color: rgb(0,72,171);">void</span>, <span class="hljs-title" style="color: rgb(0,72,171);">timeout</span>?: <span class="hljs-title" style="color: rgb(0,72,171);">number</span>): <span class="hljs-title" style="color: rgb(0,72,171);">void</span></span>;
+</code></pre><p style="margin-left: 30.0px;"><em>Do</em><span> </span>write a single overload using the maximum arity:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* OK */</span>
+<span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">beforeAll</span>(<span class="hljs-params">action: (done: DoneFn</span>) =&gt; <span class="hljs-title" style="color: rgb(0,72,171);">void</span>, <span class="hljs-title" style="color: rgb(0,72,171);">timeout</span>?: <span class="hljs-title" style="color: rgb(0,72,171);">number</span>): <span class="hljs-title" style="color: rgb(0,72,171);">void</span></span>;
+</code></pre><p style="margin-left: 30.0px;"><em>Why</em>: It’s always legal for a callback to disregard a parameter, so there’s no need for the shorter overload. Providing a shorter callback first allows incorrectly-typed functions to be passed in because they match the first overload.</p><h1 style="" id="TypescriptDo&#39;sandDon&#39;ts-FunctionOverloads">Function Overloads</h1><h2 style="margin-left: 30.0px;" id="TypescriptDo&#39;sandDon&#39;ts-Ordering">Ordering</h2><p style="margin-left: 30.0px;"><em>Don’t</em><span> </span>put more general overloads before more specific overloads:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* WRONG */</span>
+<span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: <span class="hljs-built_in" style="color: rgb(0,72,171);">any</span></span>): <span class="hljs-title" style="color: rgb(0,72,171);">any</span></span>;
+<span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: HTMLElement</span>): <span class="hljs-title" style="color: rgb(0,72,171);">number</span></span>;
+<span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: HTMLDivElement</span>): <span class="hljs-title" style="color: rgb(0,72,171);">string</span></span>;
+
+<span class="hljs-keyword">var</span> myElem: HTMLDivElement;
+<span class="hljs-keyword">var</span> x = fn(myElem); <span class="hljs-comment" style="color: rgb(115,129,145);">// x: any, wat?</span>
+</code></pre><p style="margin-left: 30.0px;"><em>Do</em><span> </span>sort overloads by putting the more general signatures after more specific signatures:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* OK */</span>
+<span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: HTMLDivElement</span>): <span class="hljs-title" style="color: rgb(0,72,171);">string</span></span>;
+<span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: HTMLElement</span>): <span class="hljs-title" style="color: rgb(0,72,171);">number</span></span>;
+<span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: <span class="hljs-built_in" style="color: rgb(0,72,171);">any</span></span>): <span class="hljs-title" style="color: rgb(0,72,171);">any</span></span>;
+
+<span class="hljs-keyword">var</span> myElem: HTMLDivElement;
+<span class="hljs-keyword">var</span> x = fn(myElem); <span class="hljs-comment" style="color: rgb(115,129,145);">// x: string, :)</span>
+</code></pre><p style="margin-left: 30.0px;"><em>Why</em>: TypeScript chooses the<span> </span><em>first matching overload</em><span> </span>when resolving function calls. When an earlier overload is “more general” than a later one, the later one is effectively hidden and cannot be called.</p><h2 style="margin-left: 30.0px;" id="TypescriptDo&#39;sandDon&#39;ts-UseOptionalParameters">Use Optional Parameters</h2><p style="margin-left: 30.0px;"><em>Don’t</em><span> </span>write several overloads that differ only in trailing parameters:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* WRONG */</span>
+<span class="hljs-interface"><span class="hljs-keyword">interface</span> Example </span>{
+    diff(one: <span class="hljs-built_in" style="color: rgb(0,72,171);">string</span>): <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>;
+    diff(one: <span class="hljs-built_in" style="color: rgb(0,72,171);">string</span>, two: <span class="hljs-built_in" style="color: rgb(0,72,171);">string</span>): <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>;
+    diff(one: <span class="hljs-built_in" style="color: rgb(0,72,171);">string</span>, two: <span class="hljs-built_in" style="color: rgb(0,72,171);">string</span>, three: <span class="hljs-built_in" style="color: rgb(0,72,171);">boolean</span>): <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>;
+}
+</code></pre><p style="margin-left: 30.0px;"><em>Do</em><span> </span>use optional parameters whenever possible:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* OK */</span>
+<span class="hljs-interface"><span class="hljs-keyword">interface</span> Example </span>{
+    diff(one: <span class="hljs-built_in" style="color: rgb(0,72,171);">string</span>, two?: <span class="hljs-built_in" style="color: rgb(0,72,171);">string</span>, three?: <span class="hljs-built_in" style="color: rgb(0,72,171);">boolean</span>): <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>;
+}
+</code></pre><p style="margin-left: 30.0px;">Note that this collapsing should only occur when all overloads have the same return type.</p><p style="margin-left: 30.0px;"><em>Why</em>: This is important for two reasons.</p><p style="margin-left: 30.0px;">TypeScript resolves signature compatibility by seeing if any signature of the target can be invoked with the arguments of the source,<span> </span><em>and extraneous arguments are allowed</em>. This code, for example, exposes a bug only when the signature is correctly written using optional parameters:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: (a: <span class="hljs-built_in" style="color: rgb(0,72,171);">string</span>, b: <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>, c: <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span></span>) =&gt; <span class="hljs-title" style="color: rgb(0,72,171);">void</span>) </span>{ }
+<span class="hljs-keyword">var</span> x: Example;
+<span class="hljs-comment" style="color: rgb(115,129,145);">// When written with overloads, OK -- used first overload</span>
+<span class="hljs-comment" style="color: rgb(115,129,145);">// When written with optionals, correctly an error</span>
+fn(x.diff);
+</code></pre><p style="margin-left: 30.0px;">The second reason is when a consumer uses the “strict null checking” feature of TypeScript. Because unspecified parameters appear as<span> </span><code>undefined</code><span> </span>in JavaScript, it’s usually fine to pass an explicit<span> </span><code>undefined</code><span> </span>to a function with optional arguments. This code, for example, should be OK under strict nulls:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-keyword">var</span> x: Example;
+<span class="hljs-comment" style="color: rgb(115,129,145);">// When written with overloads, incorrectly an error because of passing 'undefined' to 'string'</span>
+<span class="hljs-comment" style="color: rgb(115,129,145);">// When written with optionals, correctly OK</span>
+x.diff(<span class="hljs-string" style="color: rgb(0,72,171);">&quot;something&quot;</span>, <span class="hljs-literal" style="color: rgb(0,72,171);">true</span> ? <span class="hljs-literal" style="color: rgb(0,72,171);">undefined</span> : <span class="hljs-string" style="color: rgb(0,72,171);">&quot;hour&quot;</span>);
+</code></pre><h2 style="margin-left: 30.0px;" id="TypescriptDo&#39;sandDon&#39;ts-UseUnionTypes">Use Union Types</h2><p style="margin-left: 30.0px;"><em>Don’t</em><span> </span>write overloads that differ by type in only one argument position:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* WRONG */</span>
+<span class="hljs-interface"><span class="hljs-keyword">interface</span> Moment </span>{
+    utcOffset(): <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>;
+    utcOffset(b: <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>): Moment;
+    utcOffset(b: <span class="hljs-built_in" style="color: rgb(0,72,171);">string</span>): Moment;
+}
+</code></pre><p style="margin-left: 30.0px;"><em>Do</em><span> </span>use union types whenever possible:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-comment" style="color: rgb(115,129,145);">/* OK */</span>
+<span class="hljs-interface"><span class="hljs-keyword">interface</span> Moment </span>{
+    utcOffset(): <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>;
+    utcOffset(b: <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>|<span class="hljs-built_in" style="color: rgb(0,72,171);">string</span>): Moment;
+}
+</code></pre><p style="margin-left: 30.0px;">Note that we didn’t make<span> </span><code>b</code><span> </span>optional here because the return types of the signatures differ.</p><p style="margin-left: 30.0px;"><em>Why</em>: This is important for people who are “passing through” a value to your function:</p><pre style="margin-left: 30.0px;"><code class="language-ts hljs typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: <span class="hljs-built_in" style="color: rgb(0,72,171);">string</span></span>): <span class="hljs-title" style="color: rgb(0,72,171);">void</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span></span>): <span class="hljs-title" style="color: rgb(0,72,171);">void</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title" style="color: rgb(0,72,171);">fn</span>(<span class="hljs-params">x: <span class="hljs-built_in" style="color: rgb(0,72,171);">number</span>|<span class="hljs-built_in" style="color: rgb(0,72,171);">string</span></span>) </span>{
+    <span class="hljs-comment" style="color: rgb(115,129,145);">// When written with separate overloads, incorrectly an error</span>
+    <span class="hljs-comment" style="color: rgb(115,129,145);">// When written with union types, correctly OK</span>
+    <span class="hljs-keyword">return</span> moment().utcOffset(x);
+}</code></pre>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Oct 29, 2017 01:41</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
